@@ -1,4 +1,4 @@
-# Linux workshop for Windows administrators
+# Linux workshop for Enterprise administrators
 
 Workshop items:
 - Operations walkthrough (using Cockpit)
