@@ -4,7 +4,7 @@ Workshop items:
 - Operations walkthrough (using Cockpit)
   - User management (with Active Directory)
   - Connecting a server to Active Directory for authentication (no GPOs)
-  - Review
+  - Show:
     - Assigning privileges to users (Run as Administrator configuration)
     - Setting up access controls
   - Storage management
@@ -12,13 +12,19 @@ Workshop items:
     - Expanding a filesystem
   - Enable/disable/restart services
   - Network configuration
+    - Static ip assignment
+    - Dynamic ip assignment
   - Firewall management
+    - Enable service openings in firewall
+    - Open single port in firewall
   - Troubleshooting
+    - View logs
+    - View active processes
   - Software management
-  - Installing software
-  - Updating software
+    - Installing software
+    - Updating software
 
-- Assignements:
+- Assignments:
   - Installing MsSQL
   - Management of several servers using Cockpit
 - Extra tasks (if you have time)
