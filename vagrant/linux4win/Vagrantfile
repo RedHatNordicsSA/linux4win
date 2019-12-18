@@ -1,0 +1,16 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure(2) do |config|
+  config.vm.box = "generic/rhel8"
+  config.vm.define "linux4win" do |rhel|
+#          rhel.vm.hostname   = "linux4win"
+          rhel.vm.provision :ansible do |ansible|
+            ansible.playbook = "../ansibles/prepare_linux4win.yml"
+          end
+  end
+
+  config.vm.provider "libvirt" do |vb|
+    vb.memory = "1024"
+  end
+end

@@ -1,0 +1,13 @@
+---
+- hosts:  all
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+  become: yes
+  tasks:
+
+  - name: install latest podman
+    yum : name='https://kojipkgs.fedoraproject.org//packages/podman/1.2.0/9.dev.git614409f.fc31/x86_64/podman-1.2.0-9.dev.git614409f.fc31.x86_64.rpm'
+
+  #- name: Up it!
+     #package: name=* state=latest
+

@@ -1,0 +1,26 @@
+---
+- hosts:  all
+  become: yes
+  tasks:
+  - name: upgrade all packages
+    yum:
+      name: '*'
+      state: latest
+
+  - name: install cockpit
+    yum:
+      name:
+        - cockpit
+        - cockpit-composer
+      state: latest
+  - name: enable the service
+    systemd:
+      name: cockpit.socket
+      state: started
+      enabled: yes
+  - name: open the firewall for cockpit
+    firewalld:
+      service: cockpit
+      permanent: yes
+      state: enabled
+  

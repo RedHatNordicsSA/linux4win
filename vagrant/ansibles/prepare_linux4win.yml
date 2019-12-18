@@ -1,0 +1,72 @@
+---
+- name: Prepare and configure the base
+  hosts:  all
+  gather_facts: no
+  become: yes
+  vars:
+    - ansible_python_interpreter: /usr/libexec/platform-python
+  tasks:
+    - name: get defaults
+      include_vars:
+        file: defaults/main.yml
+
+    - name: Set hostname
+      hostname:
+        name: linux4win
+
+    - name: Add the user 'rhel' as admin
+      user:
+        name: rhel
+        password: '$6$pissomog$CMz8jyl/eY1Z8BvBK3248wD3IE.uzR1KY1ZqudgiqGCwfXNdc7CjbCaH.9pbJ8hB3hdoUbLXiIoNYq4.0jYW61'
+        groups: wheel
+        append: yes
+
+    - name: Subscribe to Red Hat
+      redhat_subscription:
+        state: present
+        username: "{{ subs_username }}"
+        password: "{{ subs_pw }}"
+        autosubscribe: false
+        pool: "{{ subs_pool }}"
+
+    - name: Enable required repositories
+      rhsm_repository:
+        name: "{{ enabled_repos_rhel8 }}"
+        state: enabled
+
+#    - name: Upgrade all packages
+#      yum:
+#        name: '*'
+#        state: latest
+
+    - name: Install cockpit
+      yum:
+        name:
+          - cockpit
+          - cockpit-composer
+        state: latest
+
+    - name: Enable the cockpit service
+      systemd:
+        name: cockpit.socket
+        state: started
+        enabled: yes
+
+    - name: Open the firewall for cockpit
+      firewalld:
+        service: cockpit
+        permanent: yes
+        state: enabled
+
+- name: Install all needed parts for the workshop
+  hosts:  all
+  gather_facts: no
+  become: yes
+  vars:
+    - ansible_python_interpreter: /usr/libexec/platform-python
+  tasks:
+  - name: Install the first lab
+    include_tasks: tasks/lab1.yml
+
+  - name: Install the second lab
+    include_tasks: tasks/lab2.yml

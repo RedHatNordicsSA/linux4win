@@ -1,0 +1,4 @@
+---
+- name: Setup for lab1
+  debug:
+    msg: lab2 tasks
