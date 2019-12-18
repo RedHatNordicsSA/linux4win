@@ -34,10 +34,10 @@
         name: "{{ enabled_repos_rhel8 }}"
         state: enabled
 
-#    - name: Upgrade all packages
-#      yum:
-#        name: '*'
-#        state: latest
+    - name: Upgrade all packages
+      yum:
+        name: '*'
+        state: latest
 
     - name: Install cockpit
       yum:
