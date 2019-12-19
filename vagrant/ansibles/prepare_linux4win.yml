@@ -64,8 +64,7 @@
   vars:
     - ansible_python_interpreter: /usr/libexec/platform-python
   tasks:
-  - name: Install the first lab
-    include_tasks: tasks/lab1.yml
-
-  - name: Install the second lab
+  - name: Prepare for lab2
     include_tasks: tasks/lab2.yml
+  - name: Prepare for lab4
+    include_tasks: tasks/lab4.yml

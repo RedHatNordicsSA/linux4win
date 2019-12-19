@@ -1,0 +1,5 @@
+---
+- name: install support for html2txt
+  yum:
+    name: https://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/p/python2-html2text-2019.8.11-1.el7.noarch.rpm
+    state: present

@@ -8,22 +8,21 @@ Workshop items:
   - **lab2** *Storage management*
     - Creating new filesystem
     - Expanding a filesystem
-  - **lab2** *Service management*
+  - **lab3** *Service management*
     - Start a service
     - Enable a service (survives reboot)
     - Check status of a service
     - Disable a service
-  - **lab3** *Network configuration*
+  - **lab4** *Network configuration*
     - Static ip assignment
     - Dynamic ip assignment
-  - **lab4** *Firewall management*
     - Enable service openings in firewall
     - Open single port in firewall
-  - **lab5** *Connecting a server to Active Directory for authentication (no GPOs)*
-  - **lab6** *User management (with Active Directory)*
+  - **lab5** *User management (with Active Directory)*
+    - Connecting a server to Active Directory for authentication (no GPOs)
     - Assigning privileges to users (Run as Administrator configuration)
     - Setting up access controls
-  - **lab7** *Troubleshooting*
+  - **lab6** *Troubleshooting*
     - View logs
     - View active processes
 
