@@ -20,10 +20,10 @@ Workshop items:
     - Enable service openings in firewall
     - Open single port in firewall
   - **lab5** *Connecting a server to Active Directory for authentication (no GPOs)*
-  - lab6 User management (with Active Directory)
+  - **lab6** *User management (with Active Directory)*
     - Assigning privileges to users (Run as Administrator configuration)
     - Setting up access controls
-  - lab7 Troubleshooting
+  - **lab7** *Troubleshooting*
     - View logs
     - View active processes
 

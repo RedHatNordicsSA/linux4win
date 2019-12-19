@@ -1,4 +1,6 @@
 ---
-- name: Setup for lab1
-  debug:
-    msg: lab2 tasks
+- name: Create mount point for new filesystem
+  file:
+    path: /mnt/myvol
+    state: directory
+    mode: '0755'

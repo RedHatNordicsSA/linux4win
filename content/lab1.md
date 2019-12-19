@@ -6,7 +6,7 @@ To your left there is a bar with "applications" as those are known. As you can s
 
 Locate the Applications entry
 
-![applications user interface of cockpit](images/interface_apps.png)
+![applications user interface ](images/interface_apps.png)
 
 To install the storage management please click the Install button:
 
@@ -14,7 +14,7 @@ To install the storage management please click the Install button:
 
 And once you do you will have an additional entry in the menus:
 
-![system user interface of cockpit](images/interface_plusstorage.png)
+![system user interface](images/interface_plusstorage.png)
 
 **todo** add section about installing packages that are not presented as buttons.
 
@@ -24,7 +24,7 @@ In order to update packages you need to locate the Software Updates menu item an
 
 You will now see something like this:
 
-![yum update user interface of cockpit](images/interface_updates.png)
+![yum update user interface](images/interface_updates.png)
 
 Here you can patch all available software updates and security patches. As you can see there are two different buttons. On which installs security updates only and one that updates everything
 
