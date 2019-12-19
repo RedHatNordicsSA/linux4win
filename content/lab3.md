@@ -14,7 +14,7 @@ Now we are going to install a new service that we will need to set to start up a
 
 ![terminal user inferface](images/interface_terminal.png)
 
-Here you can interface with the ŕuning server and do stuff that is not implemented in the user interface. Like installing the apache webserver. We will do that now. Please type exactly this into the terminal:
+Here you can interface with the command line interface of the server and do stuff that is not implemented in the user interface. Like installing the apache webserver. We will do that now. Please type exactly this into the terminal:
 
 ```
 sudo yum install httpd

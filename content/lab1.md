@@ -16,7 +16,7 @@ And once you do you will have an additional entry in the menus:
 
 ![system user interface](images/interface_plusstorage.png)
 
-**todo** add section about installing packages that are not presented as buttons.
+We will install packages not present in the cockpit user interface in a later lab
 
 ## Update packages
 

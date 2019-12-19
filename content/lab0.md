@@ -15,7 +15,7 @@ This is the first page of the user interface of cockpit:
 
 To your left there is a bar with "applications" as those are known. As you can see there is already quite many.
 
-These are installed as regular packages, the storage package is installed using yum (dnf)
+Some of these are installed as regular packages, the storage package is installed using yum (dnf)
 
 ```
 yum install cockpit-storaged
