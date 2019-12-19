@@ -29,7 +29,7 @@ Workshop items:
     - View active processes
 
 - Assignments:
-  - **assign1** *Setup server to function in Enterprise environment*
+  - [**assign1** *Setup server to function in Enterprise environment*](content/assign1.md)
     - Create a "golden image" using Image-builder
     - Clone a server from the golden image
     - Connect the cloned server to the Active Directory for Authentication
@@ -37,17 +37,17 @@ Workshop items:
     - Configure administrator rights to correct groups
     - Install base packages needed
     - Update the golden image with all additions
-  - **assign2** *Installing MSSQL*
+  - [**assign2** *Installing MSSQL*](content/assign2.md)
     - Install repo that contains MSSQL
     - Install MSSQL binaries from the repo
     - Set MSSQL service to start at boot
     - Open firewall for correct port
-  - **assign3** *Management of several servers using Cockpit*
+  - [**assign3** *Management of several servers using Cockpit*](content/assign3.md)
     - Create a ssh key to use for authentication
     - Distribute the ssh key to the servers to be managed
     - Add servers to the graphical user interface(GUI)
     - Perform tasks on many servers using the GUI
-  - **assign4** *Management of several servers using Ansible*
+  - [**assign4** *Management of several servers using Ansible*](content/assign4.md)
     - Setup of ansible master
     - Run ad hoc commands against your windows server
 
