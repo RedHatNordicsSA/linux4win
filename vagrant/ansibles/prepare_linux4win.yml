@@ -44,6 +44,7 @@
         name:
           - cockpit
           - cockpit-composer
+          - cockpit-storaged
         state: latest
 
     - name: Enable the cockpit service
