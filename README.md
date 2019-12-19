@@ -1,5 +1,7 @@
 # Linux workshop for Enterprise administrators
 
+Here is the explanation of your [environments](content/lab0.md)
+
 Workshop items:
 - Operations walkthrough (using Cockpit)
   - [**lab1** *Software management*](content/lab1.md)
