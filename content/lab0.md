@@ -21,3 +21,7 @@ These are installed as regular packages, the storage package is installed using 
 yum install cockpit-storaged
 ```
 This can be done also from cockpit (we will look at this in lab 1)
+
+Continue to [lab 1](content/lab1.md)
+
+Back to [index](../README.md)

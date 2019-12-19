@@ -49,3 +49,7 @@ Then return to the Software Updates menu choice and see there is now also update
 ![user interface of yum history](images/interface_yumhistory.png)
 
 Click on the arrow **>** to see the last transaction
+
+Continue to [lab 2](content/lab2.md)
+
+Back to [index](../README.md)
