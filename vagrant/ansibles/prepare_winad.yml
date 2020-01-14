@@ -1,0 +1,15 @@
+- name: Copy powershell script to server and run it
+  hosts:  mydc
+  gather_facts: no
+  #become_method: runas
+  #vars:
+    #ansible_become_password: vagrant
+  tasks:
+    - name: Copy the ps1 script to the server
+      win_copy:
+        src: setup_ad.ps1
+        dest: C:\setup_ad.ps1
+    - name: Run the powershell script
+      win_shell: C:\setup_ad.ps1 >> C:\setup_ad.txt
+      #become: yes
+      #become_user: Administrator

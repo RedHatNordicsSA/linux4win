@@ -1,0 +1,8 @@
+[mydc]
+127.0.0.1
+
+[mydc:vars]
+ansible_connection: winrm
+ansible_winrm_transport: ntlm
+ansible_user: vagrant
+ansible_password: vagrant

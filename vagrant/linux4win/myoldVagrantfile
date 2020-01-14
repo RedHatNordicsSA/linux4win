@@ -1,0 +1,29 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+disk = './secondDisk.vdi'
+Vagrant.configure(2) do |config|
+  config.vm.box = "generic/rhel8"
+  config.vm.define "linux4win" do |rhel|
+    rhel.vm.hostname   = "linux4win"
+    rhel.vm.provision :ansible do |ansible|
+      ansible.playbook = "../ansibles/prepare_linux4win.yml"
+    end
+  end
+  config.vm.provider "libvirt" do |vb|
+    vb.memory = "1024"
+  end
+end
+
+#ansible-playbook -i .vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory ../ansibles/prepare_linux4win.yml
+
+#Vagrant.configure("2") do |config|
+#  config.vm.define :adserver do |adserver|
+#  adserver.vm.box = "peru/windows-server-2016-standard-x64-eval"
+#  adserver.vm.box_version = "20191202.01"
+#      adserver.vm.provider :libvirt do |domain|
+#      domain.cpu_mode = 'host-passthrough'
+#      domain.memory = "4096"
+#     end
+#  end
+#end
+
