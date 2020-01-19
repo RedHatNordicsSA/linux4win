@@ -1,0 +1,12 @@
+---
+- name: Make sure that service chronyd does not start
+  replace:
+    path: /etc/chrony.conf
+    regexp: 'iburst'
+    replace: 'ibarst'
+
+- name: Restart service chronyd so it fails
+  service:
+    name: chronyd
+    state: restarted
+  ignore_errors: yes
