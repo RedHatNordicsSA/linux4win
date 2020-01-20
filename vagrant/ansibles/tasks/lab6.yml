@@ -1,12 +1,17 @@
 ---
-- name: Make sure that service chronyd does not start
-  replace:
-    path: /etc/chrony.conf
-    regexp: 'iburst'
-    replace: 'ibarst'
+- name: Prepare for lab5
+  gather_facts: no
+  vars:
+    - ansible_python_interpreter: /usr/libexec/platform-python
+  tasks:
+  - name: Make sure that service chronyd does not start
+    replace:
+      path: /etc/chrony.conf
+      regexp: 'iburst'
+      replace: 'ibarst'
 
-- name: Restart service chronyd so it fails
-  service:
-    name: chronyd
-    state: restarted
-  ignore_errors: yes
+  - name: Restart service chronyd so it fails
+    service:
+      name: chronyd
+      state: restarted
+    ignore_errors: yes
