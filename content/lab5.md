@@ -19,7 +19,7 @@ Now you get the join domain wizard.
 
 ![join domain wizard](images/joindomain.png)
 
-Fill in the domain address and wait for the discovery to run. It will say below if the domain can be joined or not. You can also specify the OU to put the computer-account in. Fill in the username/password of an account that can add computers.
+Fill in the domain address and wait for the discovery to run. It will say below if the domain can be joined or not. You can also specify the OU to put the computer-account in. Fill in the username/password of an account that can add computers. In this lab that is *wsadder/Password1*
 
 ## Assigning privileges to users (Run as Administrator configuration)
 
