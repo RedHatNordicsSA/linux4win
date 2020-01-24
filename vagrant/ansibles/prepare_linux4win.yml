@@ -40,7 +40,13 @@
           - cockpit
         state: latest
 
-    - name: Enable the cockpit service
+    - name: Install cockpit Image builder
+      yum:
+        name:
+          - cockpit-composer
+        state: latest
+
+        - name: Enable the cockpit service
       systemd:
         name: cockpit.socket
         state: started
