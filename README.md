@@ -31,12 +31,8 @@ Workshop items:
 - Assignments:
   - [**assign1** *Setup server to function in Enterprise environment*](content/assign1.md)
     - Create a "golden image" using Image-builder
-    - Clone a server from the golden image
-    - Connect the cloned server to the Active Directory for Authentication
-    - Configure networking
-    - Configure administrator rights to correct groups
-    - Install base packages needed
-    - Update the golden image with all additions
+    - Add local users to the golden image
+    - Create image for your selected hypervisor
   - [**assign2** *Installing MSSQL*](content/assign2.md)
     - Install repo that contains MSSQL
     - Install MSSQL binaries from the repo
