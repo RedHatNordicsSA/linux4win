@@ -11,31 +11,44 @@ Vagrant.configure("2") do |config|
     end
   end
   config.vm.provider "libvirt" do |libvirt, override|
+    libvirt.memory = 2500
+    libvirt.nested = true
+  end
+
+  config.vm.define "linux4win2" do |rhel|
+    rhel.vm.box = "generic/rhel8"
+    rhel.vm.hostname   = "linux4win2"
+    rhel.vm.network :private_network, ip: "10.0.1.5"
+    rhel.vm.provision :ansible do |ansible|
+      ansible.playbook = "../ansibles/prepare_linux4win2.yml"
+    end
+  end
+  config.vm.provider "libvirt" do |libvirt, override|
     libvirt.memory = 1024
     libvirt.nested = true
   end
 
-  windc_hostname= "mydc"
-  config.vm.define "#{windc_hostname}" do |node|
-    #node.vm.box = "oatakan/windows-2019-standard-core"
-    node.vm.box = "oatakan/windows-2019-standard"
-    node.vm.hostname = "#{windc_hostname}"
-    node.vm.boot_timeout = 600
-    node.winrm.transport = :negotiate
-    node.vm.communicator = "winrm"
-    node.winrm.basic_auth_only = false
-    node.winrm.timeout = 300
-    node.winrm.retry_limit = 20
-    node.vm.network "forwarded_port", guest: 5986, host: 5902
-    node.vm.network :private_network, ip: "10.0.1.6"
-    node.vm.synced_folder ".", "/vagrant", disabled: true
-    node.vm.provision :ansible do |ansible|
-      ansible.playbook = "../ansibles/prepare_winad.yml"
-    end
+#  windc_hostname= "mydc"
+#  config.vm.define "#{windc_hostname}" do |node|
+#    #node.vm.box = "oatakan/windows-2019-standard-core"
+#    node.vm.box = "oatakan/windows-2019-standard"
+#    node.vm.hostname = "#{windc_hostname}"
+#    node.vm.boot_timeout = 600
+#    node.winrm.transport = :negotiate
+#    node.vm.communicator = "winrm"
+#    node.winrm.basic_auth_only = false
+#    node.winrm.timeout = 300
+#    node.winrm.retry_limit = 20
+#    node.vm.network "forwarded_port", guest: 5986, host: 5902
+#    node.vm.network :private_network, ip: "10.0.1.6"
+#    node.vm.synced_folder ".", "/vagrant", disabled: true
+#    node.vm.provision :ansible do |ansible|
+#      ansible.playbook = "../ansibles/prepare_winad.yml"
+#    end
 
-  end
-  config.vm.provider :libvirt do |libvirt, override|
-    libvirt.memory = 4096
-    libvirt.nested = true
-  end
+#  end
+#  config.vm.provider :libvirt do |libvirt, override|
+#    libvirt.memory = 4096
+#    libvirt.nested = true
+#  end
 end

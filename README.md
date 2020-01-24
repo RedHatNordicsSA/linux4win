@@ -29,7 +29,7 @@ Workshop items:
     - View active processes
 
 - Assignments:
-  - [**assign1** *Setup server to function in Enterprise environment*](content/assign1.md)
+  - [**assign1** *Create image for use in the cloud or virtual*](content/assign1.md)
     - Create a "golden image" using Image-builder
     - Add local users to the golden image
     - Create image for your selected hypervisor

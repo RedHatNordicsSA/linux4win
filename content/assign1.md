@@ -1,4 +1,4 @@
-# Setup server to function in Enterprise environment
+# Create image for use in the cloud or virtual
 
 So now we are going to create a template that we can later use in your vmware environment. 
 
@@ -97,7 +97,32 @@ Now if you click the name of your image:
 
 You will get another view at the image. This is where you can add users and such to the image.
 
+![add user to image](images/interface_adduserimage.png)
+
+Now lets add a user, click the Create User Account button
+
+![user details](images/interface_userdetails.png)
+
+Fill any details you like here. 
+
 ## Create image for your selected hypervisor
+
+Once the image is done it is time to use it on your selected hypervisor. Now in the same detailed view of your image you will find a tab called Images. Please click that one now.
+
+![make image](images/interface_newimage.png)
+
+And click the button Create Image
+
+![export image](images/interface_imageoptions.png)
+
+Here you will find all available image-formats that is supported out of the box. Just select the kind of hypervisor you are targeting and then click Create. Now the image is beeing built and you can follow the process by clicking on the link **Show Logs**
+
+![export image](images/interface_imagebuilderlogs.png)
+
+Once the buildprocess is done you can download your image. Press the Download button to save it to disk
+
+![export image](images/interface_downloadimage.png)
+
 
 Continue to [assignment 2](content/assign2.md)
 
