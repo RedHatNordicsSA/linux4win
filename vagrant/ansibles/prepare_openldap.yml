@@ -1,0 +1,51 @@
+---
+- name: Prepare and configure the base
+  hosts:  all
+  gather_facts: no
+  become: yes
+  vars:
+    - ansible_python_interpreter: /usr/libexec/platform-python
+  tasks:
+    - name: get defaults
+      include_vars:
+        file: defaults/main.yml
+
+    - name: Set hostname
+      hostname:
+        name: openldap
+
+    - name: Add the user 'rhel' as admin
+      user:
+        name: rhel
+        password: '$6$pissomog$CMz8jyl/eY1Z8BvBK3248wD3IE.uzR1KY1ZqudgiqGCwfXNdc7CjbCaH.9pbJ8hB3hdoUbLXiIoNYq4.0jYW61'
+        groups: wheel
+        append: yes
+
+    - name: Install cockpit
+      yum:
+        name:
+          - cockpit
+        state: latest
+  
+    - name: Install cockpit container management
+      yum:
+        name:
+          - cockpit-podman
+        state: latest
+  
+    - name: Enable the cockpit service
+      systemd:
+        name: cockpit.socket
+        state: started
+        enabled: yes
+  
+    - name: Open the firewall for cockpit
+      firewalld:
+        service: cockpit
+        permanent: yes
+        state: enabled
+    
+        - name: Pull the openldap image using podman
+      podman_image:
+        name: docker.io/rroemhild/test-openldap
+      
