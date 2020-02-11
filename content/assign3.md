@@ -4,9 +4,43 @@ Yes it is possible to manage several servers with one cockpit instance. Lets sta
 
 ## Create a ssh key to use for authentication
 
+So we want to be able to manage those other servers without entering passwords and such. So we are going to generate a ssh key-pair to use for the authentication. This needs to be done from the terminal. So lets go there. Locate terminal in the menu on your left.
+
+Once there we are going to use an already installed application to generate the keys.
+```
+ssh-keygen -t rsa -b 2048
+```
+Just press enter to accept defaults. We input no password since then we would need to use a password anyway to unlock the key.
+
+This command will generate an RSA key with a key length of 2048 bits. This for added security.
+
 ## Distribute the ssh key to the servers to be managed
 
+Now when we have the key generated we need the public part of the key to add to the servers that we are going to manage. 
+```
+cat .ssh/id_rsa.pub
+```
+Which will output something like this:
+```
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDSCAXaZu7Bz4eSs/zyRi1MB1Nm7oR5XXBkjvbhpDdszPkUouDk+2MJ6/nK19NEtJ1yGU6t02kPQLTq6aOvUaPZsQ+wXFL3qPWhxSb60Tbc/t1+Nhh9FfeIQO+cqzq4PtCkC7DThSjParCkmkTn5JnIYNaVvOimaI9c4lO0qrt+6kdty2oTIbdcOrM0CERDBWhzECCmCDpAXv6R4/G+g2WXTXefpmGgwEdNiDVfV79niJQj4DnG0DVQV/uFNKoV/AyzGcKFVNzaO7PSqoY5kdQjlAEa3tr2SETLH8jjSec7ux4BDoAyPU+qNLWTCHNnlZ6yB4isbPbKw5RcOaDnZiLr rhel@linux4win
+```
+We are interested in the long string between *ssh-rsa* and *rhel@linux4win*. Copy this string and paste into a notebook somewhere to save. We will use this again soon.
+
+Now we are going to send this key to another server. For this you need the ip of the server or the FQDN. 
+```
+ssh-copy-id 192.168.121.214
+```
+When promted input the password of user rhel(redhat)
+
 ## Add servers to the graphical user interface(GUI)
+
+Now it is time to add the second server to the user interface. Locate the **Dashboard** icon on your very left and click on that:
+
+![the dashboard button](images/interface_dashboard.png)
+
+Once you click on that button you will see the Dashboard:
+
+![the dashboard](images/interface_dashboardsingle.png)
 
 ## Perform tasks on many servers using the GUI
 
