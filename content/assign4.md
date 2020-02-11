@@ -65,11 +65,53 @@ Once the command is done you have patched two servers using one command.
 
 ## Run ad hoc commands against your windows server
 
-Now lets see if we can do this also with our windows server. On the server we do not have to do anything it is already prepared for ansible management. Here you find info about this:
+Now lets see if we can do this also with our windows server. On the server we do not have to do anything it is already prepared for ansible management. Here you find info about what was done to enable this:
 
 [Windows server setup](https://docs.ansible.com/ansible/latest/user_guide/windows_setup.html)
 
 Now we need to add some stuff to the hosts file in order to be able to manage windows servers.
+
+So lets edit the hosts file again:
+```
+/etc/ansible/hosts
+```
+And add all of these lines somewhere
+```
+[win]
+192.168.121.102
+
+[win:vars]
+ansible_user=wsadder@hger.org
+ansible_password=Password1
+ansible_connection=winrm
+ansible_winrm_transport=ntlm
+ansible_winrm_server_cert_validation=ignore
+```
+
+What we did was add a group [win] and some variables for that group [win:vars]
+I know it is not the safest to have password in clear text. To make it safer you can use ansible-vault.
+
+Once you have added the stuff to the hosts file it is time to test if stuff works:
+
+```
+ansible win -m win_ping
+```
+
+You should get some kind of result indicating that you can connect to the remote windows server.
+If that is successful then perhaps lets make some very common tasks like check for updates using Microsoft Updates. Be prepared that it may take quite some time to get back the list
+```
+ansible win -m win_updates -e state=searched
+```
+
+Now we see that there are some updates to lets install them
+```
+ansible win -m win_updates -e category_names=['SecurityUpdates, CriticalUpdates, UpdateRollups'] -e reboot=yes
+```
+
+If you need to reboot the win server use this command
+```
+ansible win -m win_reboot
+```
 
 Back to [index](../README.md)
 
