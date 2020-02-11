@@ -14,6 +14,13 @@ Vagrant.configure("2") do |config|
     libvirt.memory = 2500
     libvirt.nested = true
   end
+  config.vm.provider "virtualbox" do |vb, override|
+    vb.gui = false
+    vb.name = "linux4win"
+    vb.customize ["modifyvm", :id, "--memory", 2500]
+    vb.customize ["modifyvm", :id, "--cpus", 1]
+  end
+
 
   config.vm.define "linux4win2" do |rhel|
     rhel.vm.box = "generic/rhel8"
@@ -27,6 +34,32 @@ Vagrant.configure("2") do |config|
     libvirt.memory = 1024
     libvirt.nested = true
   end
+  config.vm.provider "virtualbox" do |vb, override|
+    vb.gui = false
+    vb.name = "linux4win2"
+    vb.customize ["modifyvm", :id, "--memory", 1024]
+    vb.customize ["modifyvm", :id, "--cpus", 1]
+  end
+
+#  config.vm.define "openldap" do |centos|
+#    centos.vm.box = "centos/8"
+#    centos.vm.hostname   = "openldap"
+#    centos.vm.network :private_network, ip: "10.0.1.3"
+#    centos.vm.provision :ansible do |ansible|
+#      ansible.playbook = "../ansibles/prepare_openldap.yml"
+#    end
+#  end
+#  config.vm.provider "libvirt" do |libvirt, override|
+#    libvirt.memory = 1024
+#    libvirt.nested = true
+#  end
+#  config.vm.provider "virtualbox" do |vb, override|
+#    vb.gui = false
+#    vb.name = "openldap"
+#    vb.customize ["modifyvm", :id, "--memory", 1024]
+#    vb.customize ["modifyvm", :id, "--cpus", 1]
+#  end
+
 
 #  windc_hostname= "mydc"
 #  config.vm.define "#{windc_hostname}" do |node|
