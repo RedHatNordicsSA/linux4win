@@ -22,6 +22,11 @@ Add-ADGroupMember -Identity "Minions" -Members "CN=Hakan Hagenrud,CN=Users,DC=hg
 Add-ADGroupMember -Identity "Managers" -Members "CN=Mister Manager,CN=Users,DC=hger,DC=org"
 Rename-Computer -NewName dc -Force -Restart
 '@
+#setup winrm for ansible
+$ansurl = "https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/ConfigureRemotingForAnsible.ps1"
+$ansfile = "c:\ConfigureRemotingForAnsible.ps1"
+(New-Object -TypeName System.Net.WebClient).DownloadFile($ansurl, $ansfile)
+powershell.exe -ExecutionPolicy ByPass -File $ansfile
 
 echo $daScript > $myScript
 net user /passwordreq:yes Administrator $myPassword
