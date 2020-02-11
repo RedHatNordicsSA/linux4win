@@ -42,7 +42,20 @@ Once you click on that button you will see the Dashboard:
 
 ![the dashboard](images/interface_dashboardsingle.png)
 
+If all is well you can add servers from here. Please press the **plus** sign to add another server.
+
+In the end the list should look something like this:
+
+![added a server](images/interface_moreservers.png)
+
 ## Perform tasks on many servers using the GUI
+
+Now it is time to do some stuff on the other machine. And it is as simple as clicking the new server in the interface to go there. Now you need to click around to fix stuff.
+
+You can always go between the servers by clicking in the top left corner
+
+![switch server](images/interface_switchnode.png)
+
 
 Continue to [assignment 4](content/assign4.md)
 
