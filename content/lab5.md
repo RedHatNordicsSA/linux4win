@@ -44,15 +44,15 @@ So right now you will have to use the Terminal. Please click the terminal option
 Type the following command into the terminal to get information regarding an account
 
 ```
-id vsda@hger.org
+id vsda@linux4win.local
 ```
 Out comes info about the user like groups that is member of.
 ```
-uid=579601105(vsda@hger.org) gid=579600513(domain users@hger.org) groups=579600513(domain users@hger.org),579601110(minions@hger.org)
+uid=579601105(vsda@linux4win.local) gid=579600513(domain users@linux4win.local) groups=579600513(domain users@linux4win.local),579601110(minions@linux4win.local)
 ```
 In order for this account to be able to administer this computer we will need to add it to the local wheel group. This is done by the command shown below:
 ```
-sudo usermod --append -G wheel vsda@hger.org
+sudo usermod --append -G wheel vsda@linux4win.local
 ```
 Please type the password of the account (*redhat*). This works on smaller scale. Not so much on larger scale where you most likely use Groupmembership for these kind of things. So in order to set this up we are going to create a file in a special location. 
 ```
@@ -67,7 +67,7 @@ Then lets make the file
 sudo nano /etc/sudoers.d/minions
 ```
 ```
-%minions@hger.org ALL=(ALL) NOPASSWD: ALL
+%minions@linux4win.local ALL=(ALL) NOPASSWD: ALL
 ```
 Now we need to set rights on the file. All files in the sudo system should have these:
 ```
@@ -79,7 +79,7 @@ sudo chmod 0440 /etc/sudoers.d/minions
 ```
 So to test ths you will need to login as another account and try to run anything with sudo. Can be done like this:
 ```
-sudo su - hger@hger.org
+sudo su - hger@linux4win.local
 ```
 And then try a sudo command:
 ```
@@ -95,10 +95,10 @@ sudo nano /etc/ssh/sshd_config
 ```
 And add these two lines at the end
 ```
-AllowGroups minions@hger.org
-DenyUsers administrator administrator@hger.org
+AllowGroups minions@linux4win.local
+DenyUsers administrator administrator@linux4win.local
 ```
-So now you have to be a member of the minions@hger.org Security Group in Active Directory to be allowed to login using ssh. Also we blocked access to the generic Administrator account which can pose a security issue if used.
+So now you have to be a member of the minions@linux4win.local Security Group in Active Directory to be allowed to login using ssh. Also we blocked access to the generic Administrator account which can pose a security issue if used.
 Now we need to restart the sshd service. This can be done using the Services part of the menu.
 Filter for ssh:
 ![restart sshd service](images/sshdservview.png)

@@ -81,7 +81,7 @@ And add all of these lines somewhere
 192.168.121.102
 
 [win:vars]
-ansible_user=wsadder@hger.org
+ansible_user=.\wsadder
 ansible_password=Password1
 ansible_connection=winrm
 ansible_winrm_transport=ntlm
