@@ -138,7 +138,6 @@
         - device_name: /dev/sdb
           volume_size: 1
           delete_on_termination: true
-      volumes:
         - device_name: /dev/sdc
           volume_size: 1
           delete_on_termination: true
