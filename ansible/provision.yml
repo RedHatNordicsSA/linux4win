@@ -81,8 +81,8 @@
           to_port: 443
           cidr_ip: 0.0.0.0/0
         - proto: tcp
-          from_port: 8080
-          to_port: 8080
+          from_port: 9090
+          to_port: 9090
           cidr_ip: 0.0.0.0/0
       rules_egress:
         - proto: all
@@ -133,6 +133,7 @@
       region: "{{ ec2_region }}"
       group: "{{ ec2_security_group }}"
       instance_type: t2.medium
+      user_data: "{{ lookup('file', '/tmp/cockpit-prep.sh') }}"
       image: "{{ rhel_ami_id }}"
       volumes:
         - device_name: /dev/sdb
