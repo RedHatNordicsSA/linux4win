@@ -88,6 +88,43 @@
         - proto: all
           cidr_ip: 0.0.0.0/0
 
+  - name: Provision Active Directory host
+    ec2:
+      aws_access_key: "{{ec2_access_key}}"
+      aws_secret_key: "{{ec2_secret_key}}"
+      key_name: "{{ec2_key}}"
+      region: "{{ ec2_region }}"
+      group: "{{ ec2_security_group }}"
+      instance_type: t2.medium
+      image: "{{ win_ami_id }}"
+      user_data: "{{ lookup('file', '/tmp/ad-prep.ps1') }}"
+      wait: true
+      exact_count: "{{ number_of_ad_systems }}"
+      count_tag:
+        identity: ad
+      instance_tags:
+        identity: ad
+    register: ad
+    
+ - name: Add Active Directory host instance public IPs to host group
+    add_host: hostname={{ item.public_ip }} groups=ad
+    with_items: "{{ ad.tagged_instances }}"
+
+  - name: Print IP addresses of Windows hosts to ./ad_instances.out
+    lineinfile:
+      path: ./ad_instances.out
+      line: "{{ item.public_ip }}"
+      create: yes
+    with_items: "{{ ad.tagged_instances }}"
+  
+  - name: Replace AD variable placeholder in RHEL host files
+    lineinfile:
+      path: /tmp/rhelhost-prep.sh
+      regexp: '^ADIPADDRESS'
+      line: "{{ item_public_ip }}"
+      create: yes
+    with_items: "{{ ad.tagged_instance }}"
+
   - name: Provision Cockpit servers
     ec2:
       aws_access_key: "{{ec2_access_key}}"
@@ -145,24 +182,6 @@
         identity: winhost
     register: winhost
 
-  - name: Provision Active Directory hosts
-    ec2:
-      aws_access_key: "{{ec2_access_key}}"
-      aws_secret_key: "{{ec2_secret_key}}"
-      key_name: "{{ec2_key}}"
-      region: "{{ ec2_region }}"
-      group: "{{ ec2_security_group }}"
-      instance_type: t2.medium
-      image: "{{ win_ami_id }}"
-      user_data: "{{ lookup('file', '/tmp/ad-prep.ps1') }}"
-      wait: true
-      exact_count: "{{ number_of_ad_systems }}"
-      count_tag:
-        identity: ad
-      instance_tags:
-        identity: ad
-    register: ad
-
   - name: Add Cockpit instance public IPs to host group
     add_host: hostname={{ item.public_ip }} groups=cockpit
     with_items: "{{ cockpit.tagged_instances }}"
@@ -177,7 +196,7 @@
       line: "{{ item.public_ip }}"
       create: yes
     with_items: "{{ cockpit.tagged_instances }}"
-    
+
   - name: Add RHEL host instance public IPs to host group
     add_host: hostname={{ item.public_ip }} groups=rhelhost
     with_items: "{{ rhelhost.tagged_instances }}"
@@ -208,20 +227,9 @@
       create: yes
     with_items: "{{ winhost.tagged_instances }}"
     
-  - name: Add Active Directory host instance public IPs to host group
-    add_host: hostname={{ item.public_ip }} groups=ad
-    with_items: "{{ ad.tagged_instances }}"
-
+ 
   - name: Print IP addresses of Active Directory hosts
     debug:
       msg: "{{ groups['ad'] }}"
-
-  - name: Print IP addresses of Windows hosts to ./ad_instances.out
-    lineinfile:
-      path: ./ad_instances.out
-      line: "{{ item.public_ip }}"
-      create: yes
-    with_items: "{{ ad.tagged_instances }}"
-
 
 

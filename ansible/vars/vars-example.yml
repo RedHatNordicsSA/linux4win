@@ -33,8 +33,10 @@ rhelhost_prep: https://raw.githubusercontent.com/RedHatNordicsSA/linux4win/maste
 winhost_prep: https://raw.githubusercontent.com/RedHatNordicsSA/linux4win/master/ansible/scripts/winhost-prep.ps1
 ad_prep: https://raw.githubusercontent.com/RedHatNordicsSA/linux4win/master/ansible/scripts/ad-prep.ps1
 
-
+# One per student
 number_of_cockpit_systems: 1
 number_of_rhelhost_systems: 1
 number_of_winhost_systems: 1
+
+# One per class
 number_of_ad_systems: 1
