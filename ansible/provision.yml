@@ -117,13 +117,13 @@
       create: yes
     with_items: "{{ ad.tagged_instances }}"
   
-  - name: Replace AD variable placeholder in RHEL host files
+  - name: Replace AD variable placeholder in Cockpit prep files
     lineinfile:
       path: /tmp/cockpit-prep.sh
-      regexp: '^ADIPADDRESS'
-      line: "{{ item_public_ip }}"
+      regexp: '^DNSIP=ADIPADDRESS'
+      line: "DNSIP={{ item.private_ip }}"
       create: yes
-    with_items: "{{ ad.tagged_instance }}"
+    with_items: "{{ ad.tagged_instances }}"
 
   - name: Provision Cockpit servers
     ec2:
