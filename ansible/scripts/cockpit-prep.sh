@@ -2,7 +2,7 @@
 
 #preps the first cockpit server
 useradd rhel
-echo "redhat" | passwd student --stdin
+echo "linux4winPass2020" | passwd student --stdin
 usermod -aG wheel rhel
 echo "rhel ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/rhel
 chmod 0440 /etc/sudoers.d/rhel
