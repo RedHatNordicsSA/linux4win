@@ -16,8 +16,8 @@ ec2_secret_key: !vault |
           3763373634353134653637373766633364393761623334623762
 
 ec2_key: ec2-ssh-key-needs-to-be-default-from-place-you-run-playbook
-ec2_region: eu-west-1, or whatever-you-like
-ec2_security_group: ansibleroadshow-tower
+ec2_region: eu-central-1
+ec2_security_group: linux4win
 
 # If you are not deploying in AWS Frankfurt, change AMI id by looking them up here: 
 # https://eu-north-1.console.aws.amazon.com/ec2/v2/home?region=eu-north-1#LaunchInstanceWizard:
