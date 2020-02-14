@@ -28,10 +28,10 @@ rhel_ami_id: ami-9f35bde1 (ami-id is for AWS in Stockholm)
 win_ami_id: ami-0c57f585c85be5b5b (ami-id is for AWS in Stockholm)
 
 # This is where the user data file should be fetched. This needs to be edited if you have cloned this repo
-cockpit-prep.sh = https://raw.githubusercontent.com/RedHatNordicsSA/linux4win/master/ansible/scripts/cockpit-prep.sh
-rhelhost-prep.sh = https://raw.githubusercontent.com/RedHatNordicsSA/linux4win/master/ansible/scripts/rhelhost-prep.sh
-winhost-prep.sh = https://raw.githubusercontent.com/RedHatNordicsSA/linux4win/master/ansible/scripts/winhost-prep.ps1
-ad-prep.ps1 = https://raw.githubusercontent.com/RedHatNordicsSA/linux4win/master/ansible/scripts/ad-prep.ps1
+cockpit_prep = https://raw.githubusercontent.com/RedHatNordicsSA/linux4win/master/ansible/scripts/cockpit-prep.sh
+rhelhost_prep = https://raw.githubusercontent.com/RedHatNordicsSA/linux4win/master/ansible/scripts/rhelhost-prep.sh
+winhost_prep = https://raw.githubusercontent.com/RedHatNordicsSA/linux4win/master/ansible/scripts/winhost-prep.ps1
+ad_prep = https://raw.githubusercontent.com/RedHatNordicsSA/linux4win/master/ansible/scripts/ad-prep.ps1
 
 
 number_of_cockpit_systems: 1
