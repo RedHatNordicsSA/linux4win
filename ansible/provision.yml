@@ -165,7 +165,7 @@
         identity: rhelhost
       instance_tags:
         identity: rhelhost
-    register: ec2micro
+    register: rhelhost
 
   - name: Provision Windows hosts
     ec2:
