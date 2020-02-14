@@ -19,13 +19,14 @@ ec2_key: ec2-ssh-key-needs-to-be-default-from-place-you-run-playbook
 ec2_region: eu-west-1, or whatever-you-like
 ec2_security_group: ansibleroadshow-tower
 
-# If you are not deploying in AWS Stockholm, change AMI id by looking them up here: 
+# If you are not deploying in AWS Frankfurt, change AMI id by looking them up here: 
 # https://eu-north-1.console.aws.amazon.com/ec2/v2/home?region=eu-north-1#LaunchInstanceWizard:
 # rhel_ami_id is for "Red Hat Enterprise Linux 8 (HVM), SSD Volume Type"
 # win_ami_id is for "Microsoft Windows Server 1909 Core Base"
 
-rhel_ami_id: ami-9f35bde1 (ami-id is for AWS in Stockholm)
-win_ami_id: ami-0c57f585c85be5b5b (ami-id is for AWS in Stockholm)
+# These are AMIs for eu-central-1
+rhel_ami_id: ami-0badcc5b522737046
+win_ami_id: ami-023f2b50d6aabf023
 
 # This is where the user data file should be fetched. This needs to be edited if you have cloned this repo
 cockpit_prep: https://raw.githubusercontent.com/RedHatNordicsSA/linux4win/master/ansible/scripts/cockpit-prep.sh
