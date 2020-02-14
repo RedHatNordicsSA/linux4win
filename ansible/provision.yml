@@ -6,28 +6,28 @@
   tasks:
   - name: Download Cockpit user data file
     get_url:
-      url: "{{ cockpit-prep.sh }}"
+      url: "{{ cockpit_prep }}"
       dest: /tmp/cockpit-prep.sh
       validate_certs: no
       force: yes
 
   - name: Download RHEL host user data file
     get_url:
-      url: "{{ rhelhost-prep.sh }}"
+      url: "{{ rhelhost_prep }}"
       dest: /tmp/rhelhost-prep.sh
       validate_certs: no
       force: yes
       
   - name: Download Windows host user data file
     get_url:
-      url: "{{ winhost-prep.ps1 }}"
+      url: "{{ winhost_prep }}"
       dest: /tmp/winhost-prep.ps1
       validate_certs: no
       force: yes
  
    - name: Download Active Directory user data file
     get_url:
-      url: "{{ ad-prep.ps1 }}"
+      url: "{{ ad_prep }}"
       dest: /tmp/ad-prep.ps1
       validate_certs: no
       force: yes
