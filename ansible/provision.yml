@@ -138,6 +138,9 @@
         - device_name: /dev/sdb
           volume_size: 1
           delete_on_termination: true
+        - device_name: /dev/sdc
+          volume_size: 1
+          delete_on_termination: true
       wait: true
       exact_count: "{{ number_of_cockpit_systems }}"
       count_tag:
