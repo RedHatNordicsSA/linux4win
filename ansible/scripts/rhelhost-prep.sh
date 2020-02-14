@@ -9,6 +9,7 @@ chmod 0440 /etc/sudoers.d/rhel
 
 #install enable and open firewall for cockpit
 yum install firewalld cockpit-composer cockpit bash-completion -y
+systemctl enable --now firewalld
 systemctl enable --now cockpit.socket
 firewall-cmd --add-service=cockpit
 firewall-cmd --add-service=cockpit --permanent
