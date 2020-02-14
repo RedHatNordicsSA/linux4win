@@ -4,33 +4,57 @@
   vars_files:
     - vars/vars.yml
   tasks:
-  - name: Download Tower user data file
+  - name: Download Cockpit user data file
     get_url:
-      url: https://raw.githubusercontent.com/mglantz/ansible-roadshow/master/content/scripts/tower-prep.sh
-      dest: /tmp/tower-prep.sh
+      url: "{{ cockpit-prep.sh }}"
+      dest: /tmp/cockpit-prep.sh
       validate_certs: no
       force: yes
 
-  - name: Download regular hosts user data file
+  - name: Download RHEL host user data file
     get_url:
-      url: https://raw.githubusercontent.com/mglantz/ansible-roadshow/master/content/scripts/host-prep.sh
-      dest: /tmp/host-prep.sh
+      url: "{{ rhelhost-prep.sh }}"
+      dest: /tmp/rhelhost-prep.sh
+      validate_certs: no
+      force: yes
+      
+  - name: Download Windows host user data file
+    get_url:
+      url: "{{ winhost-prep.ps1 }}"
+      dest: /tmp/winhost-prep.ps1
+      validate_certs: no
+      force: yes
+ 
+   - name: Download Active Directory user data file
+    get_url:
+      url: "{{ ad-prep.ps1 }}"
+      dest: /tmp/ad-prep.ps1
       validate_certs: no
       force: yes
 
-  - name: Create empty file to store tower servers public IPs
+  - name: Create empty file to store Cockpit public IPs
     file:
-      path: "./tower_servers.out"
+      path: "./cockpit_servers.out"
       state: touch
 
-  - name: Create empty file to store tower clients public IPs
+  - name: Create empty file to store RHEL host public IPs
     file:
-      path: "./client_instances.out"
+      path: "./rhelhost_instances.out"
       state: touch
 
-  - name: Ensure a security group for Ansible Tower servers is in place
+  - name: Create empty file to store Windows host public IPs
+    file:
+      path: "./winhost_instances.out"
+      state: touch
+
+  - name: Create empty file to store Active Directory host public IPs
+    file:
+      path: "./ad_instances.out"
+      state: touch
+
+  - name: Ensure a security group is in place
     ec2_group:
-      name: "{{ ec2_security_group_tower }}"
+      name: "{{ ec_security_group }}"
       description: Security Group for Ansible Tower servers
       region: "{{ ec2_region }}"
       aws_access_key: "{{ec2_access_key}}"
@@ -41,65 +65,12 @@
           to_port: 22
           cidr_ip: 0.0.0.0/0
         - proto: tcp
-          from_port: 80
-          to_port: 80
+          from_port: 5985
+          to_port: 5985
           cidr_ip: 0.0.0.0/0
         - proto: tcp
-          from_port: 443
-          to_port: 443
-          cidr_ip: 0.0.0.0/0
-        - proto: tcp
-          from_port: 8080
-          to_port: 8080
-          cidr_ip: 0.0.0.0/0
-      rules_egress:
-        - proto: all
-          cidr_ip: 0.0.0.0/0
-
-  - name: Ensure a security group for client systems is in place
-    ec2_group:
-      name: "{{ ec2_security_group_client_systems }}"
-      description: Security Group for Ansible client systems
-      region: "{{ ec2_region }}"
-      aws_access_key: "{{ec2_access_key}}"
-      aws_secret_key: "{{ec2_secret_key}}"
-      rules:
-        - proto: tcp
-          from_port: 22
-          to_port: 22
-          cidr_ip: 0.0.0.0/0
-#          group_name: "{{ ec2_security_group_tower}}"
-        - proto: tcp
-          from_port: 80
-          to_port: 80
-          cidr_ip: 0.0.0.0/0
-        - proto: tcp
-          from_port: 443
-          to_port: 443
-          cidr_ip: 0.0.0.0/0
-        - proto: tcp
-          from_port: 8080
-          to_port: 8080
-          cidr_ip: 0.0.0.0/0
-#        - proto: icmp
-#          from_port: -1
-#          to_port: -1
-#          group_name: "{{ ec2_security_group_tower}}"
-      rules_egress:
-        - proto: all
-          cidr_ip: 0.0.0.0/0
-
-  - name: Ensure a security group for Gitlab is in place
-    ec2_group:
-      name: "{{ ec2_security_group_gitlab }}"
-      description: Security Group for webserver Servers
-      region: "{{ ec2_region }}"
-      aws_access_key: "{{ec2_access_key}}"
-      aws_secret_key: "{{ec2_secret_key}}"
-      rules:
-        - proto: tcp
-          from_port: 22
-          to_port: 22
+          from_port: 5986
+          to_port: 5986
           cidr_ip: 0.0.0.0/0
         - proto: tcp
           from_port: 80
@@ -117,108 +88,140 @@
         - proto: all
           cidr_ip: 0.0.0.0/0
 
-  - name: Provision Gitlab
+  - name: Provision Cockpit servers
     ec2:
       aws_access_key: "{{ec2_access_key}}"
       aws_secret_key: "{{ec2_secret_key}}"
       key_name: "{{ec2_key}}"
       region: "{{ ec2_region }}"
-      group: "{{ ec2_security_group_gitlab }}"
+      group: "{{ ec2_security_group }}"
       instance_type: t2.medium
-      image: "{{ ami_id }}"
+      image: "{{ rhel_ami_id }}"
+      volumes:
+        - device_name: /dev/sdb
+          volume_size: 1
+          delete_on_termination: true
       wait: true
-      exact_count: "{{ number_of_git_systems }}"
+      exact_count: "{{ number_of_cockpit_systems }}"
       count_tag:
-        identity: git
+        identity: cockpit
       instance_tags:
-        identity: git
-    register: git_server
+        identity: cockpit
+    register: cockpit
 
-  - name: Provision the systems which are to be managed with Ansible
+  - name: Provision RHEL hosts
     ec2:
       aws_access_key: "{{ec2_access_key}}"
       aws_secret_key: "{{ec2_secret_key}}"
       key_name: "{{ec2_key}}"
       region: "{{ ec2_region }}"
-      group: "{{ ec2_security_group_client_systems }}"
+      group: "{{ ec2_security_group }}"
       instance_type: t2.micro
-      image: "{{ ami_id }}"
-      user_data: "{{ lookup('file', '/tmp/host-prep.sh') }}"
+      image: "{{ rhel_ami_id }}"
+      user_data: "{{ lookup('file', '/tmp/rhelhost-prep.sh') }}"
       wait: true
-      exact_count: "{{ number_of_client_systems }}"
+      exact_count: "{{ number_of_rhelhost_systems }}"
       count_tag:
-        identity: system
+        identity: rhelhost
       instance_tags:
-        identity: system
+        identity: rhelhost
     register: ec2micro
 
-  - name: Provision Ansible Tower
+  - name: Provision Windows hosts
     ec2:
       aws_access_key: "{{ec2_access_key}}"
       aws_secret_key: "{{ec2_secret_key}}"
       key_name: "{{ec2_key}}"
       region: "{{ ec2_region }}"
-      group: "{{ ec2_security_group_tower }}"
-      instance_type: t2.medium
-      image: "{{ ami_id }}"
-      user_data: "{{ lookup('file', '/tmp/tower-prep.sh') }}"
+      group: "{{ ec2_security_group }}"
+      instance_type: t2.micro
+      image: "{{ win_ami_id }}"
+      user_data: "{{ lookup('file', '/tmp/winhost-prep.ps1') }}"
       wait: true
-      exact_count: "{{ number_of_tower_systems }}"
+      exact_count: "{{ number_of_winhost_systems }}"
       count_tag:
-        identity: tower
+        identity: winhost
       instance_tags:
-        identity: tower
-    register: ec2large
+        identity: winhost
+    register: winhost
 
-  - name: Add client instance public IPs to host group
-    add_host: hostname={{ item.public_ip }} groups=ec2micro
-    with_items: "{{ ec2micro.tagged_instances }}"
+  - name: Provision Active Directory hosts
+    ec2:
+      aws_access_key: "{{ec2_access_key}}"
+      aws_secret_key: "{{ec2_secret_key}}"
+      key_name: "{{ec2_key}}"
+      region: "{{ ec2_region }}"
+      group: "{{ ec2_security_group }}"
+      instance_type: t2.medium
+      image: "{{ win_ami_id }}"
+      user_data: "{{ lookup('file', '/tmp/ad-prep.ps1') }}"
+      wait: true
+      exact_count: "{{ number_of_ad_systems }}"
+      count_tag:
+        identity: ad
+      instance_tags:
+        identity: ad
+    register: ad
 
-  - name: Print IP addresses of regular systems
+  - name: Add Cockpit instance public IPs to host group
+    add_host: hostname={{ item.public_ip }} groups=cockpit
+    with_items: "{{ cockpit.tagged_instances }}"
+
+  - name: Print IP addresses of Cockpit systems
     debug:
-      msg: "{{ groups['ec2micro'] }}"
+      msg: "{{ groups['cockpit'] }}"
 
-  - name: Print IP addresses of regular systems to ./client_instances.out
+  - name: Print IP addresses of Cockpit systems to ./cockpit_instances.out
     lineinfile:
-      path: ./client_instances.out
+      path: ./cockpit_instances.out
       line: "{{ item.public_ip }}"
       create: yes
-    with_items: "{{ ec2micro.tagged_instances }}"
+    with_items: "{{ cockpit.tagged_instances }}"
+    
+  - name: Add RHEL host instance public IPs to host group
+    add_host: hostname={{ item.public_ip }} groups=rhelhost
+    with_items: "{{ rhelhost.tagged_instances }}"
 
-  - name: Add Tower instance public IPs to host group
-    add_host: hostname={{ item.public_ip }} groups=ec2large
-    with_items: "{{ ec2large.tagged_instances }}"
-
-  - name: Add git instance public IPs and fqdn to host group
-    add_host:
-      hostname: "{{ item.public_ip }}"
-      groups: git
-      ansible_become: true
-      fqdn: "{{item.public_dns_name}}"
-      ansible_ssh_user: ec2-user
-    with_items: "{{ git_server.tagged_instances }}"
-
-  - name: Print IP address of Ansible Tower server
+  - name: Print IP addresses of RHEL hosts
     debug:
-      msg: "{{ groups['ec2large'] }}"
+      msg: "{{ groups['rhelhost'] }}"
 
-  - name: Print IP addresses of Tower servers to ./tower_servers.out
+  - name: Print IP addresses of RHEL hosts to ./rhelhost_instances.out
     lineinfile:
-      path: ./tower_servers.out
+      path: ./rhelhost_instances.out
       line: "{{ item.public_ip }}"
       create: yes
-    with_items: "{{ ec2large.tagged_instances }}"
+    with_items: "{{ rhelhost.tagged_instances }}"
 
-  - name: Print public ip and fqdn of Git server
+  - name: Add Windows host instance public IPs to host group
+    add_host: hostname={{ item.public_ip }} groups=winhost
+    with_items: "{{ winhost.tagged_instances }}"
+
+  - name: Print IP addresses of Windows hosts
     debug:
-      msg:
-        - "{{ item.public_ip }}"
-        - "{{ item.public_dns_name }}"
-    with_items: "{{ git_server.tagged_instances }}"
+      msg: "{{ groups['winhost'] }}"
 
-  - name: Print IP addresses of Git servers to ./git_servers.out
+  - name: Print IP addresses of Windows hosts to ./winhost_instances.out
     lineinfile:
-      path: ./git_servers.out
+      path: ./winhost_instances.out
       line: "{{ item.public_ip }}"
       create: yes
-    with_items: "{{ git_server.tagged_instances }}"
+    with_items: "{{ winhost.tagged_instances }}"
+    
+  - name: Add Active Directory host instance public IPs to host group
+    add_host: hostname={{ item.public_ip }} groups=ad
+    with_items: "{{ ad.tagged_instances }}"
+
+  - name: Print IP addresses of Active Directory hosts
+    debug:
+      msg: "{{ groups['ad'] }}"
+
+  - name: Print IP addresses of Windows hosts to ./ad_instances.out
+    lineinfile:
+      path: ./ad_instances.out
+      line: "{{ item.public_ip }}"
+      create: yes
+    with_items: "{{ ad.tagged_instances }}"
+
+
+
