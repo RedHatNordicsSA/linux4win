@@ -119,7 +119,7 @@
   
   - name: Replace AD variable placeholder in RHEL host files
     lineinfile:
-      path: /tmp/rhelhost-prep.sh
+      path: /tmp/cockpit-prep.sh
       regexp: '^ADIPADDRESS'
       line: "{{ item_public_ip }}"
       create: yes
