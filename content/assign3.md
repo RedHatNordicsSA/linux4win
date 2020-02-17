@@ -24,7 +24,7 @@ Which will output something like this:
 ```
 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDSCAXaZu7Bz4eSs/zyRi1MB1Nm7oR5XXBkjvbhpDdszPkUouDk+2MJ6/nK19NEtJ1yGU6t02kPQLTq6aOvUaPZsQ+wXFL3qPWhxSb60Tbc/t1+Nhh9FfeIQO+cqzq4PtCkC7DThSjParCkmkTn5JnIYNaVvOimaI9c4lO0qrt+6kdty2oTIbdcOrM0CERDBWhzECCmCDpAXv6R4/G+g2WXTXefpmGgwEdNiDVfV79niJQj4DnG0DVQV/uFNKoV/AyzGcKFVNzaO7PSqoY5kdQjlAEa3tr2SETLH8jjSec7ux4BDoAyPU+qNLWTCHNnlZ6yB4isbPbKw5RcOaDnZiLr rhel@linux4win
 ```
-We are interested in the long string between *ssh-rsa* and *rhel@linux4win*. Copy this string and paste into a notebook somewhere to save. We will use this again soon.
+We are interested in the long string between *ssh-rsa* and *rhel@hostname*. This string can be used to authenticate password-less from this server to that other server. 
 
 Now we are going to send this key to another server. For this you need the ip of the server or the FQDN. 
 ```
@@ -44,6 +44,8 @@ Once you click on that button you will see the Dashboard:
 
 If all is well you can add servers from here. Please press the **plus** sign to add another server.
 
+![add the server](images//interface_addserver.png)
+
 In the end the list should look something like this:
 
 ![added a server](images/interface_moreservers.png)
@@ -56,6 +58,7 @@ You can always go between the servers by clicking in the top left corner
 
 ![switch server](images/interface_switchnode.png)
 
+So I suggest enrolling the server in the domain, make sure the server is updated to latest patch level and perhaps you will find other stuff to do with the second one.
 
 Continue to [assignment 4](assign4.md)
 
