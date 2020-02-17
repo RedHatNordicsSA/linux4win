@@ -13,3 +13,8 @@ systemctl enable --now firewalld
 systemctl enable --now cockpit.socket
 firewall-cmd --add-service=cockpit
 firewall-cmd --add-service=cockpit --permanent
+
+#fix for ansible broken winrm
+yum install python3-pip -y
+pip3 install pywinrm
+cp -r /usr/local/lib/python3.6/site-packages/* /usr/lib/python3.6/site-packages/

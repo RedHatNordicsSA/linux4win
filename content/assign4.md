@@ -112,6 +112,9 @@ If you need to reboot the win server use this command
 ```
 ansible win -m win_reboot
 ```
+yum install python3-pip -y
+pip3 install pywinrm
+cp -r /usr/local/lib/python3.6/site-packages/* /usr/lib/python3.6/site-packages/
 
 Back to [index](../README.md)
 

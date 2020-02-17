@@ -39,8 +39,8 @@ Vagrant.configure("2") do |config|
 #useradd -G wheel rhel 
   windc_hostname= "mydc"
   config.vm.define "#{windc_hostname}" do |node|
-    #node.vm.box = "oatakan/windows-2019-standard-core"
-    node.vm.box = "oatakan/windows-2019-standard"
+    node.vm.box = "oatakan/windows-2019-standard-core"
+    #node.vm.box = "oatakan/windows-2019-standard"
     node.vm.hostname = "#{windc_hostname}"
     node.vm.boot_timeout = 600
     node.winrm.transport = :negotiate
@@ -62,6 +62,34 @@ Vagrant.configure("2") do |config|
   end
   config.vm.provider "virtualbox" do |vb, override|
       vb.memory = 4096
+      vb.cpus = 1
+  end
+
+  winnode_hostname= "winnode"
+  config.vm.define "#{winnode_hostname}" do |node|
+    #node.vm.box = "oatakan/windows-2019-standard-core"
+    node.vm.box = "oatakan/windows-2019-standard"
+    node.vm.hostname = "#{winnode_hostname}"
+    node.vm.boot_timeout = 600
+    node.winrm.transport = :negotiate
+    node.vm.communicator = "winrm"
+    node.winrm.basic_auth_only = false
+    node.winrm.timeout = 300
+    node.winrm.retry_limit = 20
+    node.vm.network "forwarded_port", guest: 5986, host: 5902
+    node.vm.network :private_network, ip: "10.0.1.7"
+    node.vm.synced_folder ".", "/vagrant", disabled: true
+    node.vm.provision :ansible do |ansible|
+      ansible.playbook = "../ansibles/prepare_winnode.yml"
+    end
+
+  end
+  config.vm.provider :libvirt do |libvirt, override|
+    libvirt.memory = 2048
+    libvirt.nested = true
+  end
+  config.vm.provider "virtualbox" do |vb, override|
+      vb.memory = 2048
       vb.cpus = 1
   end
 end
