@@ -50,6 +50,6 @@ Then return to the Software Updates menu choice and see there is now also update
 
 Click on the arrow **>** to see the last transaction
 
-Continue to [lab 2](content/lab2.md)
+Continue to [lab 2](lab2.md)
 
 Back to [index](../README.md)

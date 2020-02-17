@@ -124,6 +124,6 @@ Once the buildprocess is done you can download your image. Press the Download bu
 ![export image](images/interface_downloadimage.png)
 
 
-Continue to [assignment 2](content/assign2.md)
+Continue to [assignment 2](assign2.md)
 
 Back to [index](../README.md)
