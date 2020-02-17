@@ -57,6 +57,6 @@ You can always go between the servers by clicking in the top left corner
 ![switch server](images/interface_switchnode.png)
 
 
-Continue to [assignment 4](content/assign4.md)
+Continue to [assignment 4](assign4.md)
 
 Back to [index](../README.md)

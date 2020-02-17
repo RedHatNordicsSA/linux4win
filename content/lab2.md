@@ -80,6 +80,6 @@ Slide the slider to your right, max it out.
 
 Now go back again to storage and notice that the root file system is much larger
 
-Continue to [lab 3](content/lab3.md)
+Continue to [lab 3](lab3.md)
 
 Back to [index](../README.md)

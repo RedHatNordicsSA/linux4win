@@ -40,6 +40,6 @@ pool 2.rhel.pool.ntp.org iburst
 ```
 Now when you have fixed the typo go back to menu item Services and restart the chronyd service please.
 
-Continue to [assignment 1](content/assign1.md)
+Continue to [assignment 1](assign1.md)
 
 Back to [index](../README.md)

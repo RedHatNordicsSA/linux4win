@@ -49,6 +49,6 @@ This time we are adding just a port on TCP. Fill in like in the pic above and pr
 
 Now you will have an entry in the list of allowed services called *myVNC* that is new.
 
-Continue to [lab 5](content/lab5.md)
+Continue to [lab 5](lab5.md)
 
 Back to [index](../README.md)

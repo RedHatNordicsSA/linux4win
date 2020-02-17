@@ -105,6 +105,6 @@ Filter for ssh:
 Then click on sshd.service and restart the service.
 
 
-Continue to [lab 6](content/lab6.md)
+Continue to [lab 6](lab6.md)
 
 Back to [index](../README.md)

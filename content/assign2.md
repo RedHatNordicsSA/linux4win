@@ -50,6 +50,6 @@ port=1433
 ```
 
 
-Continue to [assignment 3](content/assign3.md)
+Continue to [assignment 3](assign3.md)
 
 Back to [index](../README.md)

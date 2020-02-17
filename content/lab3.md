@@ -49,6 +49,6 @@ Go back to services and filter for "httpd". You should see an entry called httpd
 
 Now you should **Start** the service and set it to **Enabled**. Now you know how to install apache webserver and set it to always run, even after reboot.
 
-Continue to [lab 4](content/lab4.md)
+Continue to [lab 4](lab4.md)
 
 Back to [index](../README.md)
