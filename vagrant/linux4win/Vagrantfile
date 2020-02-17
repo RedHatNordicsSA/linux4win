@@ -67,8 +67,8 @@ Vagrant.configure("2") do |config|
 
   winnode_hostname= "winnode"
   config.vm.define "#{winnode_hostname}" do |node|
-    #node.vm.box = "oatakan/windows-2019-standard-core"
-    node.vm.box = "oatakan/windows-2019-standard"
+    node.vm.box = "oatakan/windows-2019-standard-core"
+    #node.vm.box = "oatakan/windows-2019-standard"
     node.vm.hostname = "#{winnode_hostname}"
     node.vm.boot_timeout = 600
     node.winrm.transport = :negotiate

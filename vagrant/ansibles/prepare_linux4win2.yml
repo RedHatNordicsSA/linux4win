@@ -65,12 +65,8 @@
   vars:
     - ansible_python_interpreter: /usr/libexec/platform-python
   tasks:
-  - name: Prepare for lab2
-    include_tasks: tasks/lab2.yml
-  - name: Prepare for lab4
-    include_tasks: tasks/lab4.yml
   - name: Prepare for lab5
     include_tasks: tasks/lab5.yml
-  - name: Prepare for lab6
-    include_tasks: tasks/lab6.yml
+  - name: Prepare for assign4
+    include_tasks: tasks/assign4.yml
 
