@@ -113,5 +113,5 @@ If you need to reboot the win server use this command
 ansible win -m win_reboot
 ```
 
-Back to [index](../thews.md)
+Back to [index](thews.md)
 

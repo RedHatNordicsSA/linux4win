@@ -52,4 +52,4 @@ Click on the arrow **>** to see the last transaction
 
 Continue to [lab 2](lab2.md)
 
-Back to [index](../thews.md)
+Back to [index](thews.md)

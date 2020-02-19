@@ -62,4 +62,4 @@ So I suggest enrolling the server in the domain, make sure the server is updated
 
 Continue to [assignment 4](assign4.md)
 
-Back to [index](../thews.md)
+Back to [index](thews.md)

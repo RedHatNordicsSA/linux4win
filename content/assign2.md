@@ -52,4 +52,4 @@ port=1433
 
 Continue to [assignment 3](assign3.md)
 
-Back to [index](../thews.md)
+Back to [index](thews.md)

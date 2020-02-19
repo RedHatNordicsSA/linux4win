@@ -51,4 +51,4 @@ Now you should **Start** the service and set it to **Enabled**. Now you know how
 
 Continue to [lab 4](lab4.md)
 
-Back to [index](../thews.md)
+Back to [index](thews.md)

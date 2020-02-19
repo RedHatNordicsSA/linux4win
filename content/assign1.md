@@ -126,4 +126,4 @@ Once the buildprocess is done you can download your image. Press the Download bu
 
 Continue to [assignment 2](assign2.md)
 
-Back to [index](../thews.md)
+Back to [index](thews.md)
