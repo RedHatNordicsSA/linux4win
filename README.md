@@ -8,6 +8,6 @@ It is meant to be instructor led.
 
 In order to use this workshop please either deploy it in [AWS](content/aws.md) or use [vagrant](content/vagrant.md) locally.
 
-Here you will find the index of the [workshop](thews.md)
+Here you will find the index of the [workshop](content/thews.md)
 
 And here is a [pitch](pitch.md)
