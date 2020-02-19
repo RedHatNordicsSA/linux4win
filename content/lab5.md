@@ -54,7 +54,7 @@ In order for this account to be able to administer this computer we will need to
 ```
 sudo usermod --append -G wheel vsda@linux4win.local
 ```
-Please type the password of the account (*redhat*). This works on smaller scale. Not so much on larger scale where you most likely use Groupmembership for these kind of things. So in order to set this up we are going to create a file in a special location. 
+Please type the password of the account. This works on smaller scale. Not so much on larger scale where you most likely use Groupmembership for these kind of things. So in order to set this up we are going to create a file in a special location. 
 ```
 ls -l /etc/sudoers.d/
 ```

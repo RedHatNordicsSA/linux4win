@@ -38,13 +38,12 @@ When you are ready press the blue **Install All Updates** button and have some p
 
 ![yum update restart](images/interface_yumrestart.png)
 
-We stongly recommend restarting when you have just updated. Easy to forget otherwise,
+We stongly recommend restarting when you have just updated. Easy to forget otherwise, however since this lab is running in AWS you will loose the connection to the host so please do not restart the server.
 
-Once the server has comeback online you will need to login again, do that using **rhel** with password **redhat** and make sure the checkbox is checked
 
-![login page of cockpit](images/login.png)
+**Press Ignore please**
 
-Then return to the Software Updates menu choice and see there is now also updates history displayed:
+You can go back to the Software Updates portion of the interface to see history
 
 ![user interface of yum history](images/interface_yumhistory.png)
 

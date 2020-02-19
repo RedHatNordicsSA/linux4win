@@ -19,7 +19,7 @@ Here you can interface with the command line interface of the server and do stuf
 ```
 sudo yum install httpd
 ```
-When promted please type the password of user **rhel** (redhat)
+When promted please type the password of user **rhel**
 ```
 [sudo] password for rhel: 
 ```

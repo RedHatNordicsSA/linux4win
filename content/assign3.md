@@ -30,7 +30,7 @@ Now we are going to send this key to another server. For this you need the ip of
 ```
 ssh-copy-id 192.168.121.214
 ```
-When promted input the password of user rhel(redhat)
+When promted input the password of user rhel
 
 ## Add servers to the graphical user interface(GUI)
 
