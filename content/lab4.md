@@ -51,4 +51,4 @@ Now you will have an entry in the list of allowed services called *myVNC* that i
 
 Continue to [lab 5](lab5.md)
 
-Back to [index](../README.md)
+Back to [index](../thews.md)

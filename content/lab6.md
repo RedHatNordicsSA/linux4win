@@ -42,4 +42,4 @@ Now when you have fixed the typo go back to menu item Services and restart the c
 
 Continue to [assignment 1](assign1.md)
 
-Back to [index](../README.md)
+Back to [index](../thews.md)

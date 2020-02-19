@@ -82,4 +82,4 @@ Now go back again to storage and notice that the root file system is much larger
 
 Continue to [lab 3](lab3.md)
 
-Back to [index](../README.md)
+Back to [index](../thews.md)

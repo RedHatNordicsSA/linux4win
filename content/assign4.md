@@ -56,7 +56,7 @@ With this command we find out what release of Red Hat Enterprise Linux these ser
 ansible all -m shell -a 'yum check-update' -u rhel --ask-pass --become-user rhel
 ```
 
-This command list all available updates for any system. Now you get a loooooong list of stuff that is going to be updated on any connected system. To actually run the update run this:
+This command list all available updates for any system. Now most likely you do not get any updates since we have already done the patching using the cockpit web-ui. But if there where any all you needed to do was run this command.
 ```
 ansible all -m shell -a 'yum update -y' -u rhel --ask-pass --become-user rhel
 ```
@@ -113,5 +113,5 @@ If you need to reboot the win server use this command
 ansible win -m win_reboot
 ```
 
-Back to [index](../README.md)
+Back to [index](../thews.md)
 
