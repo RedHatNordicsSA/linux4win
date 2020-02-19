@@ -18,5 +18,17 @@ You will now get 4 servers that should have these ip addresses:
 10.0.1.6 (Active Directory server)
 10.0.1.7 (Windows client)
 ```
+Then you can connect to the main instance using this URI:
+
+https://10.0.1.4:9090
+
+To get rid of the instances do this:
+
+```
+cd linux4win/vagrant/linux4win
+vagrant destroy -f
+```
+
+That should be it.
 
 Back to [index](../thews.md)
