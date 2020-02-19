@@ -1,0 +1,4 @@
+*/.DS_Store
+.DS_Store
+ansible/vars/vars.yml
+ansible/vault-password.txt
