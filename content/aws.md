@@ -1,8 +1,8 @@
 # Deploy on AWS
 
-Here are instructions of installing the enterprise workshop, see below for the different systems you provision for the lab.
+Here are instructions of installing the Enterprise workshop, see below for the different systems you provision for the lab.
 
-![Overview of labs](images/overview.png)
+![Overview of workshop](images/cockpitws.png)
 
 # Pre-requisites
 
