@@ -1,5 +1,8 @@
 #!/bin/bash
 
+RHN_ACCOUNT=THEACCOUNT
+RHN_PASSWORD=THEPASSWORD
+
 #preps the first cockpit server
 useradd rhel
 echo "linux4winPass2020" | passwd rhel --stdin
@@ -8,7 +11,31 @@ echo "rhel ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/rhel
 chmod 0440 /etc/sudoers.d/rhel
 
 #install enable and open firewall for cockpit
-yum install firewalld cockpit-composer cockpit cockpit-dashboard bash-completion -y
+dnf install firewalld cockpit-composer cockpit cockpit-dashboard bash-completion -y
+
+#cockpit update fix
+dnf update dnf subscription-manager -y
+
+subscription-manager register --username=$RHN_ACCOUNT --password=$RHN_PASSWORD
+if [ "$?" -ne 0 ]; then
+	sleep 5
+	subscription-manager register --username=$RHN_ACCOUNT --password=$RHN_PASSWORD
+	if [ "$?" -ne 0 ]; then
+		sleep 5
+		subscription-manager register --username=$RHN_ACCOUNT --password=$RHN_PASSWORD 
+		if [ "$?" -eq 0 ]; then
+			rm -f /etc/yum.repos.d/*rhui*
+		else
+			echo "I tried 3 times, I'm giving up."
+			exit 1
+		fi
+	else
+		rm -f /etc/yum.repos.d/*rhui*
+	fi
+else
+	rm -f /etc/yum.repos.d/*rhui*
+fi
+
 systemctl enable --now firewalld
 systemctl enable --now cockpit.socket
 firewall-cmd --add-service=cockpit
@@ -19,10 +46,10 @@ mkdir /mnt/myvol
 chmod 0755 /mnt/myvol
 
 #prep for lab 4
-yum install https://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/p/python2-html2text-2019.8.11-1.el7.noarch.rpm -y
+dnf install https://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/p/python2-html2text-2019.8.11-1.el7.noarch.rpm -y
 
 #prep for lab 5
-yum install realmd oddjob oddjob-mkhomedir sssd adcli samba-common-tools -y
+dnf install realmd oddjob oddjob-mkhomedir sssd adcli samba-common-tools -y
 
 # Set dns=none for NetworkManager
 sed -i -e "s/\[main\]/\[main\]\\ndns=none/" /etc/NetworkManager/NetworkManager.conf
@@ -35,3 +62,6 @@ sed -i -e "s/nameserver/nameserver $DNSIP\\nnameserver/1" /etc/resolv.conf
 #prep for lab 6
 sed -i 's/iburst/ibarst/g' /etc/chrony.conf
 systemctl restart chronyd  >/dev/null 2>&1
+
+#uncomment before live
+#rm -rf /var/lib/cloud/instance/scripts/*
