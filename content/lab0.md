@@ -36,8 +36,6 @@ If by some reason you get stuck in a lab - then here's what you should do. **Fol
 * A computer with a connection to the Internet.
 * One of the supported browsers: Firefox, Chrome or Microsoft Edge.
 
-
-
 # Your environment
 
 Here is a view of your lab-environment:
@@ -46,9 +44,13 @@ There are two servers which runs Red Hat Enterprise Linux and two servers runnin
 
 ![Overview of workshop](images/cockpitws.png)
 
-Your instructor will provide a list of ip-addresses and user credentials to use during the day. 
+:exclamation: Your instructor will provide a list of ip-addresses and user credentials to use during the day.
 
-From the list provided by the instructor, locate the ip named **Start here** and open a web-browser. Input like this:
+# Accessing your environment
+
+From the list provided by the instructor, locate the address labeled **Start here** and open a web-browser. 
+
+:boom: Input the address, into your web browser like such:
 ```
 https://ip.nu.mb.er:9090
 ```
@@ -64,7 +66,7 @@ This is the first page of the user interface of cockpit:
 
 ![system user interface of cockpit](images/interface_system.png)
 
-To your left there is a bar with "applications" as those are known. As you can see there is already quite many. These applications can be installed on-demand as you need.
+You are now ready to start.
 
 Continue to [lab 1](lab1.md)
 
