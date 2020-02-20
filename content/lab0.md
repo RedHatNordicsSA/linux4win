@@ -2,7 +2,7 @@
 
 Hello and welcome to the lab. First off, if you are not familiar to Linux, do not worry, you will be soon. Knowing Linux is not a prerequisite for this lab, with that said, if you do notice something that you simply do not understand that is a bug which you should report.
 
-Today, Linux is used to run everything from modern cars to Satellites, IoT devices, core network parts of the internet, major internet services such as search engines, social networks and more. Modern IT solutions nowdays tends to default ot Linux in the global perspective. 
+Today, Linux is used to run everything from modern cars to Satellites, IoT devices, core network parts of the internet, major internet services such as search engines, social networks and more. Modern innovative companies such as Google, Facebook, LinkedIn, Netflix, Spotify and Amazon are all founded on Open Source technology, including Linux. 
 
 This means that the knowledge you'll get today will be widely applicable to a large number of technical sectors and domains.
 
