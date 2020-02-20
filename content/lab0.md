@@ -1,10 +1,12 @@
 # Welcome to the lab
 
-Hello and welcome to the lab. First off, if you are not familiar to Linux, do not worry, you will be soon. Knowing Linux is not a prerequisite for this lab, with that said, if you do notice something that you simply do not understand that is a bug which you should report.
+Hello and welcome to the lab. First off, if you are not familiar to Linux, do not worry, you will be soon. Knowing the Linux operating system is not a prerequisite for this lab, with that said, if you do notice something that you simply do not understand that is a bug which you should report.
 
-Today, Linux is used to run everything from modern cars to Satellites, IoT devices, core network parts of the internet, major internet services such as search engines, social networks and more. Modern innovative companies such as Google, Facebook, LinkedIn, Netflix, Spotify and Amazon are all founded on Open Source technology, including Linux. 
+Today, the Linux operating system is used to run everything from modern cars to Satellites, IoT devices, core network parts of the internet, major internet services such as search engines, social networks and more. Modern innovative companies such as Google, Facebook, LinkedIn, Netflix, Spotify and Amazon are all founded and built on Open Source technology, including Linux.
 
 This means that the knowledge you'll get today will be widely applicable to a large number of technical sectors and domains.
+
+This lab is meant to get you a hands on start with Linux and does not deal with all theory around the operating system as such.
 
 # Lab graphics
 
@@ -36,8 +38,6 @@ If by some reason you get stuck in a lab - then here's what you should do. **Fol
 * A computer with a connection to the Internet.
 * One of the supported browsers: Firefox, Chrome or Microsoft Edge.
 
-
-
 # Your environment
 
 Here is a view of your lab-environment:
@@ -46,9 +46,13 @@ There are two servers which runs Red Hat Enterprise Linux and two servers runnin
 
 ![Overview of workshop](images/cockpitws.png)
 
-Your instructor will provide a list of ip-addresses and user credentials to use during the day. 
+:exclamation: Your instructor will provide a list of ip-addresses and user credentials to use during the day.
 
-From the list provided by the instructor, locate the ip named **Start here** and open a web-browser. Input like this:
+# Accessing your environment
+
+From the list provided by the instructor, locate the address labeled **Start here** and open a web-browser. 
+
+:boom: Input the address, into your web browser like such:
 ```
 https://ip.nu.mb.er:9090
 ```
@@ -64,7 +68,7 @@ This is the first page of the user interface of cockpit:
 
 ![system user interface of cockpit](images/interface_system.png)
 
-To your left there is a bar with "applications" as those are known. As you can see there is already quite many. These applications can be installed on-demand as you need.
+You are now ready to start.
 
 Continue to [lab 1](lab1.md)
 
