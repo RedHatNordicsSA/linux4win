@@ -64,7 +64,20 @@ Now, let's log in to your first Red Hat Enterprise Linux instance.
 ```
 https://ip.nu.mb.er:9090
 ```
-Now that you have connected to your server it is time to log into the web console application.
+
+The first time you connect to the ```Web console``` on a server in this lab, you will be met by a web page that looks something like below.
+
+![unknown certificate](images/unknown_cert.png)
+
+You have to accept the fact that we are running self signed certificates. How you do this differs a little between browser.
+
+:boom: As an example. In Chrome: Click on **Advanced** 
+
+:boom: Then click ```Proceed to 1.2.3.4 (unsafe)```. As shown below.
+
+![unknown certificate](images/unknown_cert2.png)
+
+After you you have connected to your server it is time to log into the web console application.
 
 :boom: Check the checkbox labeled ```Reuse my password for privileged tasks``` when you log in. If you do not do this, there are certain task you will not be able to do.
 
