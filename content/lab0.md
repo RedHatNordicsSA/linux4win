@@ -2,6 +2,8 @@
 
 Hello and welcome to the lab. First off, if you are not familiar to Linux, do not worry, you will be soon. Knowing the Linux operating system is not a prerequisite for this lab, with that said, if you do notice something that you simply do not understand that is a bug which you should report.
 
+```This lab focuses on Red Hat Enterprise Linux, the currently most used enterprise Linux operating system. Many things you'll learn here though, will be possible to apply to other Linux operating systems.```
+
 Today, the Linux operating system is used to run everything from modern cars to Satellites, IoT devices, core network parts of the internet, major internet services such as search engines, social networks and more. Modern innovative companies such as Google, Facebook, LinkedIn, Netflix, Spotify and Amazon are all founded and built on Open Source technology, including Linux.
 
 This means that the knowledge you'll get today will be widely applicable to a large number of technical sectors and domains.

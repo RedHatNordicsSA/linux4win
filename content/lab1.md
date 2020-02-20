@@ -1,5 +1,22 @@
 # Lab 1 Software management
 
+This lab will introduce you to the basic concepts of installing applications in Red Hat Enterprise Linux.
+
+## Software management in Linux
+
+In Windows, there is really no uniform way to build, search for, install, update and remove software. Windows Update provides some of the features, such as update of some software.
+
+In Linux - building, searching for, installing, upgrading and removing software - is something which is managed by package management tools. Typically there are one or two tools which manages this in a Linux operating system. Different Linux operating systems may use different tools and package formats, but a number of them shares tools and package format.
+
+In Linux operating systems such as Red Hat Enterprise Linux (and Fedora and CentOS and many others) the package format is called RPM and (confusingly enough) the package management tools are called RPM and DNF (or yum). Let's have a quick look at the two with the without going into too much detail.
+
+### The package format (and a tool) - RPM
+
+If you want to distribute a piece of software (or many pieces) - you can build a package in which you put the files you want to distribute.
+
+Think of the package as a zip file which includes some meta data such as name, version, author, change log and importantly - dependencies on other software.
+
+
 To your left there is a bar with "applications" as those are known. As you can see there is already quite many. For this excercise you will look at adding a package to manage storage. This package is missing from the user interface.
 
 ## Add additional applications
