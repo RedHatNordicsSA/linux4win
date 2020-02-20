@@ -4,7 +4,7 @@ We know that installation of systems will be part of your tasks in the future. A
 
 
 ## Create a "golden image" using Image-builder
-To start this out we need to add the image-builder application to cockpit. This is done at the Applications part of the menu on your left.
+To start this out we need to add the image-builder application. This is done at the Applications part of the menu on your left.
 Locate the **Image Builder** entry and install it. It may alresdy be installed
 
 So now click on the image to goto the Image-builder it is located below the image for the system we are using.

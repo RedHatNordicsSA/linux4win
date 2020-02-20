@@ -2,7 +2,7 @@
 
 To your left there is a bar with "applications" as those are known. As you can see there is already quite many. For this excercise you will look at adding a package to manage storage. This package is missing from the user interface.
 
-## Add cockpit packages
+## Add additional applications
 
 Locate the Applications entry
 
@@ -16,7 +16,7 @@ And once you do you will have an additional entry in the menus:
 
 ![system user interface](images/interface_plusstorage.png)
 
-We will install packages not present in the cockpit user interface in a later lab
+We will install packages not present in the web console in a later lab
 
 ## Update packages
 

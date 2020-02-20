@@ -1,6 +1,6 @@
 # Troubleshooting
 
-This is quite the broad topic. We have installed a service that is failing. A service is an application that is designed to run always to provide some service like synchronizing time with an reliable source. Log messages traditionally gets sent to a file on the file-system. And sometimes many processes log to the same file which leads lots and lots of lines. This can make it very hard to locate the message that helps you solve the problem. With the cockpit interface any messages are attached to the process that produced them. You will also get an good overview of how your system is configured.
+This is quite the broad topic. We have installed a service that is failing. A service is an application that is designed to run always to provide some service like synchronizing time with an reliable source. Log messages traditionally gets sent to a file on the file-system. And sometimes many processes log to the same file which leads lots and lots of lines. This can make it very hard to locate the message that helps you solve the problem. With the web console any messages are attached to the process that produced them. You will also get an good overview of how your system is configured.
 
 
 ## View active services
@@ -12,7 +12,7 @@ You can filter services by their status. Click where it says **All**
 ![services filter](images/services_filter.png) 
 Select Enabled to view services that are set to start at boot.
 Disabled are services that are installed but not set to start at boot.
-Static are *********
+Static services are started on-demand when they are needed by other services or when new hardware is plugged into the system.
 
 You may see a service that is in **Failed** state. This should be the chronyd service. Chronyd is the default NTP service on Red Hat Enterprise Linux. You should already have a good idea why it is not working. Just click on the entry in the list to view more details.
 

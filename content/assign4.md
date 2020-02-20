@@ -1,6 +1,6 @@
 # Management of several servers using Ansible
 
-So in the previous assignment you added a server to the interface. This enabled you to manage two servers using the cockpit interface. But it is still not super efficient way to manage lots of servers.
+So in the previous assignment you added a server to the interface. This enabled you to manage two servers using the web console. But it is still not super efficient way to manage lots of servers.
 
 Lets say you have 20 linux servers in your infrastructure. And a serious software vulnerability is found in a base-package present in all these 20 servers. Now you will need to click 20 times on the update software button.
 
@@ -56,7 +56,7 @@ With this command we find out what release of Red Hat Enterprise Linux these ser
 ansible all -m shell -a 'yum check-update' -u rhel --ask-pass --become-user rhel
 ```
 
-This command list all available updates for any system. Now most likely you do not get any updates since we have already done the patching using the cockpit web-ui. But if there where any all you needed to do was run this command.
+This command list all available updates for any system. Now most likely you do not get any updates since we have already done the patching using the web-ui. But if there where any all you needed to do was run this command.
 ```
 ansible all -m shell -a 'yum update -y' -u rhel --ask-pass --become-user rhel
 ```

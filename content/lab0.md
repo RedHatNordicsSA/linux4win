@@ -56,7 +56,7 @@ From the list provided by the instructor, locate the address labeled **Start her
 ```
 https://ip.nu.mb.er:9090
 ```
-Now that you have connected to your server it is time to log into the web-ui called cockpit.
+Now that you have connected to your server it is time to log into the web-ui.
 
 Use the user **rhel** and password that your instructor provided to you.
 
@@ -64,7 +64,7 @@ Make sure you check the checkbox labeld "Reuse my password for privileged tasks"
 
 ![login page of cockpit](images/login.png)
 
-This is the first page of the user interface of cockpit:
+This is the first page of the user interface:
 
 ![system user interface of cockpit](images/interface_system.png)
 

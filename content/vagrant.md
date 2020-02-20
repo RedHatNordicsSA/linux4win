@@ -13,8 +13,8 @@ vagrant up
 You will now get 4 servers that should have these ip addresses:
 
 ```
-10.0.1.4 (main cockpit instance)
-10.0.1.5 (second cockpit instance)
+10.0.1.4 (main web console instance)
+10.0.1.5 (second web console instance)
 10.0.1.6 (Active Directory server)
 10.0.1.7 (Windows client)
 ```

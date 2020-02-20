@@ -37,7 +37,7 @@ Press Cancel to close the add new user dialog and locate the entry called **rhel
 
 Here you can set all kind of options including the ability to administer the server (checkbox called Server Administrator)
 
-But none of the accounts from Active Directory is visible here. This will be addressed in future releases of cockpit.
+But none of the accounts from Active Directory is visible here. This will be addressed in future releases of the web console.
 
 So right now you will have to use the Terminal. Please click the terminal option in the menu on your left.
 

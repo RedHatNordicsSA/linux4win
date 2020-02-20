@@ -3,7 +3,7 @@
 Here is the explanation of your [environments](lab0.md)
 
 Workshop items:
-- Operations walkthrough (using Cockpit)
+- Operations walkthrough (using the web console)
   - [**lab1** *Software management*](lab1.md)
     - Installing software
     - Updating software
@@ -38,7 +38,7 @@ Workshop items:
     - Install MSSQL binaries from the repo
     - Set MSSQL service to start at boot
     - Open firewall for correct port
-  - [**assign3** *Management of several servers using Cockpit*](assign3.md)
+  - [**assign3** *Management of several servers using web console*](assign3.md)
     - Create a ssh key to use for authentication
     - Distribute the ssh key to the servers to be managed
     - Add servers to the graphical user interface(GUI)

@@ -1,6 +1,6 @@
 # Lab 2 Storage management
 
-In the previous lab we installed the storage application for cockpit and now its the time to use it. Please locate the Storage menu entry and click on it now.
+In the previous lab we installed the storage application and now its the time to use it. Please locate the Storage menu entry and click on it now.
 
 ![storage user interface](images/interface_storage.png)
 

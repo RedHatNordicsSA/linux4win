@@ -1,6 +1,6 @@
 # Lab 3 Network configuration
 
-Now we will turn to the networking options available in cockpit. Please locate the menu entry called **Networking** and click on it.
+Now we will turn to the networking options available in the web console. Please locate the menu entry called **Networking** and click on it.
 
 ## Static/Dynamic ip assignment
 
@@ -18,7 +18,7 @@ If you want to change the IPv4 settings you click on the Blue text (Automatic DH
 
 ![network setup details](images/interface_changedhcp.png)
 
-You can change from **DHCP** to **Manual** here and fill in your details. This is the primary ip of the server meaning that you will lose the cockpit connection when you press **Apply**. So be thorough. For this exercise we are not going to change anything. So please press **Cancel** and then **Networking** in the menu bar on your left.
+You can change from **DHCP** to **Manual** here and fill in your details. This is the primary ip of the server meaning that you will lose the web connection when you press **Apply**. So be thorough. For this exercise we are not going to change anything. So please press **Cancel** and then **Networking** in the menu bar on your left.
 
 ## Enable service openings in firewall
 
@@ -39,7 +39,7 @@ This opens the add services window. In the filter-box please enter *http*. This 
 
 ## Open single port in firewall
 
-When we are still in the Firewall portion of cockpit we are going to add a rule that allows a single tcp port to be accessed from the world. If you have already closed please locate the **Networking** menu item on your left and then please click on the frame called **Firewall**
+When we are still in the Firewall portion we are going to add a rule that allows a single tcp port to be accessed from the world. If you have already closed please locate the **Networking** menu item on your left and then please click on the frame called **Firewall**
 
 Once here again locate the blue button called **Add Services**
 

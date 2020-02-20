@@ -1,6 +1,6 @@
-# Management of several servers using Cockpit
+# Management of several servers using the web console
 
-Yes it is possible to manage several servers with one cockpit instance. Lets start to set this up
+Yes it is possible to manage several servers with one web console instance. Lets start to set this up
 
 ## Create a ssh key to use for authentication
 
