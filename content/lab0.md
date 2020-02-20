@@ -6,6 +6,8 @@
 
 Here is a view of your lab-environment:
 
+There are two servers which runs Red Hat Enterprise Linux and two servers running Microsoft Windows, one of the Windows servers provides an Active Directory services.
+
 ![Overview of workshop](images/cockpitws.png)
 
 Your instructor will provide a list of ip-addresses to use during the day. Locate the ip named **Start here** and open a web-browser. Input like this:
