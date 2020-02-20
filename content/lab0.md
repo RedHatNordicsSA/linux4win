@@ -8,7 +8,7 @@ Today, the Linux operating system is used to run everything from modern cars to 
 
 This all means that the knowledge you'll get today will be widely applicable to a large number of technical sectors and domains.
 
-This lab is meant to get you a hands on start with Linux and does not deal with all theory around the operating system as such.
+This lab is meant to get you a hands on start with Linux and does not deal with all theory and details around the operating system as such.
 
 # Lab graphics
 
@@ -36,6 +36,8 @@ If by some reason you get stuck in a lab - then here's what you should do. **Fol
 
 # Preparations to do the lab
 
+:boom: Take a deep breath. This is about you learning, it's not a competition about who finishes the most things or who finishes tasks the fastest. Take your time and read through the instructions and texts - that way you will learn more.
+
 :boom: Get the following things in order:
 * A computer with a connection to the Internet.
 * One of the supported browsers: Firefox, Chrome or Microsoft Edge.
@@ -52,11 +54,11 @@ There are two servers which runs Red Hat Enterprise Linux and two servers runnin
 
 # Accessing your environment using the Web console
 
-To get access to the Red Hat Enterprise Linux machines, we will use a feature called ```Web console``` which is an application that provides a web based interface to a Linux machine. The application uses the native interfaces of Linux to display information and provide management capabilities in a focused web environments. Often when you search for information about how to do something in Linux, you will find instructions about commands to run in terminals, to switch out the graphical environments of Windows to a terminal can sometimes feel cumbersome and strange, even though, when you learn, it can be a more effective way of working.
+To get access to the Red Hat Enterprise Linux machines, we will use a feature called ```Web console``` which is an application that provides a web based interface to a Linux machine. The application uses the native interfaces of Linux to display information and provide management capabilities in a focused web environments. This is very useful, as you do not have to install a full graphical environment on your Linux servers to be able to manage them. People will often associate Linux with complicated commands run in terminals, but you will soon learn that you can do a lot in a more familiar graphical environment.
 
 :star: If you want to learn more about the ```Web console``` software, the open source project which ```Web console``` is based on, is called ```Cockpit```. [Click here to visit Cockpit's home on the www (https://cockpit-project.org).](https://cockpit-project.org "Cockpit webpage")  
 
-Now, let's log in to your first Red Hat Enterprise Linux instance.
+Now, let's log in to your first Red Hat Enterprise Linux server.
 
 :boom: From the list provided by the instructor, locate the address labeled **Start here** and open a web-browser. 
 
