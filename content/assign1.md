@@ -3,11 +3,11 @@
 We know that installation of systems will be part of your tasks in the future. And using virtual or cloud you will want some kind of template for your systems that include settings and customizations. Templates make for rapid deployment since we are skipping the install process of the operating system. However inherent to templates is age. As soon as you have created a new template it is outdated. So by using the image builder you get a dependable and reproducable process that always creates the same template, just updated packages.
 
 
-## Create a "golden image" using Image-builder
-To start this out we need to add the image-builder application. This is done at the Applications part of the menu on your left.
+## Create a "golden image" using image builder
+To start this out we need to add the image builder application. This is done at the Applications part of the menu on your left.
 Locate the **Image Builder** entry and install it. It may alresdy be installed
 
-So now click on the image to goto the Image-builder it is located below the image for the system we are using.
+So now click on the image to goto the image builder it is located below the image for the system we are using.
 
 ![button of imagebuilder](images/interface_imagebuilderbutt.png)
 
@@ -35,57 +35,19 @@ We will need subscription-manager to be able to attach our subscriptions. Also o
 Add this list of packages:
 
 ```
-audit
-basesystem
-bash
-coreutils
-cronie
-curl
-dnf
-dnf-plugin-spacewalk
-e2fsprogs
-filesystem
 firewalld
-glibc
-grubby
-hostname
-initscripts
-iproute
-iprutils
-iputils
-irqbalance
-kbd
-kexec-tools
-less
-man-db
-ncurses
 openssh-clients
 openssh-server
-parted
 passwd
 plymouth
-policycoreutils
-procps-ng
 rhn-client-tools
 rhn-setup
-rhnlib
-rhnsd
-rng-tools
-rootfiles
 rpm
 rsyslog
 selinux-policy-targeted
-setup
-shadow-utils
-sssd-common
-sssd-kcm
 subscription-manager
 sudo
 systemd
-tuned
-util-linux
-vim-minimal
-xfsprogs
 yum
 ```
 Once that is done please press the blue **Commit** button once and get a review of you selections. Again press the blue **Commit** button to return to the list of images.
