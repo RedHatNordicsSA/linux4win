@@ -50,23 +50,29 @@ There are two servers which runs Red Hat Enterprise Linux and two servers runnin
 
 :exclamation: Your instructor will provide a list of ip-addresses and user credentials to use during the day.
 
-# Accessing your environment
+# Accessing your environment using the Web console
 
-From the list provided by the instructor, locate the address labeled **Start here** and open a web-browser. 
+To get access to the Red Hat Enterprise Linux machines, we will use a feature called ```Web console``` which is an application that provides a web based interface to a Linux machine. The application uses the native interfaces of Linux to display information and provide management capabilities in a focused web environments. Often when you search for information about how to do something in Linux, you will find instructions about commands to run in terminals, to switch out the graphical environments of Windows to a terminal can sometimes feel cumbersome and strange, even though, when you learn, it can be a more effective way of working.
+
+:star: If you want to learn more about the ```Web console``` software, the open source project which ```Web console``` is based on, is called ```Cockpit```. [Click here to visit Cockpit's home on the www (https://cockpit-project.org).](https://cockpit-project.org "Cockpit webpage")  
+
+Now, let's log in to your first Red Hat Enterprise Linux instance.
+
+:boom: From the list provided by the instructor, locate the address labeled **Start here** and open a web-browser. 
 
 :boom: Input the address, into your web browser like such:
 ```
 https://ip.nu.mb.er:9090
 ```
-Now that you have connected to your server it is time to log into the web-ui.
+Now that you have connected to your server it is time to log into the web console application.
 
-Use the user **rhel** and password that your instructor provided to you.
+:boom: Check the checkbox labeled ```Reuse my password for privileged tasks``` when you log in. If you do not do this, there are certain task you will not be able to do.
 
-Make sure you check the checkbox labeld "Reuse my password for privileged tasks" when you log in. This resuses the admin rights of the user for privileged tasks.
+:boom: Use the user **rhel** and password that your instructor provided to you and click **Log in** as displayed below.
 
 ![login page of cockpit](images/login.png)
 
-This is the first page of the user interface:
+This is the first page of the user interface will look something like below.
 
 ![system user interface of cockpit](images/interface_system.png)
 
