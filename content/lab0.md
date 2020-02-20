@@ -1,6 +1,6 @@
 # Requirements
--A computer with a connection to the Internet.
--A cockpit supported browser (Firefox, Chrome or Microsoft Edge).
+* A computer with a connection to the Internet.
+* A cockpit supported browser (Firefox, Chrome or Microsoft Edge).
 
 # Your environment
 
