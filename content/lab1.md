@@ -45,7 +45,7 @@ Here you can patch all available software updates and security patches. As you c
 
 ![sudo package patch info](images/package_sudo.png)
 
-:boom When you are ready press the blue **Install All Updates** button and have some patience.
+:boom: When you are ready press the blue **Install All Updates** button and have some patience.
 
 :exclamation: If you installed patches that requires a reboot you will be presented with below dialog. Note: **DO NOT RESTART YOUR SYSTEM, PRESS IGNORE**
 
@@ -59,7 +59,7 @@ Here you can patch all available software updates and security patches. As you c
 
 ![user interface of yum history](images/interface_yumhistory.png)
 
-:boom: Click on the arrow **>** to see the last transactionw.
+:boom: Click on the arrow **>** to see the last transaction.
 
 
 ## Installing add-ons for the Web console
