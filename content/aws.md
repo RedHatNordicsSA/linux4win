@@ -95,4 +95,4 @@ ansible-playbook --vault-password-file vault-password.txt -i inventory/ec2.py de
 
 _if you don't use vault, ignore ```vault-password-file``` parameter_
 
-Back to [index](../thews.md)
+Back to [index](../README.md)
