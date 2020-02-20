@@ -16,6 +16,10 @@ If you want to distribute a piece of software (or many pieces) - you can build a
 
 Think of the package as a zip file which includes some meta data such as name, version, author, a cryptographic signature, change log and importantly - dependencies on other software. The last item means that when you install a package, a package management tool can automatically see what more needs to be installed for your software to work - and install that too.
 
+Below is information about the RPM package containing the Apache web server.
+
+![httpd rpm package info](images/rpm.png)
+
 For Red Hat Enterprise Linux, the package format is called RPM. RPM packages have the suffix of .rpm. There is also a basic tool to query information about packages and do basic operations, which is also called RPM, the name of the command, when typed into a terminal is called ```rpm```.
 
 ### The package management tool - DNF (or yum)
