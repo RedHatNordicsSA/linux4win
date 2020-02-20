@@ -31,4 +31,4 @@ vagrant destroy -f
 
 That should be it.
 
-Back to [index](../thews.md)
+Back to [index](../README.md)

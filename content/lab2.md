@@ -12,25 +12,11 @@ In the right hand lower corner of this screen you will see the attached storage 
 
 If you click on the top one you will see some info regarding the partitions present on this device and what format they are in. To go back click again on menu item **Storage** in the menubar to your left.
 
-There should also be a second drive attached, if you click on this one you will find that it has no partions, it is a brand new blockdevice.
-
-Locate the **Create Partition Data** button and press it.
-
-![filesystem user interface](images/interface_newfilesystem.png)
-
-Select like in the picture below, you will get a disk using GPT partitions. 
-
-![format user interface](images/interface_formatfilesystem.png)
-
-Now you have initialized this device.
-
-![partion create ](images/interface_formatdone.png)
-
-Next step is to make a Physical Volume of this disk. Please press the **Storage** entry in the menubar to your left to go back.
+There should also be two more disks attached, one smaller and one larger. We are going to use the smaller one to make a new filesystem.
 
 Locate the **Volume Groups** frame to your right and press the blue **+** sign
 
-![create volgroup ](images/interface_newpv.png)
+![create volgroup ](images/interface_createvg.png)
 
 Give the new Volume Group a good uniqe name and check the checkbox infront of your device and press **Create**.
 
