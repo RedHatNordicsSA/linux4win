@@ -1,3 +1,7 @@
+# Requirements
+-A computer with a connection to the Internet.
+-A cockpit supported browser (Firefox, Chrome or Microsoft Edge).
+
 # Your environment
 Your instructor will provide a list of ip-addresses to use during the day. Locate the ip named **Start here** and open a web-browser. Input like this:
 ```
