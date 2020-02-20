@@ -84,6 +84,10 @@ For this excercise you will look at adding an add-on in the ```Web console``` to
 
 ![applications user interface ](images/interface_apps.png)
 
+:exclamation: :boom: If you cannot locate the Storage addon option as shown below. You will need to click on the refresh button as shown below.
+
+![applications user interface ](images/storage_missing.png)
+
 :boom: Locate ```Storage``` and click the Install button located to the right. This will install the storage add-on.
 
 ![install button](images/storage_install.png)
