@@ -1,6 +1,7 @@
 # Create image for use in the cloud or virtual
 
-So now we are going to create a template that we can later use in your vmware environment. 
+We know that installation of systems will be part of your tasks in the future. And using virtual or cloud you will want some kind of template for your systems that include settings and customizations. Templates make for rapid deployment since we are skipping the install process of the operating system. However inherent to templates is age. As soon as you have created a new template it is outdated. So by using the image builder you get a dependable and reproducable process that always creates the same template, just updated packages.
+
 
 ## Create a "golden image" using Image-builder
 To start this out we need to add the image-builder application to cockpit. This is done at the Applications part of the menu on your left.

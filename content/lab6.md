@@ -1,5 +1,7 @@
 # Troubleshooting
-This is quite the broad topic. But logs usually help a lot when trying to figure out what a problem can be. We have already installed a service that is not starting as expected.
+
+This is quite the broad topic. We have installed a service that is failing. A service is an application that is designed to run always to provide some service like synchronizing time with an reliable source. Log messages traditionally gets sent to a file on the file-system. And sometimes many processes log to the same file which leads lots and lots of lines. This can make it very hard to locate the message that helps you solve the problem. With the cockpit interface any messages are attached to the process that produced them. You will also get an good overview of how your system is configured.
+
 
 ## View active services
 To look at the running services you just locate the **Services** option in the menu on your left. So please click that now

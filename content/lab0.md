@@ -3,6 +3,11 @@
 -A cockpit supported browser (Firefox, Chrome or Microsoft Edge).
 
 # Your environment
+
+Here is a view of your lab-environment:
+
+![Overview of workshop](images/cockpitws.png)
+
 Your instructor will provide a list of ip-addresses to use during the day. Locate the ip named **Start here** and open a web-browser. Input like this:
 ```
 https://ip.nu.mb.er:9090
