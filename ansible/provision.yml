@@ -125,6 +125,34 @@
       create: yes
     with_items: "{{ ad.tagged_instances }}"
 
+  - name: Replace RHN_ACCOUNT variable placeholder in Cockpit prep files
+    lineinfile:
+      path: /tmp/cockpit-prep.sh
+      regexp: '^RHN_ACCOUNT=THEACCOUNT'
+      line: "RHN_ACCOUNT={{ rhn_account }}"
+      create: yes
+
+  - name: Replace RHN_PASSWORD variable placeholder in Cockpit prep files
+    lineinfile:
+      path: /tmp/cockpit-prep.sh
+      regexp: '^RHN_PASSWORD=THEPASSWORD'
+      line: "RHN_PASSWORD=\"{{ rhn_password }}\""
+      create: yes
+
+  - name: Replace RHN_ACCOUNT variable placeholder in rhelhost prep files
+    lineinfile:
+      path: /tmp/rhelhost-prep.sh
+      regexp: '^RHN_ACCOUNT=THEACCOUNT'
+      line: "RHN_ACCOUNT={{ rhn_account }}"
+      create: yes
+
+  - name: Replace RHN_PASSWORD variable placeholder in rhelhost prep files
+    lineinfile:
+      path: /tmp/rhelhost-prep.sh
+      regexp: '^RHN_PASSWORD=THEPASSWORD'
+      line: "RHN_PASSWORD=\"{{ rhn_password }}\""
+      create: yes
+
   - name: Provision Cockpit servers
     ec2:
       aws_access_key: "{{ec2_access_key}}"
@@ -236,4 +264,47 @@
     debug:
       msg: "{{ groups['ad'] }}"
 
+
+  - name: Remove user-data from Cockpit servers for safety reasons
+    ec2:
+      aws_access_key: "{{ec2_access_key}}"
+      aws_secret_key: "{{ec2_secret_key}}"
+      key_name: "{{ec2_key}}"
+      region: "{{ ec2_region }}"
+      group: "{{ ec2_security_group }}"
+      instance_type: t2.medium
+      user_data: ":"
+      image: "{{ rhel_ami_id }}"
+      volumes:
+        - device_name: /dev/sdb
+          volume_size: 1
+          delete_on_termination: true
+        - device_name: /dev/sdc
+          volume_size: 1
+          delete_on_termination: true
+      wait: true
+      exact_count: "{{ number_of_cockpit_systems }}"
+      count_tag:
+        identity: cockpit
+      instance_tags:
+        identity: cockpit
+    register: cockpit
+
+  - name: Remove user-data from RHEL hosts for safety reasons
+    ec2:
+      aws_access_key: "{{ec2_access_key}}"
+      aws_secret_key: "{{ec2_secret_key}}"
+      key_name: "{{ec2_key}}"
+      region: "{{ ec2_region }}"
+      group: "{{ ec2_security_group }}"
+      instance_type: t2.micro
+      image: "{{ rhel_ami_id }}"
+      user_data: "{{ lookup('file', '/tmp/rhelhost-prep.sh') }}"
+      wait: true
+      exact_count: "{{ number_of_rhelhost_systems }}"
+      count_tag:
+        identity: rhelhost
+      instance_tags:
+        identity: rhelhost
+    register: rhelhost
 

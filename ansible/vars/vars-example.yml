@@ -24,6 +24,10 @@ ec2_security_group: linux4win
 # rhel_ami_id is for "Red Hat Enterprise Linux 8 (HVM), SSD Volume Type"
 # win_ami_id is for "Microsoft Windows Server 1909 Core Base"
 
+# fix for aws cockpit update
+rhn_account:
+rhn_password: ""
+
 # These are AMIs for eu-central-1
 rhel_ami_id: ami-0badcc5b522737046
 win_ami_id: ami-023f2b50d6aabf023

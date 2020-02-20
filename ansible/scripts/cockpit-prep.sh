@@ -16,13 +16,13 @@ dnf install firewalld cockpit-composer cockpit cockpit-dashboard bash-completion
 #cockpit update fix
 dnf update dnf subscription-manager -y
 
-subscription-manager register --username=$RHN_ACCOUNT --password=$RHN_PASSWORD
+subscription-manager register --username=$RHN_ACCOUNT --password=$RHN_PASSWORD --force --auto-attach
 if [ "$?" -ne 0 ]; then
 	sleep 5
-	subscription-manager register --username=$RHN_ACCOUNT --password=$RHN_PASSWORD
+	subscription-manager register --username=$RHN_ACCOUNT --password=$RHN_PASSWORD --force --auto-attach
 	if [ "$?" -ne 0 ]; then
 		sleep 5
-		subscription-manager register --username=$RHN_ACCOUNT --password=$RHN_PASSWORD 
+		subscription-manager register --username=$RHN_ACCOUNT --password=$RHN_PASSWORD --force --auto-attach
 		if [ "$?" -eq 0 ]; then
 			rm -f /etc/yum.repos.d/*rhui*
 		else
@@ -63,5 +63,8 @@ sed -i -e "s/nameserver/nameserver $DNSIP\\nnameserver/1" /etc/resolv.conf
 sed -i 's/iburst/ibarst/g' /etc/chrony.conf
 systemctl restart chronyd  >/dev/null 2>&1
 
-#uncomment before live
-#rm -rf /var/lib/cloud/instance/scripts/*
+#comment out in case of debug
+rm -rf /var/lib/cloud/instance
+
+
+

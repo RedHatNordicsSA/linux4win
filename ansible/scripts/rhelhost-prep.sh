@@ -10,13 +10,13 @@ usermod -aG wheel rhel
 echo "rhel ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/rhel
 chmod 0440 /etc/sudoers.d/rhel
 
-subscription-manager register --username=$RHN_ACCOUNT --password=$RHN_PASSWORD
+subscription-manager register --username=$RHN_ACCOUNT --password=$RHN_PASSWORD --force --auto-attach
 if [ "$?" -ne 0 ]; then 
         sleep 5
-        subscription-manager register --username=$RHN_ACCOUNT --password=$RHN_PASSWORD
+        subscription-manager register --username=$RHN_ACCOUNT --password=$RHN_PASSWORD --force --auto-attach
         if [ "$?" -ne 0 ]; then 
                 sleep 5
-                subscription-manager register --username=$RHN_ACCOUNT --password=$RHN_PASSWORD 
+                subscription-manager register --username=$RHN_ACCOUNT --password=$RHN_PASSWORD --force --auto-attach
                 if [ "$?" -eq 0 ]; then 
                         rm -f /etc/yum.repos.d/*rhui*
 			dnf clean all
@@ -45,5 +45,5 @@ yum install python3-pip -y
 pip3 install pywinrm
 cp -r /usr/local/lib/python3.6/site-packages/* /usr/lib/python3.6/site-packages/
 
-#uncomment before live
-#rm -rf /var/lib/cloud/instance/scripts/*
+#comment out for debug
+rm -rf /var/lib/cloud/instance
