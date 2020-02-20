@@ -4,9 +4,9 @@ Hello and welcome to the lab. First off, if you are not familiar to Linux, do no
 
 ```This lab focuses on Red Hat Enterprise Linux, the currently most used enterprise Linux operating system. Many things you'll learn here though, will be possible to apply to other Linux operating systems.```
 
-Today, the Linux operating system is used to run everything from modern cars to Satellites, IoT devices, core network parts of the internet, major internet services such as search engines, social networks and more. Modern innovative companies such as Google, Facebook, LinkedIn, Netflix, Spotify and Amazon are all founded and built on Open Source technology, including Linux.
+Today, the Linux operating system is used to run everything from modern cars to Satellites, IoT devices, core network parts of the internet, major internet services such as search engines, social networks and more. Modern innovative companies such as Google, Facebook, LinkedIn, Netflix, Spotify and Amazon are all founded and built on Open Source technology, including Linux. This means that a lot of cutting edge technologies only works on Linux or becomes available there first. Linux is also used at a majority of the worlds largest companies, as this was what most companies migrated to when they moved away from UNIX and mainframe systems.
 
-This means that the knowledge you'll get today will be widely applicable to a large number of technical sectors and domains.
+This all means that the knowledge you'll get today will be widely applicable to a large number of technical sectors and domains.
 
 This lab is meant to get you a hands on start with Linux and does not deal with all theory around the operating system as such.
 
