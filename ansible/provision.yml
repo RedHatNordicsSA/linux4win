@@ -65,12 +65,8 @@
           to_port: 22
           cidr_ip: 0.0.0.0/0
         - proto: tcp
-          from_port: 5985
-          to_port: 5985
-          cidr_ip: 0.0.0.0/0
-        - proto: tcp
-          from_port: 5986
-          to_port: 5986
+          from_port: 3389
+          to_port: 3389
           cidr_ip: 0.0.0.0/0
         - proto: tcp
           from_port: 80
@@ -96,7 +92,7 @@
       region: "{{ ec2_region }}"
       group: "{{ ec2_security_group }}"
       instance_type: t2.medium
-      image: "{{ win_ami_id }}"
+      image: ami-0e0564dc8e882f217
       user_data: "{{ lookup('file', '/tmp/ad-prep.ps1') }}"
       wait: true
       exact_count: "{{ number_of_ad_systems }}"

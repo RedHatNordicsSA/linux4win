@@ -20,17 +20,19 @@ New-ADGroup "Minions" -GroupCategory Security -GroupScope Global
 Add-ADGroupMember -Identity "Domain Admins" -Members "CN=Workstation Adder,CN=Users,DC=linux4win,DC=local"
 Add-ADGroupMember -Identity "Minions" -Members "CN=Hakan Hagenrud,CN=Users,DC=linux4win,DC=local", "CN=Daniel Svensson,CN=Users,DC=linux4win,DC=local"
 Add-ADGroupMember -Identity "Managers" -Members "CN=Mister Manager,CN=Users,DC=linux4win,DC=local"
-Rename-Computer -NewName dc -Force -Restart
 '@
 
 echo $daScript > $myScript
+Start-Sleep -s 5
 net user /passwordreq:yes Administrator $myPassword
 #Install-Windowsfeature AD-Domain-Services
 #Install-WindowsFeature RSAT-ADDS
 Install-WindowsFeature -Name AD-Domain-Services -IncludeManagementTools
+Start-Sleep -s 20
 Install-WindowsFeature DNS -IncludeManagementTools
+Start-Sleep -s 20
 Import-Module ADDSDeployment
 Install-ADDSForest -CreateDnsDelegation:$false -DatabasePath "C:\Windows\NTDS" -DomainMode "Win2012R2" -DomainName $myDomain -DomainNetbiosName $myNetbios -ForestMode "Win2012R2" -InstallDns:$true -LogPath "C:\Windows\NTDS" -NoRebootOnCompletion:$false -SysvolPath "C:\Windows\SYSVOL" -Force:$true -SafeModeAdministratorPassword:$Secure_String_Pwd
-Rename-Computer -NewName mydc -Force
+Restart-Computer
 </powershell>
 
