@@ -17,8 +17,8 @@ chmod 0440 /etc/sudoers.d/rhel
 #install enable and open firewall for cockpit
 dnf install firewalld cockpit-composer cockpit cockpit-dashboard bash-completion -y
 
-#cockpit update fix
-dnf update dnf subscription-manager -y
+#cockpit update / firewalld fix
+dnf update dnf subscription-manager polkit -y
 
 systemctl enable cockpit.socket
 systemctl start cockpit.socket
@@ -29,8 +29,11 @@ systemctl enable firewalld
 systemctl start firewalld
 systemctl restart dbus
 systemctl restart firewalld
+systemctl status firewalld
 sleep 5
 echo "adding cockpit rule to firewalld"
+firewall-cmd --add-service=cockpit
+systemctl restart firewalld
 firewall-cmd --add-service=cockpit --permanent
 
 #prep for lab2
