@@ -1,8 +1,32 @@
 # Lab 2 Storage management
 
-In the previous lab we installed the storage application and now its the time to use it. Please locate the Storage menu entry and click on it now.
+In the previous lab we installed the storage application and now its the time to use it. 
+
+In this section of the lab, you will learn about how to manage storage in Red Hat Enterprise Linux. That includes how to detect new disks added, creating new filesystems and how to extend existing filesystems, two very common system admin tasks.
+
+:boom: Locate the Storage menu entry and click on it.
 
 ![storage user interface](images/interface_storage.png)
+
+In this view you can overview everything of importance regarding storage, including what storage devices are attached to the system, how do they perform and information about the different storage configurations on this system.
+
+## Intro to Storage Management
+
+In Linux, just as in Windows, you can create partitions on which you can create filesystems. The downside of using filesystems created directly on partitions, is that it's difficult to increase the size of a partition, as it's connected to a physical disk. To solve this and other challenges, Red Hat Enterprise Linux uses a ```volume manager``` called ```LVM``` (```L```ogical ```V```olume ```M```anager). 
+
+LVM allows a more flexible management of physical disks for example by allowing you to:
+
+* Pooling several disks together and presenting them as one (much like RAID 0)
+* Allowing hot swapping disks in an easy manner without disruption
+* Allowing for resizing of storage (extending it and shrinking it)
+* Settings up storage tiers consisting of faster and slower disks
+* Setting up storage caches powered by faster solid state disks
+* Performing consistent backups, using snapshots
+* Encryption of disks or pools or disk
+
+...(and more) all using a single tool.
+
+If you are looking for something similar in Windows, it would be ```Storage Spaces```.  The difference with Storage Spaces in Windows, except for having a richer feature set - is that LVM has existed in Linux for over 18 years (though, it was actually originally written in 1998). LVM has been the most popular way to handle storage in Linux for over a decade and is considered a very stable and performant piece of technology.
 
 ## Creating new filesystem
 
