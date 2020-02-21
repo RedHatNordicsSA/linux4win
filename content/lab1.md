@@ -105,7 +105,7 @@ rpm -V cockpit
 rpm -Va
 ```
 
-Now we'll try to install and remove a piece of software, to do that, we'll use the ```dnf``` tool in Red Hat Enterprise Linux 8. To install and remove software is a priviledged task, which means we'll need to escalate our priviledges in the system. In our system (and normally in Linux systems in general) this is done using a piece of software called ```sudo```. ```Sudo``` can be configured to allow a user run commands as the systems administrator (in Linux, this user is called the root user, or just root).
+Now we'll try to install and remove a piece of software, to do that, we'll use the ```dnf``` tool in Red Hat Enterprise Linux 8. To install and remove software is a priviledged task, which means we'll need to escalate our priviledges in the system. In our system (and normally in Linux systems in general) this is done using a piece of software called ```sudo```. ```Sudo``` can be configured to allow a user run commands as the systems administrator (in Linux, this user is called the root user, or just root). We will not go deeper into how this is done in this lab, just enjoy the power it gives you.
 
 ![sudo learn](images/sandwich.png)
 
