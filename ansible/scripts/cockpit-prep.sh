@@ -22,19 +22,14 @@ dnf update dnf subscription-manager polkit -y
 
 systemctl enable cockpit.socket
 systemctl start cockpit.socket
-sleep 5
-systemctl status cockpit.socket
-sleep 1
 systemctl enable firewalld
 systemctl start firewalld
-systemctl restart dbus
-systemctl restart firewalld
-systemctl status firewalld
-sleep 5
+sleep 2
 echo "adding cockpit rule to firewalld"
+setenforce 0
 firewall-cmd --add-service=cockpit
-systemctl restart firewalld
 firewall-cmd --add-service=cockpit --permanent
+setenforce 1
 
 #prep for lab2
 mkdir /mnt/myvol
