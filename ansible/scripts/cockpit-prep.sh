@@ -20,6 +20,22 @@ dnf install firewalld cockpit-composer cockpit cockpit-dashboard bash-completion
 #cockpit update fix
 dnf update dnf subscription-manager -y
 
+#protect ourselfs from network outages
+LOOP=0
+while true; do
+	ping -c1 subscription.rhn.redhat.com >/dev/null
+	if [ "$?" -eq 0 ]; then
+		echo "We can reach Red Hat Network"
+		break
+	else
+		LOOP=$(expr $LOOP +1)
+		if [ "$LOOP" -eq 120 ]; then
+			echo "We've waited for 2 minutes... exiting."
+			exit 1
+		fi
+	fi
+done
+
 subscription-manager register --username=$RHN_ACCOUNT --password=$RHN_PASSWORD --force --auto-attach
 if [ "$?" -ne 0 ]; then
 	sleep 5
