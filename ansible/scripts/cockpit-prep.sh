@@ -20,48 +20,15 @@ dnf install firewalld cockpit-composer cockpit cockpit-dashboard bash-completion
 #cockpit update fix
 dnf update dnf subscription-manager -y
 
-#protect ourselfs from network outages
-LOOP=0
-while true; do
-	ping -c1 subscription.rhn.redhat.com >/dev/null
-	if [ "$?" -eq 0 ]; then
-		echo "We can reach Red Hat Network"
-		break
-	else
-		LOOP=$(expr $LOOP +1)
-		if [ "$LOOP" -eq 120 ]; then
-			echo "We've waited for 2 minutes... exiting."
-			exit 1
-		fi
-	fi
-done
-
-subscription-manager register --username=$RHN_ACCOUNT --password=$RHN_PASSWORD --force --auto-attach
-if [ "$?" -ne 0 ]; then
-	sleep 5
-	subscription-manager register --username=$RHN_ACCOUNT --password=$RHN_PASSWORD --force --auto-attach
-	if [ "$?" -ne 0 ]; then
-		sleep 5
-		subscription-manager register --username=$RHN_ACCOUNT --password=$RHN_PASSWORD --force --auto-attach
-		if [ "$?" -eq 0 ]; then
-			rm -f /etc/yum.repos.d/*rhui*
-		else
-			echo "I tried 3 times, I'm giving up."
-			exit 1
-		fi
-	else
-		rm -f /etc/yum.repos.d/*rhui*
-	fi
-else
-	rm -f /etc/yum.repos.d/*rhui*
-fi
-
-systemctl enable --now firewalld
+systemctl enable cockpit.socket
+systemctl start cockpit.socket
 sleep 5
-systemctl enable --now cockpit.socket
-sleep 30
 systemctl status cockpit.socket
 sleep 1
+systemctl enable firewalld
+systemctl start firewalld
+sleep 5
+echo "adding cockpit rule to firewalld"
 firewall-cmd --add-service=cockpit --permanent
 
 #prep for lab2
@@ -85,6 +52,42 @@ sed -i -e "s/nameserver/nameserver $DNSIP\\nnameserver/1" /etc/resolv.conf
 #prep for lab 6
 sed -i 's/iburst/ibarst/g' /etc/chrony.conf
 systemctl restart chronyd  >/dev/null 2>&1
+
+#protect ourselfs from network outages
+LOOP=0
+while true; do
+        ping -c1 subscription.rhn.redhat.com >/dev/null
+        if [ "$?" -eq 0 ]; then
+                echo "We can reach Red Hat Network"
+                break
+        else
+                LOOP=$(expr $LOOP +1)
+                if [ "$LOOP" -eq 120 ]; then
+                        echo "We've waited for 2 minutes... exiting."
+                        exit 1
+                fi
+        fi
+done
+
+subscription-manager register --username=$RHN_ACCOUNT --password=$RHN_PASSWORD --force --auto-attach
+if [ "$?" -ne 0 ]; then
+        sleep 5
+        subscription-manager register --username=$RHN_ACCOUNT --password=$RHN_PASSWORD --force --auto-attach
+        if [ "$?" -ne 0 ]; then
+                sleep 5
+                subscription-manager register --username=$RHN_ACCOUNT --password=$RHN_PASSWORD --force --auto-attach
+                if [ "$?" -eq 0 ]; then
+                        rm -f /etc/yum.repos.d/*rhui*
+                else
+                        echo "I tried 3 times, I'm giving up."
+                        exit 1
+                fi
+        else
+                rm -f /etc/yum.repos.d/*rhui*
+        fi
+else
+        rm -f /etc/yum.repos.d/*rhui*
+fi
 
 ) >/tmp/user-data.log 2>&1
 
