@@ -69,6 +69,10 @@
           from_port: 42
           to_port: 42
           cidr_ip: 0.0.0.0/0
+        - proto: tcp
+          from_port: 464
+          to_port: 464
+          cidr_ip: 0.0.0.0/0
         - proto: udp
           from_port: 42
           to_port: 42
@@ -105,6 +109,10 @@
           from_port: 445
           to_port: 445
           cidr_ip: 0.0.0.0/0
+        - proto: udp
+          from_port: 445
+          to_port: 445
+          cidr_ip: 0.0.0.0/0
         - proto: tcp
           from_port: 389
           to_port: 389
@@ -133,9 +141,8 @@
           from_port: 3269
           to_port: 3269
           cidr_ip: 0.0.0.0/0
-
         - proto: tcp
-          from_port: 49152
+          from_port: 45152
           to_port: 65535
           cidr_ip: 0.0.0.0/0
         - proto: tcp
