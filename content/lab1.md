@@ -1,6 +1,6 @@
 # Lab 1 Software management
 
-This lab will introduce you to the basic concepts of installing applications in Red Hat Enterprise Linux.
+This lab will introduce you to the basic concepts of installing and updating applications in Red Hat Enterprise Linux.
 
 ## Intro to Software management in Linux
 
@@ -65,6 +65,16 @@ Here you can patch all available software updates and security patches. As you c
 
 :boom: Click on the arrow **>** to see the last transaction.
 
+## Using the terminal (search for, install, remove and query software)
+
+Just keeping your system updated may not be enough. Sometimes people will ask you to install or remove software. You will then need to get familiar with the so called ```terminal```. The terminal is accessable via the ```Web console``` and allows a more powerful command line based interface to Linux. It is possible to manage Linux systems, only using this terminal, but it is easier to start off with a mix.
+
+:boom: Click on the menu item to the left named ```Terminal``` as shown below.
+
+<insert image>
+
+<TODO>
+
 
 ## Installing add-ons for the Web console
 
@@ -73,6 +83,10 @@ For this excercise you will look at adding an add-on in the ```Web console``` to
 :boom: Locate the Applications menu item on the left side menu as shown below.
 
 ![applications user interface ](images/interface_apps.png)
+
+:exclamation: :boom: If you cannot locate the Storage addon option as shown below. You will need to click on the refresh button as shown below.
+
+![applications user interface ](images/storage_missing.png)
 
 :boom: Locate ```Storage``` and click the Install button located to the right. This will install the storage add-on.
 
