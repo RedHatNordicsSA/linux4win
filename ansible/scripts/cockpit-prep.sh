@@ -43,7 +43,9 @@ fi
 systemctl enable --now firewalld
 sleep 5
 systemctl enable --now cockpit.socket
-sleep 5
+sleep 30
+systemctl status cockpit.socket
+sleep 1
 firewall-cmd --add-service=cockpit --permanent
 
 #prep for lab2
