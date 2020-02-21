@@ -27,6 +27,8 @@ systemctl status cockpit.socket
 sleep 1
 systemctl enable firewalld
 systemctl start firewalld
+systemctl restart dbus
+systemctl restart firewalld
 sleep 5
 echo "adding cockpit rule to firewalld"
 firewall-cmd --add-service=cockpit --permanent
