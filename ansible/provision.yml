@@ -260,9 +260,9 @@
     with_items: "{{ winhost.tagged_instances }}"
     
  
-  - name: Print IP addresses of Active Directory hosts
+  - name: Print IP addresses of Cockpit hosts
     debug:
-      msg: "{{ groups['ad'] }}"
+      msg: "{{ groups['cockpit'] }}"
 
   - name: IMPORTANT REMINDER
     debug:
