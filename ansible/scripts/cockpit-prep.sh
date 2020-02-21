@@ -1,5 +1,9 @@
 #!/bin/bash
 
+(
+
+set -x
+
 RHN_ACCOUNT=THEACCOUNT
 RHN_PASSWORD=THEPASSWORD
 
@@ -66,5 +70,6 @@ systemctl restart chronyd  >/dev/null 2>&1
 #comment out in case of debug
 rm -rf /var/lib/cloud/instance
 
+) >/tmp/user-data.log 2>&1
 
 
