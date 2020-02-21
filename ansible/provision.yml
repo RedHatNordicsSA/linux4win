@@ -55,26 +55,111 @@
   - name: Ensure a security group is in place
     ec2_group:
       name: "{{ ec2_security_group }}"
-      description: Security Group for Ansible Tower servers
+      description: Security Group for linux4win workshop
       region: "{{ ec2_region }}"
       aws_access_key: "{{ec2_access_key}}"
       aws_secret_key: "{{ec2_secret_key}}"
+
       rules:
         - proto: tcp
           from_port: 22
           to_port: 22
           cidr_ip: 0.0.0.0/0
         - proto: tcp
-          from_port: 5985
-          to_port: 5985
+          from_port: 42
+          to_port: 42
           cidr_ip: 0.0.0.0/0
         - proto: tcp
-          from_port: 5986
-          to_port: 5986
+          from_port: 464
+          to_port: 464
+          cidr_ip: 0.0.0.0/0
+        - proto: udp
+          from_port: 42
+          to_port: 42
+          cidr_ip: 0.0.0.0/0
+        - proto: udp
+          from_port: 88
+          to_port: 88
+          cidr_ip: 0.0.0.0/0
+        - proto: tcp
+          from_port: 88
+          to_port: 88
+          cidr_ip: 0.0.0.0/0
+        - proto: udp
+          from_port: 135
+          to_port: 135
+          cidr_ip: 0.0.0.0/0
+        - proto: tcp
+          from_port: 135
+          to_port: 135
+          cidr_ip: 0.0.0.0/0
+        - proto: tcp
+          from_port: 137
+          to_port: 137
+          cidr_ip: 0.0.0.0/0
+        - proto: udp
+          from_port: 137
+          to_port: 137
+          cidr_ip: 0.0.0.0/0
+        - proto: tcp
+          from_port: 139
+          to_port: 139
+          cidr_ip: 0.0.0.0/0
+        - proto: tcp
+          from_port: 445
+          to_port: 445
+          cidr_ip: 0.0.0.0/0
+        - proto: udp
+          from_port: 445
+          to_port: 445
+          cidr_ip: 0.0.0.0/0
+        - proto: tcp
+          from_port: 389
+          to_port: 389
+          cidr_ip: 0.0.0.0/0
+        - proto: udp
+          from_port: 389
+          to_port: 389
+          cidr_ip: 0.0.0.0/0
+        - proto: tcp
+          from_port: 636
+          to_port: 636
+          cidr_ip: 0.0.0.0/0
+        - proto: tcp
+          from_port: 1512
+          to_port: 1512
+          cidr_ip: 0.0.0.0/0
+        - proto: udp
+          from_port: 1512
+          to_port: 1512
+          cidr_ip: 0.0.0.0/0
+        - proto: tcp
+          from_port: 3268
+          to_port: 3268
+          cidr_ip: 0.0.0.0/0
+        - proto: tcp
+          from_port: 3269
+          to_port: 3269
+          cidr_ip: 0.0.0.0/0
+        - proto: tcp
+          from_port: 45152
+          to_port: 65535
+          cidr_ip: 0.0.0.0/0
+        - proto: tcp
+          from_port: 3389
+          to_port: 3389
           cidr_ip: 0.0.0.0/0
         - proto: tcp
           from_port: 80
           to_port: 80
+          cidr_ip: 0.0.0.0/0
+        - proto: tcp
+          from_port: 53
+          to_port: 53
+          cidr_ip: 0.0.0.0/0
+        - proto: udp
+          from_port: 53
+          to_port: 53
           cidr_ip: 0.0.0.0/0
         - proto: tcp
           from_port: 443
@@ -96,7 +181,7 @@
       region: "{{ ec2_region }}"
       group: "{{ ec2_security_group }}"
       instance_type: t2.medium
-      image: "{{ win_ami_id }}"
+      image: ami-0e0564dc8e882f217
       user_data: "{{ lookup('file', '/tmp/ad-prep.ps1') }}"
       wait: true
       exact_count: "{{ number_of_ad_systems }}"
@@ -260,9 +345,9 @@
     with_items: "{{ winhost.tagged_instances }}"
     
  
-  - name: Print IP addresses of Active Directory hosts
+  - name: Print IP addresses of Cockpit hosts
     debug:
-      msg: "{{ groups['ad'] }}"
+      msg: "{{ groups['cockpit'] }}"
 
   - name: IMPORTANT REMINDER
     debug:
