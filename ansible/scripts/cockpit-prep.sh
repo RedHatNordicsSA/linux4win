@@ -41,8 +41,9 @@ else
 fi
 
 systemctl enable --now firewalld
+sleep 3
 systemctl enable --now cockpit.socket
-firewall-cmd --add-service=cockpit
+sleep 1
 firewall-cmd --add-service=cockpit --permanent
 
 #prep for lab2
@@ -67,9 +68,8 @@ sed -i -e "s/nameserver/nameserver $DNSIP\\nnameserver/1" /etc/resolv.conf
 sed -i 's/iburst/ibarst/g' /etc/chrony.conf
 systemctl restart chronyd  >/dev/null 2>&1
 
-#comment out in case of debug
-rm -rf /var/lib/cloud/instance
-
 ) >/tmp/user-data.log 2>&1
 
-
+#comment out in case of debug
+#rm -rf /var/lib/cloud/instance
+#rm -f /tmp/user-data.log
