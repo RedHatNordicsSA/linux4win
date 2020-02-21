@@ -55,7 +55,7 @@
   - name: Ensure a security group is in place
     ec2_group:
       name: "{{ ec2_security_group }}"
-      description: Security Group for Ansible Tower servers
+      description: Security Group for linux4win workshop
       region: "{{ ec2_region }}"
       aws_access_key: "{{ec2_access_key}}"
       aws_secret_key: "{{ec2_secret_key}}"
@@ -65,12 +65,8 @@
           to_port: 22
           cidr_ip: 0.0.0.0/0
         - proto: tcp
-          from_port: 5985
-          to_port: 5985
-          cidr_ip: 0.0.0.0/0
-        - proto: tcp
-          from_port: 5986
-          to_port: 5986
+          from_port: 3389
+          to_port: 3389
           cidr_ip: 0.0.0.0/0
         - proto: tcp
           from_port: 80
@@ -96,7 +92,7 @@
       region: "{{ ec2_region }}"
       group: "{{ ec2_security_group }}"
       instance_type: t2.medium
-      image: "{{ win_ami_id }}"
+      image: ami-0e0564dc8e882f217
       user_data: "{{ lookup('file', '/tmp/ad-prep.ps1') }}"
       wait: true
       exact_count: "{{ number_of_ad_systems }}"
@@ -260,9 +256,9 @@
     with_items: "{{ winhost.tagged_instances }}"
     
  
-  - name: Print IP addresses of Active Directory hosts
+  - name: Print IP addresses of Cockpit hosts
     debug:
-      msg: "{{ groups['ad'] }}"
+      msg: "{{ groups['cockpit'] }}"
 
   - name: IMPORTANT REMINDER
     debug:
