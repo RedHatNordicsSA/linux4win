@@ -34,6 +34,9 @@ sleep 5
 echo "adding cockpit rule to firewalld"
 firewall-cmd --add-service=cockpit
 systemctl restart firewalld
+systemctl restart polkit
+systemctl restart dbus
+sleep 2
 firewall-cmd --add-service=cockpit --permanent
 
 #prep for lab2
