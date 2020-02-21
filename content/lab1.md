@@ -71,14 +71,73 @@ Just keeping your system updated may not be enough. Sometimes people will ask yo
 
 :boom: Click on the menu item to the left named ```Terminal``` as shown below.
 
-<insert image>
+![terminal user interface](images/terminal.png)
 
-<TODO>
+First off, we will use the ```rpm``` command line tool, to query about the status of packages. We will query a familiar piece of software, the ```Web console``` we are using right now. Try below tricks and see if you find them useful.
 
+:boom: Run below command to query if a package exists.
+
+```
+rpm -q cockpit
+```
+
+:boom: Run below command to see more information about a package.
+
+```
+rpm -qi cockpit
+```
+
+:boom: Run below command to see the changelog for a package.
+
+```
+rpm -q cockpit --changelog
+```
+
+:boom: Run below command to see if any files delivered by this package has been changed or removed. This command outputs any changed files, if any, and with otherwise exit without output.
+
+```
+rpm -V cockpit
+```
+
+:boom: Run below command to see all files which were owned by a package and have been changed or removed.
+
+```
+rpm -Va
+```
+
+Now we'll try to install and remove a piece of software, to do that, we'll use the ```dnf``` tool in Red Hat Enterprise Linux 8. To install and remove software is a priviledged task, which means we'll need to escalate our priviledges in the system. In our system (and normally in Linux systems in general) this is done using a piece of software called ```sudo```. ```Sudo``` can be configured to allow a user run commands as the systems administrator (in Linux, this user is called the root user, or just root).
+
+![sudo learn](images/sandwich.png)
+
+:boom: Run below command to run the ```dnf``` command to search for a piece of software called nmap. Please note the prefixing of the ```dnf``` command with ```sudo```. This is what makes the command run as an administrator. This is less dangerous than using administrator powers all the time.
+
+```
+sudo dnf search nmap
+```
+
+:boom: Let's install this software, which is a security scanner. We'll again escalate our priviledges using ```sudo```.
+
+```
+sudo dnf install nmap
+```
+
+Please note how ```dnf``` identified a software dependency for nmap, which is needed for nmap to work and installed that as well. To get nmap to install, you need to answer ```y``` to the question if to install it.
+
+![installing software](images/nmap.png)
+
+:boom: Now let's remove the software we installed by running below command. Again, we're using ```sudo``` as this is a priviledged task.
+
+```
+sudo dnf remove nmap
+```
+
+![installing software](images/nmap_remove.png)
+
+Again, answer ```y``` to the question if to remove the software and notice that ```dnf``` identified that the dependency we pulled in at install time (nmap-ncat) also get's removed, as it's only the nmap package which uses it.
 
 ## Installing add-ons for the Web console
 
-For this excercise you will look at adding an add-on in the ```Web console``` to manage storage. This add-on is missing from the user interface.
+For this excercise you will look at adding an add-on in the ```Web console``` to manage storage. This add-on is missing from the user interface. While add-ons can be installed using the ```dnf``` command, we can only install them in the web console itself.
 
 :boom: Locate the Applications menu item on the left side menu as shown below.
 
