@@ -23,7 +23,7 @@ For more information about ```systemd``` have a look at [the Wikipedia page for 
 
 ## Reviewing services on a system
 
-At the main ```Services``` page there's a list of all installed services on this system, listed under the ```System Services``` tab.
+At the main ```Services``` page there's a list of all installed services on this system, listed under the ```System Services``` tab. All this information is provided from ```systemd```, which provides a neat programmable interface.
 
 :boom: Try filtering the services, to get information about a specific service. Type in ```ssh``` to get information about ```S```ecure ```Sh```ell - the service which manages secure and encrypted remote terminal access to our system. Further click on the entry which reads ```sshd.service```, as shown below.
 
