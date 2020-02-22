@@ -1,6 +1,9 @@
 # Create image for use in the cloud or virtual
 
-We know that installation of systems will be part of your tasks in the future. And using virtual or cloud you will want some kind of template for your systems that include settings and customizations. Templates make for rapid deployment since we are skipping the install process of the operating system. However inherent to templates is age. As soon as you have created a new template it is outdated. So by using the image builder you get a dependable and reproducable process that always creates the same template, just updated packages.
+We know that installation of systems will be part of your tasks in the future. And using virtual or cloud you will want some kind of template for your systems that include settings and customizations. 
+![deploy from template](images/vmware_template.jpg)
+
+Templates make for rapid deployment since we are skipping the install process of the operating system. However inherent to templates is age. As soon as you have created a new template it is outdated. So by using the image builder you get a dependable and reproducable process that always creates the same template, just updated packages.
 
 
 ## Create a "golden image" using image builder
@@ -37,6 +40,7 @@ We will need subscription-manager to be able to attach our subscriptions. Also o
 Add this list of packages:
 
 ```
+bash-completion
 firewalld
 openssh-clients
 openssh-server
