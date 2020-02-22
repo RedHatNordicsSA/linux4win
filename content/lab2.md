@@ -69,8 +69,6 @@ We have now created a volume group, to wich we in the future can add more disk t
 
 Next up is to create the ```Logical Volume``' on which we will create the actual filesystem.
 
-![create logical vol ](images/interface_newlogvol.png)
-
 :boom: Click on your newly created Volume Group which is now diplayed on the main ```Storage``` page, as shown below. Note that a new MB was consumed by LVM meta data, as the Volume Group is not 1024 MB in size.
 
 ![create logical vol](images/create_lv1.png)
@@ -79,45 +77,71 @@ Next up is to create the ```Logical Volume``' on which we will create the actual
 
 ![create logical vol](images/create_lv2.png)
 
-![create logical vol details ](images/interface_createlogvol.png)
+:boom: To create the logical volume, you simply give it a name and click create. We are allocating all space available in our volume group, which is set by default. Do that, as shown below. 
 
-Give the Logical Volume a good name and allocate approx half of the size of the volume and press **Create**.
+![create logical vol details ](images/create_lv3.png)
 
-Now we have a Logical Volume. Please press the **>** to see details of the new volume.
+:boom: Now we have a Logical Volume (LV). Please click on the logical volume to expand it and get some more details of the volume, as shown below. Please note that it at this point says ```Unrecognised Data``` next to the size of the LV, this is because we have yet to put a filesystem on top of it.
 
-![logical vol details ](images/interface_formatlv.png)
+![create logical vol details ](images/create_lv4.png)
 
-Now we are going to create the actual filesystem to be mounted. Please press the **Format** button.
+:boom: Now we are going to create the actual filesystem and mount it to our system. Click the **Format** button, as shown below.
 
-![format logical vol](images/interface_formatoflv.png)
+![format logical vol](images/create_fs1.png)
 
-Even tho we set the volume to be mounted at boot it is not mounted in the filesystem. Please locate the **Filesystem** tab in the information frame. Here you will now find a **Mount** button. Please press the Mount button
+:boom: To create a filesystem, give the filesystem a name and click ```Format```, as shown below. Once you have clicked ```Format``` you will be returned to the main page for your ```Volume Group```. Note that we are choosing the default filesystem format for Red Hat Enterprise Linux 8, which is called XFS. The limits for XFS are a maximum filesystem size of 1 Petabyte and the maximum filesize of 8 Exabyte. A single filesystem scales fairly well.
 
-![mount logical vol](images/interface_filesystemtab.png)
+![filesystem management](images/create_fs2.png)
 
-Now when we go back to **Storage** (press Storage in the menu to your left) there is a new entry in the Filesystems frame:
+Even though we have created the filesystem, it is not yet possible to access the filesystem. To connect a filesystem to a directory is called to ```mount``` a filesystem, that is up next.
 
-![mounted logical vol](images/interface_newfsadded.png)
+:boom: To connect the filesystem to a directory on our server. Click the filesystem tab and the click on ```(default)``` left of the mount button.
 
-## Expanding a filesystem
+![filesystem management](images/create_fs3.png)
 
-Now we simulate that the root file system disk is getting full. So we will need to expand an existing filesystem. Locate the Volume Groups frame and click on the group containing the root vg.
+:boom: Will will now select to which directory the filesystem is to be connected. Change ```Mounting``` from ```Default``` to ```Custom``` and more options are then presented. Type in a directory to which we will connect the filesystem, such as ```/app1```. Please note that Linux uses forwards slash ```/``` and not backwards slash ```\``` to indicate directory paths. This will cause the filesystem to get connected to the directory ```/app1```. Note that we are keeping the preselected option ```Mount at boot```, which means the filesystem will get connected when the server starts or restarts. Click on ```Apply``` to complete the process, as shown below.
 
-![locate root VG](images/interface_extendvg.png)
+![filesystem management](images/create_fs4.png)
 
-Locate the **Plus** sign in the Physical Volumes frame and click on that. The add Disks dialog is shown. You should locate the larger unformated disk (20 GB) and add that
+:boom: The final step is to connect the filesystem to our directory, which we defined. Click on the ```mount```button to do that, as shown below.
 
-![add disk to vg](images/interface_adddiskvg.png)
+![filesystem management](images/create_fs5.png)
 
-Notice that the Capacity of the Volume Group is now much larger. Press the **>** to get more details and click on the **Grow** button.
+Now that the filesystem is available on our system, it's possible to start using it and store files on it. Clicking ```Unmount``` disconnects the filesystem, which will be successful as long as no one is using it.
 
-![grow filesystem](images/interface_growxfsvol.png)
+:boom: Next, go back to the ```Storage``` main page by clicking on ```Storage``` on the left side menu as shown below. Note the new entry in the middle of the page under ```Filesystems```.
 
-Slide the slider to your right, max it out.
+![mounted logical vol](images/create_fs6.png)
 
-![max it out](images/interface_growslider.png)
+## Expanding an existing filesystem
 
-Now go back again to storage and notice that the root file system is much larger
+Now we'll pretend that our newly created filesystem has become full, meaning we'll need to extend the size of it. You will now see how LVM can be very useful.
+
+:boom: Start by clicking on the filesystem which you created earlier, as shown below.
+
+![extending filesystems](images/extend_fs1.png)
+
+We are now at the main page for our ```Volume Group```, overviewing all ```logical volumes``` and ```filesystems``` inside of it. As we have already consumed all available storage in this ```Volume Group```, we need to add an additional disk to it, so we can get more space. Had our filesystem existed directly on a disk, this would have not been possible, as a filesystem normally cannot span several disks.
+
+:boom: Let's add a new disk to our Volume Group. Click on the **+** located at ```Physical Volumes``` on the left side of the page, as shown below.
+
+![extending filesystems](images/extend_fs2.png)
+
+:boom: Check the box by the disk named ```/dev/xvdc``` and click ```Add```, as shown below.
+
+![extending filesystems](images/extend_fs3.png)
+
+After having added the disk, please note that the available space in our Volume Group has now doubled, indicated at the top of the page, where it states ```Capacity```. We are now ready to extend our ```Logical Volume```, which our filesystem resides on, very much like a filesystem resides on a partition.
+
+:boom: To extend the ```Logical Volume```, click on ```Grow``` on our Volume, as shown below.
+
+![extending filesystems](images/extend_fs4.png)
+
+:boom: Next, slide the slide bar to the right, to consume the space available and click on ```Grow```, as shown below.
+
+![extending filesystems](images/extend_fs5.png)
+
+If you now check the filesystem, notice that it's now approximately 2 GB in size, instead of 1 GB. Extending the filesystem itself has been done automatically be the ```Web console``` so that we do not have to do that seperately.
 
 Continue to [lab 3](lab3.md)
 
