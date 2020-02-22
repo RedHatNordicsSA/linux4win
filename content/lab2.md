@@ -12,6 +12,13 @@ In this view you can overview everything of importance regarding storage, includ
 
 :boom: Have a look around and take note of the different information available.
 
+If you are familiar with storage in general, you will recognised a lot of the terms on this page, such as ```RAID Devices```, ```Drives``` and ```NFS mounts```. The less familiar things may be:
+
+* VDO Devices (This is a deduplication technology in Linux)
+* ISCSI Targets (This is SCSI over IP)
+* Volume Groups (This is a Logical Volume Manager concept for a group of disk - which you will learn about in the next part of this lab)
+* Storage logs (All logs collected that are related to storage)
+
 ## Intro to Storage Management
 
 In Linux, just as in Windows, you can create partitions on which you can create filesystems. The downside of using filesystems created directly on partitions, is that it's difficult to increase the size of a partition, as it's connected to a physical disk. To solve this and other challenges, Red Hat Enterprise Linux uses a ```volume manager``` called ```LVM``` (```L```ogical ```V```olume ```M```anager). 
@@ -36,25 +43,41 @@ If you are looking for something similar in Windows, it would be ```Storage Spac
 
 ## Creating new filesystem
 
-On the right hand side there are some frames with good information regarding your system. For instance you have information regarding the any **RAID Devices**, **Volume Groups** and so on.
+You will now learn how to create a new filesystem in Red Hat Enterprise Linux. We will make use of ```LVM```, to provide a more flexible experience.
 
-In the right hand lower corner of this screen you will see the attached storage devices under **Drives**
+:boom: Go to the main ```Storage``` page as shown below.
 
-If you click on the top one you will see some info regarding the partitions present on this device and what format they are in. To go back click again on menu item **Storage** in the menubar to your left.
+![storage user interface](images/interface_storage.png)
 
-There should also be two more disks attached, one smaller and one larger. We are going to use the smaller one to make a new filesystem.
+In the right hand lower corner of this screen you will see the attached storage devices under ```Drives```.
 
-Locate the **Volume Groups** frame to your right and press the blue **+** sign
+:boom: Click on the top, called ```xvda```.  Here you will see information regarding the partitions and filesystems present on this device and what types are used.
+
+:boob: Go back to the main storage page by clicking on menu item **Storage** in the menubar to your left.
+
+There are also two more disks attached, called ```xvdb``` and ```xvdc```, both 1 GB in size. We are going to use the ```xvdb``` device for our new filesystem.
+
+:boom: Locate the ```Volume Groups``` on your right side and press the blue **+** sign, as shown below.
+
+![storage user interface](images/add_vg.png)
+
+:boom: Give the new Volume Group a name (it needs to be unique) and select the checkbox infront of the ```xvdb``` device (second in the list) and press **Create**, as shown below.
 
 ![create volgroup ](images/interface_createvg.png)
 
-Give the new Volume Group a good uniqe name and check the checkbox infront of your device and press **Create**.
+We have now created a volume group, to wich we in the future can add more disk to, this will prove to be useful in later labs.
 
-Next up is to create the **Logical Volume** that then will be mounted in the filesystem.
+Next up is to create the ```Logical Volume``' on which we will create the actual filesystem.
 
 ![create logical vol ](images/interface_newlogvol.png)
 
-Press the blue text **Create new Logical Volume**
+:boom: Click on your newly created Volume Group which is now diplayed on the main ```Storage``` page, as shown below. Note that a new MB was consumed by LVM meta data, as the Volume Group is not 1024 MB in size.
+
+![create logical vol](images/create_lv1.png)
+
+:boom: Press the blue text ```Create new Logical Volume```, as shown below.
+
+![create logical vol](images/create_lv2.png)
 
 ![create logical vol details ](images/interface_createlogvol.png)
 
