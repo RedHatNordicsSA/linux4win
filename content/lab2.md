@@ -8,13 +8,19 @@ In this section of the lab, you will learn about how to manage storage in Red Ha
 
 ![storage user interface](images/interface_storage.png)
 
-In this view you can overview everything of importance regarding storage, including what storage devices are attached to the system, how do they perform and information about the different storage configurations on this system.
+In this view you can overview everything of importance regarding storage, including what storage devices are attached to the system, how do they perform, operate and information about the different storage configurations on this system. 
+
+:boom: Have a look around and take note of the different information available.
 
 ## Intro to Storage Management
 
 In Linux, just as in Windows, you can create partitions on which you can create filesystems. The downside of using filesystems created directly on partitions, is that it's difficult to increase the size of a partition, as it's connected to a physical disk. To solve this and other challenges, Red Hat Enterprise Linux uses a ```volume manager``` called ```LVM``` (```L```ogical ```V```olume ```M```anager). 
 
-LVM allows a more flexible management of physical disks for example by allowing you to:
+LVM allows a more flexible management of physical disks by creating an abstraction layer for the disks.
+
+![Simplified LVM overview](images/lvm.png)
+
+LVM for example by allows you to do:
 
 * Pooling several disks together and presenting them as one (much like RAID 0)
 * Allowing hot swapping disks in an easy manner without disruption
@@ -26,7 +32,7 @@ LVM allows a more flexible management of physical disks for example by allowing 
 
 ...(and more) all using a single tool.
 
-If you are looking for something similar in Windows, it would be ```Storage Spaces```.  The difference with Storage Spaces in Windows, except for having a richer feature set - is that LVM has existed in Linux for over 18 years (though, it was actually originally written in 1998). LVM has been the most popular way to handle storage in Linux for over a decade and is considered a very stable and performant piece of technology.
+If you are looking for something similar in Windows, it would be ```Storage Spaces```.  The difference with Storage Spaces in Windows, except for having a richer feature set - is that LVM has existed in Linux for over 18 years (though, it was actually originally written in 1998), therefor LVM is a very battle tested piece of technology which is used by default in many Linux system.
 
 ## Creating new filesystem
 
