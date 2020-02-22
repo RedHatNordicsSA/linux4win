@@ -99,7 +99,7 @@ rpm -q cockpit --changelog
 rpm -V cockpit
 ```
 
-:boom: Run below command to see all files which were owned by a package and have been changed or removed.
+:boom: Run below command to see all files which were owned by a package (system wide) and have been changed or removed.
 
 ```
 rpm -Va
