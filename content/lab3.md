@@ -2,7 +2,9 @@
 
 Now we are going to look at services running in the linux system. In Red Hat Enterprise Linux (6, 7, 8) the system which handles services is called ```systemd```. 
 
-:boom: Locate the menu entry called ```Services``` and click on that to get to the main page for managing services.
+:boom: Locate the menu entry called ```Services``` and click on that to get to the main page for managing services. Click around and explore the different services running on your system.
+
+:exclamation: Do not randomly start / stop services if you do not know what they do, as this may break the system.
 
 ![services user interface](images/interface_services.png)
 
