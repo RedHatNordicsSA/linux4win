@@ -1,29 +1,54 @@
 # Lab 3 Service management
 
-Now we are going to look at services running in the linux system. In Red Hat Enterprise Linux the system for handling services is systemd. Locate the menu entry called **Services** and click that.
+Now we are going to look at services running in the linux system. In Red Hat Enterprise Linux (6, 7, 8) the system which handles services is called ```systemd```. 
+
+:boom: Locate the menu entry called ```Services``` and click on that to get to the main page for managing services.
 
 ![services user interface](images/interface_services.png)
 
-You will now get a list of installed service definitions. You can filter on name, input "sssd" into the filter box to only show the System Security Services Daemon. If you click on the entry in the list you will get more details regarding the service:
+## An intro to Service management in Linux
 
-![sssd service details](images/interface_servicesssd.png)
+During the development of Linux as an operating systems, there has been several different systems which has provided service management. Today, the most widely adapted system is called ```systemd``` which is what also is used in Red Hat Enterprise Linux (6, 7, 8). ```Systemd``` does do a number of other jobs as well, futher unifying the management of services across different Linux operating systems. A majority of Linux operating systems uses ```systemd```.
 
-In this interface we can **Stop/Restart/Reload** the service. **Stop** is pretty self-expainatory. **Restart** is just a **Stop** followed by a **Start**. **Reload** instructs the daemon to reload any configuration files that the service relies on.
+```Systemd``` provides a wealth of features, and acts like a glue between applications and the Linux kernel, we will focus on a limited scope of features, including:
 
-Now we are going to install a new service that we will need to set to start up automatically when the server boots up. Locate the Terminal menu entry to your left and click on that.
+* Service management - Making sure services get's properly bootstrapped, started and stopped - at boot or otherwise
+* Event logging - collecting events from services and making them searchable
+
+For more information about ```systemd``` have a look at [the Wikipedia page for systemd (https://en.wikipedia.org/wiki/Systemd).](https://en.wikipedia.org/wiki/Systemd "Systemd wikipedia page")  
+
+## Reviewing services on a system
+
+At the main ```Services``` page there's a list of all installed services on this system, listed under the ```System Services``` tab.
+
+:boom: Try filtering the services, to get information about a specific service. Type in ```ssh``` to get information about ```S```ecure ```Sh```ell - the service which manages secure and encrypted remote terminal access to our system. Further click on the entry which reads ```sshd.service```, as shown below.
+
+![services user interface](images/manage_services1.png)
+
+:boom: Explore the services page for the Secure Shell services, shown below. Try restarting, starting and stopping the service and see what information you get about the status of this service.
+
+:exclamation: ```Make sure the service is started before you leave the page```. 
+
+Key information on this page includes: What's the status of this service? Will it automatically start at boot? When will it start? And logs for this specific service.
+
+![services user interface](images/manage_services2.png)
+
+Now we are going to install a new service that we will need to set to start up automatically when the server boots up. For this, we will need the terminal.
+
+:boom: Locate the ```Terminal``` menu entry to your left and click on that.
 
 ![terminal user inferface](images/interface_terminal.png)
 
-Here you can interface with the command line interface of the server and do stuff that is not implemented in the user interface. Like installing the apache webserver. We will do that now. Please type exactly this into the terminal:
+As noted before, here you can interface with the command line interface of the server and do things that is not implemented in the user interface of the```Web console``` - Like installing the apache webserver - which is what we will do now. We will again use ```sudo``` to escalate our priviledges.
+
+:boom: Type below commands into the terminal:
 
 ```
-sudo yum install httpd
+sudo dnf install httpd
 ```
-When promted please type the password of user **rhel**
-```
-[sudo] password for rhel: 
-```
-And when the transaction is staged you will be asked to verify what will be installed.
+
+:boom: When ```dnf``` has identified what needs to be installed, you will be asked to verify what will be installed. Answer ```y```, as shown below:
+.
 ```
 Dependencies resolved.
 ============================
@@ -39,15 +64,18 @@ Install  10 Packages
 
 Total download size: 2.0 M
 Installed size: 6.1 M
-Is this ok [y/N]:
+Is this ok [y/N]: y
 ```
-Type "y" and press Enter to install the apache webserver. Now when the service is installed we want to start and enable it to start at boot.
 
-Go back to services and filter for "httpd". You should see an entry called httpd.service. Please click on that entry now.
+Selecting ```y``` installs not only the binaries for the Apache web server and it's dependencies it needs to work, but also a services definition for it. This allows us to manage the state of Apache using the ```Services``` interface in the ```Web console```.
+
+:boom: Click on services and filter for "httpd", just as you did previously. You should see an entry called httpd.service. Click on that entry, which will take you to the below shown page.
 
 ![service httpd enable](images/interface_httpddead.png)
 
-Now you should **Start** the service and set it to **Enabled**. Now you know how to install apache webserver and set it to always run, even after reboot.
+:boom: Select **Start** the service and set it to **Enabled** as well - this defines that it should start up at boot time. 
+
+Now you know how to install Apache Web server on Linux and set it to always run, even after reboot.
 
 Continue to [lab 4](lab4.md)
 
