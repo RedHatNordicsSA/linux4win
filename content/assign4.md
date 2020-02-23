@@ -6,7 +6,7 @@ Lets say you have 20 linux servers in your infrastructure. And a serious softwar
 
 So instead we propose using an automation framework that can help relive you of repetative tasks like updating software by hand.
 
-![ansible logo](images/ansible-logo.png)
+![ansible logo](images/ansiblelogo.png)
 
 ## Setup of ansible master
 
