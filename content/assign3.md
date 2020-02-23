@@ -1,12 +1,12 @@
 # Management of several servers using the web console
 
-Yes it is possible to manage several servers with one web console instance. Lets start to set this up
+As your fleet of Red Hat Enterprise Linux grows you will want to manage all of those servers from a central point. This can also be done using the same web-console. Perhaps at a point there will be way to many servers to manage and oversee. But still its nice to get an overview of all the servers you manage.
 
 ## Create a ssh key to use for authentication
 
 So we want to be able to manage those other servers without entering passwords and such. So we are going to generate a ssh key-pair to use for the authentication. This needs to be done from the terminal. So lets go there. Locate terminal in the menu on your left.
 
-Once there we are going to use an already installed application to generate the keys.
+:boom: Once there we are going to use an already installed application to generate the keys.
 ```
 ssh-keygen -t rsa -b 2048
 ```
@@ -16,7 +16,7 @@ This command will generate an RSA key with a key length of 2048 bits. This for a
 
 ## Distribute the ssh key to the servers to be managed
 
-Now when we have the key generated we need the public part of the key to add to the servers that we are going to manage. 
+:boom: Now when we have the key generated we need the public part of the key to add to the servers that we are going to manage. 
 ```
 cat .ssh/id_rsa.pub
 ```
@@ -26,7 +26,7 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDSCAXaZu7Bz4eSs/zyRi1MB1Nm7oR5XXBkjvbhpDds
 ```
 We are interested in the long string between *ssh-rsa* and *rhel@hostname*. This string can be used to authenticate password-less from this server to that other server. 
 
-Now we are going to send this key to another server. For this you need the ip of the server or the FQDN. 
+:boom: Now we are going to send this key to another server. For this you need the ip of the server or the FQDN. 
 ```
 ssh-copy-id 192.168.121.214
 ```
@@ -34,7 +34,7 @@ When promted input the password of user rhel
 
 ## Add servers to the graphical user interface(GUI)
 
-Now it is time to add the second server to the user interface. Locate the **Dashboard** icon on your very left and click on that:
+:boom: Now it is time to add the second server to the user interface. Locate the **Dashboard** icon on your very left and click on that:
 
 ![the dashboard button](images/interface_dashboard.png)
 
@@ -42,7 +42,7 @@ Once you click on that button you will see the Dashboard:
 
 ![the dashboard](images/interface_dashboardsingle.png)
 
-If all is well you can add servers from here. Please press the **plus** sign to add another server.
+:boom: If all is well you can add servers from here. Please press the **plus** sign to add another server.
 
 ![add the server](images//interface_addserver.png)
 

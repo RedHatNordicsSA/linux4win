@@ -9,6 +9,7 @@ But the SQL Server Management Studio is still windows only. There are some comma
 ## Install repo that contains MSSQL
 
 So first of all we need to install the repo definition that allows the yum command to know where to fetch the install files from. This is done in the terminal.
+
 :boom: So please click the Terminal in the left side menu.
 ```
 sudo curl -o /etc/yum.repos.d/mssql-server.repo https://packages.microsoft.com/config/rhel/8/mssql-server-2019.repo
