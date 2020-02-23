@@ -45,7 +45,7 @@ Now we are going to install a new service that we will need to set to start up a
 
 As noted before, here you can interface with the command line interface of the server and do things that is not implemented in the user interface of the```Web console``` - Like installing the apache webserver - which is what we will do now. We will again use ```sudo``` to escalate our priviledges.
 
-:boom: Type below commands into the terminal:
+:boom: Type below commands into the terminal. This will install the Apache Web server:
 
 ```
 sudo dnf install httpd
@@ -73,11 +73,11 @@ Is this ok [y/N]: y
 
 Selecting ```y``` installs not only the binaries for the Apache web server and it's dependencies it needs to work, but also a services definition for it. This allows us to manage the state of Apache using the ```Services``` interface in the ```Web console```.
 
-:boom: Click on services and filter for "httpd", just as you did previously. You should see an entry called httpd.service. Click on that entry, which will take you to the below shown page.
+:boom: Click on services and filter for ```httpd```, just as you did previously with ssh. You should see an entry called ```httpd.service```. Click on that entry, which will take you to the below shown page.
 
 ![service httpd enable](images/interface_httpddead.png)
 
-:boom: Select **Start** the service and set it to **Enabled** as well - this defines that it should start up at boot time. 
+:boom: Select **Start** the service and set it to **Enabled** as well - this defines that it should start up at boot time. Verify that Apache started up properly by reviewing log output on the bottom of the page.
 
 Now you know how to install Apache Web server on Linux and set it to always run, even after reboot.
 
