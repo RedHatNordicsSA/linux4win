@@ -52,34 +52,70 @@ Here you can see details regrading the network interface, including things like 
 
 :boom: Click **Cancel** when you are done exploring.
 
-## Enable service openings in firewall
+## Managing firewall openings using the Web console
 
-We will however open for a service in the firewall. In lab3 we installed and started the apache webserver. The service is running but we cannot access it since the internal firewall is blocking any incoming connections. Lets verify this by accessing the page from the terminal on the server. Go to **Terminal**
+In lab3 we installed and started the apache webserver. The service is running but we cannot access it since the internal firewall is blocking any incoming connections. Lets verify this.
+
+
+:boom: Try accessing the web server by typing in the IP-address of your system into a new tab on your web browser as shown below and verify that the communication is blocked:
 
 ```
-curl -s localhost | python2-html2text
+http://IP-ADDRESS
 ```
-You should now see some output from the test page of apache on Red Hat Enterprise Linux. Now if you point your browser to the same page: http://hostname you will get 404. Not found. This we need to fix. On the **Networking** page locate the frame called **Firewall** and click where it says "3 Active rules"
+
+:exclamation: Please note that it's ```http://``` and not ```https://```.
+
+ :boom: Next, we will access the web server from locally on our server. Click on the ```Terminal``` menu option on the left hand menu and type in below command.
+
+```
+curl localhost
+```
+
+```Curl``` is a small networking schwitz army knife, which for example can talk http. You will see the raw unformated HTML output from the Apache Web servers default web page, as shown below.
+
+![network setup details](images/curl_output.png)
+
+Next, we're going to open up external communication to our web server.
+
+:boom: Go to the ```Networking``` main page and locate where it says ```Firewall``` and click there or where it says ```3 Active rules```. The detailed firewall page will now appear, as shown below.
 
 ![firewall setup details](images/interface_firewalld.png)
 
-This is the detailed firewall page. You can see the active zones and any active rules in the different zones. Zones are out of scope for this workshop. We are going to add a few services to make the web service available to the world. Locate the blue **Add Services** button and press it please.
+Let's explain what you are seeing. On the top, where it reads ```Firewall``` you can enable and disable the firewall on this server.
+
+Below there, it says ```Active zones```. Zones are basically collections of rules, which we can connected to different networks that a system is connected to. By default, there is only one zone, called ```Public```, but we can pratically have unlimted number of zones, if needed.
+
+Below ```Active zones``` it says ```Allowed Services```. As we are using ```firewalld``` to manage the firewall on this system, firewall rules can be abstracted away from and defined as services, where each service lists what ports needs to be opened up. This reduces the risk of administrators forgetting to open up specific ports, for services which requires many different ports to be open to function.
+
+Next we will allow communication for our web server.
+
+:boom: Locate and click on the blue ```Add Services``` button to the right of ```Allowed Services```. Note the first service, ```Red Hat Satellite 6``` a good example of something using many different ports, which is easy to get wrong. Type in ```http``` where it says ```Filter Services``` and check the services for HTTP and HTTPS as shown below, then click ```Add Services```.
 
 ![firewall add service](images/interface_fwaddservice.png)
 
-This opens the add services window. In the filter-box please enter *http*. This will show any services availble with a name or a description containing *http*. Please check those present in the image above. Now do a reload of the page in the browser. Or open a new tab here http://hostname 
+:boom: Note how the services were added to the list of ```Allowed Services```.
 
-## Open single port in firewall
+:boom: Now do a reload of the web page your browser. Or open up a new tab and type in the address to your server as shown below:
 
-When we are still in the Firewall portion we are going to add a rule that allows a single tcp port to be accessed from the world. If you have already closed please locate the **Networking** menu item on your left and then please click on the frame called **Firewall**
+```
+http://IP-OF-YOUR-SERVER
+```
 
-Once here again locate the blue button called **Add Services**
+You should now see the Apache Web server test page, as shown below.
+
+![firewall setup details](images/httpd_testpage.png)
+
+## Opening custom ports in the firewall
+
+:boom: If you are not still on the main ```Firewall``` page in the ```Web console```, navigate there by clicking on ```Networking``` on the left side menu and then clicking on ```Firewall``` or the rules below.
+
+:boom: Once again, locate the blue button called **Add Services** and click on it, but this time, select ```Custom Ports``` and try adding a custom port or port range. Don't forget to give it a name as well.
 
 ![firewall add custom](images/interface_fwcustom.png)
 
-This time we are adding just a port on TCP. Fill in like in the pic above and press the blue button **Add Ports**
+:boom: Verify that your custom service got added.
 
-Now you will have an entry in the list of allowed services called *myVNC* that is new.
+You are now done with the networking part of the lab are hopefully have learn one or two useful things about networking on Linux.
 
 Continue to [lab 5](lab5.md)
 
