@@ -1,25 +1,54 @@
-# User management (with Active Directory)
+# User management
 
-Usually you would have your identities in a central location like Active Directory from Microsoft. So now we are going to look at howto bind a linux server to AD for user and group information. However GPO's are not supported. Any group policies you want to apply needs to be done by some other configuration system like ansible.
+In this lab, you will learn how to manage users and groups in Linux. You will also try to connect your Linux server to Active Directory.
 
-## Connecting a server to Active Directory for authentication (no GPOs)
+## Intro to user management in Linux
 
-You will need to have the realmd package installed.  
+Just as in Windows, users are members of groups and this works as a basics for access controls in many systems. Users also has home directories and system settings that applies to them specifically. By default, a Linux server only uses local users. The default administrator user in Linux is as mentioned before, called ```root```. 
+
+When managing more than a handful of systems, connecting them to some sort of centralized identity and authentication source is recommneded. In the Linux world, there is no single identity and authentication solution which most often is used. Red Hat Enterprise Linux includes an identity and authentication solution, called ```Red Hat Identity Management (Red Hat IDM)``` , if you do not have one.
+
+:star: [If you want to read more about ```Red Hat IDM```, click here.](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/considerations_in_adopting_rhel_8/identity-management-news_considerations-in-adopting-rhel-8 "Red Hat Enterprise Linux 8 documentation page")  
+
+Even though Red Hat Enterprise Linux includes a solution for centralized user management, most commonly at large enterprises - Windows and Linux systems share solutions. It is common to use Active Directory, also for Linux systems.  
+
+## User management (with Active Directory)
+
+We will now look at how user management works in Linux using Active Directory. You will learn how to connect a Linux server to Active Directory for centralized identity and authentication. Please note that group policies or GPOs are not supported for Linux. Any group policies you want to apply needs to be done by a separate configuration system. Luckily, there are many available for Linux, such as ```ansible```. You can also get central policy management of Red Hat Enterprise Linux systems using ```Red Hat Satellite```.
+
+:star: [Read more about Ansible, here: https://www.ansible.com](https://www.ansible.com "Ansible homepage")
+:star: [Read more about Red Hat Satellite, here: https://www.redhat.com/en/technologies/management/satellite](https://www.redhat.com/en/technologies/management/satellite "Satellite homepage")
+
+There are two different ways to use Active Directory for user management of Linux systems.
+
+* Connecting Linux systems directly to Active Directory
+* Using a system such as Red Hat Identity Management (IDM) to synchronized with Active Directory and then connecting Linux system to that system in turn
+
+The second option is less common and more complicated. In this lab, we will deal with the first option, connecting a Red Hat Enterprise Linux system directly to Active Directory.
+
+## Connecting your server to Active Directory (no GPOs)
+
+To connect to Active Directory, we first need to install some software on our server.
+
+:boom: Go to the ```Terminal``` menu item on the left side menu and type in below command to install the required software.
 
 ```
-sudo yum install realmd
+sudo dnf install realmd
 ```
 
-
-Locate the button on the system where is says **Join Domain** in blue.
+:boom: Next, click on the ```System``` menu option on the top of the left side menu.  Locate the button on the system where is says **Join Domain** in blue and click on that to proceed to the join domain wizard.
 
 ![system user interface of cockpit](images/interface_system.png)
 
-Now you get the join domain wizard. 
+
+:boom: Fill in the domain address as shown below and wait for the discovery to complete - indicated by the text ```Contacted domain```. In this example, we will not specify the OU to put the computer-account in. Continue and fill in the username/password of an account that can add computers and click ```Join```. Domain admin name and password for this lab is:
+
+```
+Username: Administrator
+Password: Password1
+```
 
 ![join domain wizard](images/joindomain.png)
-
-Fill in the domain address and wait for the discovery to run. It will say below if the domain can be joined or not. You can also specify the OU to put the computer-account in. Fill in the username/password of an account that can add computers. In this lab that is *wsadder/Password1*
 
 ## Assigning privileges to users (Run as Administrator configuration)
 
