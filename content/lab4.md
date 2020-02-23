@@ -115,7 +115,9 @@ You should now see the Apache Web server test page, as shown below.
 
 :boom: Verify that your custom service got added.
 
-You are now done with the networking part of the lab are hopefully have learn one or two useful things about networking on Linux.
+You are now done with the networking part of the lab and have hopefully learned one or two useful things about networking on Linux.
+
+Next up, user management.
 
 Continue to [lab 5](lab5.md)
 
