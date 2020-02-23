@@ -1,4 +1,4 @@
-# Lab 3 Network configuration
+# Lab 4 Network configuration
 
 Now we will turn to the networking options available in the web console. Please locate the menu entry called **Networking** and click on it.
 

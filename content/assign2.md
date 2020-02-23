@@ -1,15 +1,23 @@
 # Installing Microsoft SQL on Red Hat Enterprise Linux
 
-Yes this can be done. And it is fully supported. And even a little bit faster perfomance...
+Yes this can be done. And it is fully supported. And even a little bit faster perfomance.
+
+![microsoft sql server](images/mssql.png)
+
+But the SQL Server Management Studio is still windows only. There are some command line interface to to stuff with the SQL server.
 
 ## Install repo that contains MSSQL
 
-So first of all we need to install the repo definition that allows the yum command to know where to fetch the install files from. This is done in the terminal. So please click the Terminal in the left side menu.
+So first of all we need to install the repo definition that allows the yum command to know where to fetch the install files from. This is done in the terminal.
+
+:boom: So please click the Terminal in the left side menu.
 ```
 sudo curl -o /etc/yum.repos.d/mssql-server.repo https://packages.microsoft.com/config/rhel/8/mssql-server-2019.repo
 ```
 
-What this command does is to create a file in
+What this command does is to create a file in the location that the software management system looks to find enabled repositories.
+
+:boom: Now run this command
 ```
 sudo ls -l /etc/yum.repos.d/
 ```
@@ -18,12 +26,14 @@ Which outputs something like this:
 -rw-r--r--. 1 root root    231 Jan 24 14:22 mssql-server.repo
 -rw-r--r--. 1 root root 130564 Jan 24 08:00 redhat.repo
 ```
-So now we have prepared the server for installation
+As you can see from the list above there is two files (at least) an one is named **mssql-server.repo** so this file contains the settings needed to install software from microsoft.
 
 
 ## Install MSSQL binaries from the repo
 
-Now its time to install the MSSQL server. This is also done using the terminal. So input this command:
+Now its time to install the MSSQL server. This is also done using the terminal.
+
+:boom: So input this command:
 ```
 sudo yum install mssql-server
 ```
@@ -33,7 +43,9 @@ Type Yes and the stuff needed is installed. Ýou will get a
 Complete!
 ```
 
-When the installation is done it is time to configure the SQL server with the SA password and such. Run this command and follow the instructions:
+When the installation is done it is time to configure the SQL server with the SA password and such.
+
+:boom: Run this command and follow the instructions:
 ```
 sudo /opt/mssql/bin/mssql-conf setup
 ```
