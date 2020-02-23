@@ -8,7 +8,7 @@ In Windows, there is really no uniform way to build, search for, install, update
 
 In Linux - building, searching for, installing, upgrading and removing software - is something which is managed by package management tools. Typically there are one or two tools which manages this in a Linux operating system. Different Linux operating systems may use different tools and package formats, but a number of them shares tools and package format.
 
-In Linux operating systems such as Red Hat Enterprise Linux (and Fedora and CentOS and many others) the package format is called RPM and (confusingly enough) the package management tools are called **RPM** and **DNF** (or yum). Let's have a quick look at the two with the without going into too much detail.
+In Linux operating systems such as Red Hat Enterprise Linux (and Fedora and CentOS and many others) the package format is called RPM and (confusingly enough) the package management tools are called ```RPM``` and ```DNF``` (or ```yum```). Let's have a quick look at the two with the without going into too much detail.
 
 ### The package format (and a tool) - RPM
 
@@ -91,6 +91,12 @@ rpm -qi cockpit
 
 ```
 rpm -q cockpit --changelog
+```
+
+:boom: Run below command to list all files owned by a package.
+
+```
+rpm -ql cockpit
 ```
 
 :boom: Run below command to see if any files delivered by this package has been changed or removed. This command outputs any changed files, if any, and with otherwise exit without output.
