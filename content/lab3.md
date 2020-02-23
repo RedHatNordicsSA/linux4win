@@ -10,14 +10,14 @@ Now we are going to look at services running in the linux system. In Red Hat Ent
 
 ## An intro to Service management in Linux
 
-During the development of Linux as an operating systems, there has been several different systems which has provided service management. Today, the most widely adapted system is called ```systemd``` which is what also is used in Red Hat Enterprise Linux (6, 7, 8). ```Systemd``` was originally developed by ```Red Hatters Lennart Poettering and Kay Sievers``` to solve issues that the previously used system, ```System V``` failed to handle.
+During the development of Linux as an operating systems, there has been several different systems which has provided service management. Today, the most widely adapted system is called ```systemd``` which is what also is used in Red Hat Enterprise Linux (6, 7, 8). ```Systemd``` was originally developed by ```Red Hatters Lennart Poettering and Kay Sievers``` to solve issues that the previously used system, ```System V init``` failed to handle.
 
 ```Systemd``` does do a number of other jobs as well, futher unifying the management of services across different Linux operating systems. A majority of Linux operating systems uses ```systemd```.
 
 ```Systemd``` provides a wealth of features, and acts like a glue between applications and the Linux kernel, we will focus on a limited scope of features, including:
 
-* Service management - Making sure services get's properly bootstrapped, started and stopped - at boot or otherwise
-* Event logging - collecting events from services and making them searchable
+* Service management - Making sure services get's properly bootstrapped, started and stopped - at boot, shutdown or runtime of the Linux operating system
+* Event logging - collecting events from services and making the events searchable
 
 For more information about ```systemd``` have a look at [the Wikipedia page for systemd (https://en.wikipedia.org/wiki/Systemd).](https://en.wikipedia.org/wiki/Systemd "Systemd wikipedia page")  
 
