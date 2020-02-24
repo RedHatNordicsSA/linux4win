@@ -1,14 +1,14 @@
 # Create image for use in the cloud or virtual
 
-We know that installation of systems will be part of your tasks in the future. And using virtual or cloud you will want some kind of template for your systems that include settings and customizations. 
+Installing systems is still a common task when managing Linux systems. There are many different ways to install Linux, the most common one in virtual and cloud environments is using an image or so called template for your Linux operating system. The template will typically include a majority of the software and configuration which you need - preinstalled into an image.   
 ![deploy from template](images/vmware_template.jpg)
 
-Templates make for rapid deployment since we are skipping the install process of the operating system. However inherent to templates is age. As soon as you have created a new template it is outdated. So by using the image builder you get a dependable and reproducable process that always creates the same template, just updated packages.
+Templates make for rapid deployment since we are skipping the install process of the operating system. However templates have an inherent problem, which is aging. As an template is a snapshot, soon after you have created a new template, it is outdated. The solution to this is ofcourse automation of the creation process for the template, this is something we can do using the ```image builder``` functionality included in Red Hat Enterprise Linux.
 
+By using the ```image builder```, you get a dependable and reproducable process that always creates the same template, containing the newest updated packages at each build.
 
 ## Create a "golden image" using image builder
-To start this out we need to add the image builder application. This is done at the Applications part of the menu on your left.
-
+To start this out we need to add the image builder application. This is done at the ```Applications``` part of the menu on your left.
 
 :boom: Locate the **Image Builder** entry and install it. It may already be installed
 

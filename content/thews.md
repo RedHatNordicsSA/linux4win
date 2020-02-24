@@ -1,33 +1,23 @@
 # Linux workshop for Enterprise administrators
 
+:exclamation: You need to complete the labs in strict sequential order, as things you do early on will be used later on.
+
 Workshop items:
 - Welcome to the lab, here you find the [prerequisites](lab0.md) of the lab.
 
 - Operations walkthrough (using the web console)
   - [**lab1** *Software management*](lab1.md)
-    - Installing software
-    - Updating software
+    - Learn how software is managed in Linux, install applications and more.
   - [**lab2** *Storage management*](lab2.md)
-    - Creating new filesystem
-    - Expanding a filesystem
+    - More the basic of Linux storage management, including creating filesystems and more.
   - [**lab3** *Service management*](lab3.md)
-    - Start a service
-    - Enable a service (survives reboot)
-    - Check status of a service
-    - Disable a service
+    - Step out of this lab with a basic understanding about service management, including some hands on experience.
   - [**lab4** *Network configuration*](lab4.md)
-    - Static ip assignment
-    - Dynamic ip assignment
-    - Enable service openings in firewall
-    - Open single port in firewall
-  - [**lab5** *User management (with Active Directory)*](lab5.md)
-    - Connecting a server to Active Directory for authentication (no GPOs)
-    - Assigning privileges to users (Run as Administrator configuration)
-    - Setting up access controls
+    - Learn about how to manage and troubleshoot networking in Linux.
+  - [**lab5** *User management*](lab5.md)
+    - Learn how to do user management at small and large scale, including handling priviledge esclation and access controls. 
   - [**lab6** *Troubleshooting*](lab6.md)
-    - View logs
-    - View active processes
-
+    - Use some of the knowledge you've gained and troubleshoot a failing service, also try out of neat tooling.
 - Assignments:
   - [**assign1** *Create image for use in the cloud or virtual*](assign1.md)
     - Create a "golden image" using Image-builder
