@@ -49,11 +49,11 @@ openssh-clients
 openssh-server
 subscription-manager
 ```
-Once that is done please press the blue **Commit** button once and get a review of you selections. Again press the blue **Commit** button to return to the list of images.
+Once that is done please press the blue **Commit** button once and get a review of you selections. Again press the blue **Commit** button on the top of the page to return to the list of images.
 
 ## Add local users to the golden image
 
-:boom: Now if you click the name of your image:
+:boom: Return to the main page for your image by clicking on the name of your image:
 
 ![dependencies of packages](images/interface_myimage.png)
 
@@ -69,22 +69,25 @@ Fill any details you like here.
 
 ## Create image for your selected hypervisor
 
-Once the image is done it is time to use it on your selected hypervisor. Now in the same detailed view of your image you will find a tab called Images. Please click that one now.
+Now we're ready to create the actual template/image. 
+
+:boom: On the main page for your image, there are three tabs, named ```Details```, ```Selected Components``` and ```Images```. Please click on the tab which reads ```Images```.
+
+:boom: :boom: You will be welcomed with a text which says that no images has been created yet. click on the ```Create Image``` button on the middle of the page.
 
 ![make image](images/interface_newimage.png)
 
-:boom: And click the button Create Image
-
 ![export image](images/interface_imageoptions.png)
 
-Here you will find all available image-formats that is supported out of the box. Just select the kind of hypervisor you are targeting and then click Create. Now the image is beeing built and you can follow the process by clicking on the link **Show Logs**
+Here you will find all available image-formats that is supported out of the box. Just select the kind of hypervisor you are targeting and then click Create. Now the image is beeing built and you can follow the process by clicking on the link **Show Logs** located next to ```In progress``` on the far right of the image name.
+
+:exclamation: Your server has limited storage space, which means that if you build too many images, your server will run out of storage and may there after fail.
 
 ![export image](images/interface_imagebuilderlogs.png)
 
-Once the buildprocess is done you can download your image. Press the Download button to save it to disk
+Once the buildprocess is done you can download your image. Press the Download button to save it to disk.
 
 ![export image](images/interface_downloadimage.png)
-
 
 Continue to [assignment 2](assign2.md)
 

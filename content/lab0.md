@@ -6,7 +6,7 @@ Hello and welcome to the lab. First off, if you are not familiar to Linux, do no
 
 Today, the Linux operating system is used to run everything from modern cars to Satellites, IoT devices, core network parts of the internet, major internet services such as search engines, social networks and more. Modern innovative companies such as Google, Facebook, LinkedIn, Netflix, Spotify and Amazon are all founded and built on Open Source technology, including Linux. This means that a lot of cutting edge technologies only works on Linux or becomes available there first. Linux is also used at a majority of the worlds largest companies, as this was what most companies migrated to when they moved away from UNIX and mainframe systems.
 
-This all means that the knowledge you'll get today will be widely applicable to a large number of technical sectors and domains.
+This all means that the knowledge you'll get from lab will be widely applicable to a large number of technical sectors and domains.
 
 This lab is meant to get you a hands on start with Linux and does not deal with all theory and details around the operating system as such.
 
@@ -15,8 +15,11 @@ This lab is meant to get you a hands on start with Linux and does not deal with 
 In this lab, we use some basic graphics to make the lab easier to understand. Such as:
 
 :boom: This is something which you have to do.
+
 :star: If you have time, you can also do this.
+
 :exclamation: Take careful notice of this, or you may fall on your face.
+
 :thumbsup: This text contains information about a best practice.
 ```
 Here is some code that you need to run
@@ -32,7 +35,7 @@ If by some reason you get stuck in a lab - then here's what you should do. **Fol
 2. This lab has seen plenty of use, so chances are that you have simply not followed the lab instructions. Start by reading the lab instructions again, carefully.
 3. If you are sure that you are doing things as described in the labs, perhaps you typed something wrong or had a copy-paste accident. Double checking your files content and comparing them with the content described here in the lab. If you typed things manually, try doing a clean copy-paste from the lab page instead.
 4. Ask the person beside you if that person also had an issue with what you are doing. If so, that may indicate there is actually something wrong.
-5. Raise your hand and someone will come and help you :)
+5. Raise your hand and someone will come and help you, if this is a teacher lead lab :)
 
 # Preparations to do the lab
 
