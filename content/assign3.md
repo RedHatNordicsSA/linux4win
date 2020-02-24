@@ -8,11 +8,11 @@ So we want to be able to manage those other servers without entering passwords a
 
 :boom: Once there we are going to use an already installed application to generate the keys.
 ```
-ssh-keygen -t rsa -b 2048
+ssh-keygen
 ```
 Just press enter to accept defaults. We input no password since then we would need to use a password anyway to unlock the key.
 
-This command will generate an RSA key with a key length of 2048 bits. This for added security.
+This command will generate an RSA key beyond the length of 2048 bits (considered safe).
 
 ## Distribute the ssh key to the servers to be managed
 
@@ -24,7 +24,7 @@ Which will output something like this:
 ```
 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDSCAXaZu7Bz4eSs/zyRi1MB1Nm7oR5XXBkjvbhpDdszPkUouDk+2MJ6/nK19NEtJ1yGU6t02kPQLTq6aOvUaPZsQ+wXFL3qPWhxSb60Tbc/t1+Nhh9FfeIQO+cqzq4PtCkC7DThSjParCkmkTn5JnIYNaVvOimaI9c4lO0qrt+6kdty2oTIbdcOrM0CERDBWhzECCmCDpAXv6R4/G+g2WXTXefpmGgwEdNiDVfV79niJQj4DnG0DVQV/uFNKoV/AyzGcKFVNzaO7PSqoY5kdQjlAEa3tr2SETLH8jjSec7ux4BDoAyPU+qNLWTCHNnlZ6yB4isbPbKw5RcOaDnZiLr rhel@linux4win
 ```
-We are interested in the long string between *ssh-rsa* and *rhel@hostname*. This string can be used to authenticate password-less from this server to that other server. 
+We are interested in the long string starting with *ssh-rsa*, which comes before *rhel@hostname*. This string can be used to authenticate password-less from this server to that other server. Key based authentication is stronger than using a password, but on the other side, if someone steals our private key, they will have access to our systems.
 
 :boom: Now we are going to send this key to another server. For this you need the ip of the server or the FQDN. 
 ```
@@ -58,7 +58,7 @@ You can always go between the servers by clicking in the top left corner
 
 ![switch server](images/interface_switchnode.png)
 
-So I suggest enrolling the server in the domain, make sure the server is updated to latest patch level and perhaps you will find other stuff to do with the second one.
+We suggest enrolling the server in the domain, make sure the server is updated to latest patch level and perhaps you will find other stuff to do with the second one.
 
 Continue to [assignment 4](assign4.md)
 
