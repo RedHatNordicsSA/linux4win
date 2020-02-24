@@ -17,6 +17,7 @@ Even though Red Hat Enterprise Linux includes a solution for centralized user ma
 We will now look at how user management works in Linux using Active Directory. You will learn how to connect a Linux server to Active Directory for centralized identity and authentication. Please note that group policies or GPOs are not supported for Linux. Any group policies you want to apply needs to be done by a separate configuration system. Luckily, there are many available for Linux, such as ```ansible```. You can also get central policy management of Red Hat Enterprise Linux systems using ```Red Hat Satellite```.
 
 :star: [Read more about Ansible, here: https://www.ansible.com](https://www.ansible.com "Ansible homepage")
+
 :star: [Read more about Red Hat Satellite, here: https://www.redhat.com/en/technologies/management/satellite](https://www.redhat.com/en/technologies/management/satellite "Satellite homepage")
 
 There are two different ways to use Active Directory for user management of Linux systems.
