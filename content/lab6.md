@@ -1,6 +1,6 @@
 # Troubleshooting
 
-In this chapter, you will learn about common troubleshooting tools in Linux. Also, you will get to troubleshoot a failing service (extra points if you already noticed it) on your system.
+In this chapter, you will get to troubleshoot a failing service (extra points if you already noticed it) on your system and get introduce to some basic troubleshooting tools commonly used.
 
 ## Intro to troubleshooting in Linux
 
@@ -68,7 +68,70 @@ sudo sed -i -e 's/ibarst/iburst/' /etc/chrony.conf
 
 :boom: Now that you have fixed the typo go back to menu item ```Services``` and restart the chronyd service. Verify that the service is now starting up without issues.
 
-Give youself a hand, as you have now gone through all the main sections of this workshop. If you need some more challenges, continue forward to the extra assignments.
+## Common terminal troubleshooting tools
+
+If you do not have the ```Web console``` on Red Hat Enterprise Linux, you may have to hack it in the ```Terminal``` world. Here comes a bunch of troubleshooting tools, which can provide most of the information available in the ```Web console``` and more.
+
+:boom: Access the manual page (called man page) of a command or function by prefixing the command or function with ```top```,  type below to access the man page of the command ```top```:
+```
+man top
+```
+
+:boom: Get a list of what processes consumes CPU and memory with ```top``` (exit using ```q```), by typing the below command:
+
+```
+top
+```
+
+:boom: Review disk utilization using ```df```. Type below command to see information about all the filesystems on a system and what the utilization is.
+
+```
+df -h
+```
+
+:boom: Listing all running processes in the operating system.
+
+```
+ps -ef
+```
+
+:boom: List all open ports in the operating system.
+
+```
+netstat -tulpn
+```
+
+:boom: Scroll through all the logs on the system
+
+```
+journalctl
+```
+
+:boom: Scroll through all the logs on the system, reversed order, newer logs first
+
+```
+journalctl -r
+````
+
+:boom: Continiously show most recent log entries
+
+```
+journalctl -f
+```
+
+:boom: List specific logs for a service, show newer logs first.
+
+```
+journalctr -u httpd -r
+```
+
+:boom: Continiously show new log entries for a service.
+
+```
+journalctr -u httpd -f
+```
+
+That was it! Give youself a hand, as you have now gone through all the main sections of this workshop. If you need some more challenges, continue forward to the extra assignments.
 
 Continue to [assignment 1](assign1.md)
 
