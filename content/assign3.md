@@ -1,6 +1,6 @@
 # Management of several servers using the web console
 
-As your fleet of Red Hat Enterprise Linux grows you will want to manage all of those servers from a central point. This can also be done using the same web-console. Perhaps at a point there will be way to many servers to manage and oversee. But still its nice to get an overview of all the servers you manage.
+As your fleet of Red Hat Enterprise Linux grows you will want to manage all of those servers from a central point. This can also be done using the same web-console. Perhaps at a point there will be way to many servers to manage and oversee. But still its nice to get an overview of all the servers you manage, especially from troubleshooting purposes.
 
 ## Create a ssh key to use for authentication
 
