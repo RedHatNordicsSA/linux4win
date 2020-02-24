@@ -50,89 +50,210 @@ Password: Password1
 
 ![join domain wizard](images/joindomain.png)
 
+You can now see the joined Active Directory domain displayed on the main ```System``` page, clicking on the domain name provides some basic information and provides a quick way leave the domain as well.
+
+As you could see, integrating a Red Hat Enterprise Linux with Active Directory is a easy task. If wanted do this for a large number of Red Hat Enterprise Linux systems, we could have used a command line tool called ```adcli``` to join the domain. 
+
 ## Assigning privileges to users (Run as Administrator configuration)
 
-For users that are local this is a simple opperation. Locate the Accounts option in the menu to your left. And click:
+For users that are local to the system, it's easy to provide access to Administrator (```root```) priviledges. 
+
+:boom: Click on the ```Accounts``` menu option in the menu to your left, as shown below.
 
 ![accounts interface of cockpit](images/accounts.png)
 
-This is where you can add more local accounts. Please press the Create New Account button and look at your options:
+This is where you manage local users on the system. Things you can do here includes:
+
+* Creating and deleting users
+* Changing passwords
+* Locking accounts
+* Adding additional priviledges to users
+* Terminate active user sessions
+
+And more. We will now create a new local account.
+
+:boom: Click on ```Create New Account button``` and fill in some information about your imaginary new user. To remove the risk of someone accessing this account remotely, do not check the ```Access``` check box and then click ```Create```
 
 ![rhel account options](images/createaccount.png)
 
-Press Cancel to close the add new user dialog and locate the entry called **rhel** and click.
+:boom: Once returned to the main ```Accounts``` page, click on your newly created account check the box of ```Server Administrator``` as shown below. Once you have checked the box - the setting is applied and you can return to the main ```Accounts``` page.
 
 ![rhel account options](images/accountrhel.png)
 
-Here you can set all kind of options including the ability to administer the server (checkbox called Server Administrator)
+## Getting information about users in Active Directory
 
-But none of the accounts from Active Directory is visible here. This will be addressed in future releases of the web console.
+As you may have noticed, in the ```Accounts``` menu, there were only locale accounts and none from Active Directory. This will be addressed in future releases of the ```Web console```. Right now you will have to use the ```Terminal```.
 
-So right now you will have to use the Terminal. Please click the terminal option in the menu on your left.
+:boom: Click the ```Terminal``` menu option in the menu on your left.
 
-Type the following command into the terminal to get information regarding an account
+:boom: Type below command into the terminal to get information regarding two accounts in the Active Directory.
 
 ```
 id vsda@linux4win.local
+id hger@linux4win.local
 ```
-Out comes info about the user like groups that is member of.
+This provides information about what user ID the users has and also what groups they are a member of (including group IDs of the groups).
 ```
 uid=579601105(vsda@linux4win.local) gid=579600513(domain users@linux4win.local) groups=579600513(domain users@linux4win.local),579601110(minions@linux4win.local)
 ```
-In order for this account to be able to administer this computer we will need to add it to the local wheel group. This is done by the command shown below:
-```
-sudo usermod --append -G wheel vsda@linux4win.local
-```
-Please type the password of the account. This works on smaller scale. Not so much on larger scale where you most likely use Groupmembership for these kind of things. So in order to set this up we are going to create a file in a special location. 
-```
-ls -l /etc/sudoers.d/
-```
-Any files found in this location will be added to the sudoers rules that enables users to run commands as root (which is the highest level of access available on linux). So we are going to create one. This can be done in many ways. In this example we will use nano. And it is not installed. So we start there. 
-```
-sudo yum install nano
-```
-Then lets make the file
-```
-sudo nano /etc/sudoers.d/minions
-```
-```
-%minions@linux4win.local ALL=(ALL) NOPASSWD: ALL
-```
-Now we need to set rights on the file. All files in the sudo system should have these:
-```
--r--r-----. 1 root root 29 13 nov  2015 minions
-```
-So in order to set this we use chmod
-```
-sudo chmod 0440 /etc/sudoers.d/minions
-```
-So to test ths you will need to login as another account and try to run anything with sudo. Can be done like this:
-```
-sudo su - hger@linux4win.local
-```
-And then try a sudo command:
-```
-sudo ls /etc
-```
-You should get no errors
+In order for this account to become administrator with full priviledges on this computer we will need to add it to the local administrator group, called ```wheel```.
 
-## Setting up access controls
+:boom: Add the Active Directory user to the admin group by typing in below command in the terminal.
+```
+sudo usermod --append -G wheel hger@linux4win.local
+```
 
-Now we have the server connected to Active directory. And we have set how can become Administrator (root). But anyone in the organization can login to this system. First we are going to look at setting this on an ssh level, ssh is the way to remote manage any linux system. So we are going to add this to the end of the file which holds configuration for the ssh service.
-```
-sudo nano /etc/ssh/sshd_config
-```
-And add these two lines at the end
-```
-AllowGroups minions@linux4win.local
-DenyUsers administrator administrator@linux4win.local
-```
-So now you have to be a member of the minions@linux4win.local Security Group in Active Directory to be allowed to login using ssh. Also we blocked access to the generic Administrator account which can pose a security issue if used.
-Now we need to restart the sshd service. This can be done using the Services part of the menu.
-Filter for ssh:
-![restart sshd service](images/sshdservview.png)
-Then click on sshd.service and restart the service.
+This ofcourse only works on smaller scale. Not so much on larger scale where you more likely use Groupmembership to govern what you are allowed to do. This is what we will do next, to connect a specific group in Active Directory with specific priviledges on a system.
 
+In order to set this up we are going to use ```sudo``` and configure ```sudo``` to allow Administrator priviledges for members of one of the groups that the user vsda@linux4win.local is a member of.
+
+```Sudo``` automatically reads rules files, which defines who can do what, out of below directory
+```
+/etc/sudoers.d/
+```
+
+Now we are going to create a new rules file. This can be done in many ways. So that you will not have to learn a Linux terminal text editor, will will used ```echo```.
+
+:boom: First, we will have to start a session running as the ```root``` (Administrator user). In the terminal, type in:
+```
+sudo su -
+```
+:boom: Now, let's create the file. We will use echo and redirect the output to the file. Copy and paste below line, to reduce risk of errors.
+```
+echo "%minions@linux4win.local ALL=(ALL) NOPASSWD: ALL" >/etc/sudoers.d/minions
+```
+:boom: Next, verify the content of the file, using another useful little terminal tool ```cat```, which prints the content of files to the terminal. Use below command to show the content of the file:
+
+```
+cat /etc/sudoers.d/minions
+```
+
+Next, let's see if the vsda@linux4win.local user also has gained Administrator priviledges. As administrator, we can become other users by using the ```su``` command. Type in below commands into the terminal. 
+```
+sudo su - vsda@linux4win.local
+```
+
+:exclamation: If above command fails, it means that we screwed up the ```sudo``` configuration. Run below command to remove the failty configuration file and try again.
+
+```
+rm /etc/sudoers.d/minions
+```
+
+
+If everything went well. Try a to run the sudo command as the vsda@linux4win.local by typing in:
+```
+sudo whoami
+```
+You should get the output as shown below.
+
+```
+[vsda@linux4win.local@ip.. ~]$ sudo whoami
+root
+[vsda@linux4win.local@ip.. ~]$ 
+```
+
+## Intro to access controls
+
+Now we have the server connected to Active directory and configured who can use Administrator (root) priviledges. Next is to configure who is allowed to login to the system. Right now, as we have not configured any restrictions, anyone can login to the system (though, as normal users). 
+
+There are many different ways to restrict access to a Linux system, in this chapter, we will touch upon the two most common options.
+
+* Via configuration of the service itself (if supported by that service)
+* Via PAM (Pluggable Authentication Modules)
+
+```PAM``` which is a dynamic and modules access system which Linux uses. It allows services to have specific rules which governs how the services allows and denies users access.
+
+If an application do not have specific functions that allows for access restrictions, your choice will be PAM. We will deal with both these options, starting with PAM.
+
+## Using PAM to secure the Web console
+
+Red Hat Enterprise Linux comes with a PAM moduled called pam_listfile, which allows us to define a textfile which containers users or groups which should be granted access in a whitelist manner, or which would be denied access in a blacklist manner.
+
+To create a whitelist for which group can access the ```Web console```, we need to modify its ```PAM``` ruleset.
+
+:boom: Go to the ```Terminal``` menu option on the left side menu and run below commands to enter into an administrator session:
+
+```
+sudo su -
+```
+
+:exclamation: As this can cause you to loose your access to the ```Web console``` ensure that you copy and paste the below commands and double check that it is made correctly.
+
+:boom: Run the following command to create the whitelist for who can login via the console.
+
+```
+echo "rhel" >/etc/cockpit/allow_users.conf
+```
+
+:boom: Verify that the file contains only the line ```rhel``` by running below command.
+
+```
+cat /etc/cockpit/allow_users.conf
+```
+
+:boom: Now we will overwrite the current ```Web console``` PAM file, adding the pam_listfile whitelist. Copy and paste below commands into the terminal:
+
+```
+cat << 'EOF' >/etc/pam.d/cockpit
+#%PAM-1.0
+auth       required     pam_sepermit.so
+auth       substack     password-auth
+auth       include      postlogin
+auth       optional     pam_ssh_add.so
+auth       required pam_listfile.so onerr=succeed item=group sense=allow file=/etc/cockpit/allow_users.conf
+account    required     pam_nologin.so
+account    include      password-auth
+password   include      password-auth
+# pam_selinux.so close should be the first session rule
+session    required     pam_selinux.so close
+session    required     pam_loginuid.so
+# pam_selinux.so open should only be followed by sessions to be executed in the user context
+session    required     pam_selinux.so open env_params
+session    optional     pam_keyinit.so force revoke
+session    optional     pam_ssh_add.so
+session    include      password-auth
+session    include      postlogin
+EOF
+```
+
+:exclamation: Do not miss that last line above, stating ```EOF```
+
+:boom: Now, try to login using the new local user you created in the previous lab. It will be unsuccessful, while you can still login as the ```rhel``` user.
+
+## Securing SSH by configuring the service itself
+
+By far the most common way of accessing Linux systems is via ```SSH``` - a service which provides a non-graphical terminal interface for a user, very much like the ```Terminal``` interface here in the ```Web console```. Let's look at how we can limit who can login via ```SSH```.
+
+:boom: First, click on the ```Terminal``` menu option on the left hand menu. And run below command to start an administrator user session.
+
+```
+sudo su -
+```
+
+:exclamation: To reduce risk of errors, copy and paste the next two commands into the terminal.
+
+To configure ```SSH``` to only allow one single group access and deny all other groups, run below command
+```
+echo "AllowGroups minions@linux4win.local" >>/etc/ssh/sshd_config
+```
+
+We are further going to deny a user access (even if it is a part of the group we allowed access). That user is the generic administrator user in Active Directory.
+
+:boom: Run below command to add the additional line which limits the user access.
+
+```
+echo "DenyUsers administrator administrator@linux4win.local" >>/etc/ssh/sshd_config
+```
+
+Now you have to be a member of the minions@linux4win.local Security Group in Active Directory to be allowed to login using ssh. Also we blocked access to the generic Administrator account which can pose a security issue if used.
+
+:boom: Now we need to restart the sshd service for these settings to get applied. Click on the ```Services``` menu option to your left and filter for the sshd service as shown below.
+
+![services user interface](images/manage_services1.png)
+
+Then click on sshd.service and restart the service. The service is now secured.
+
+To use PAM to secure SSH have a look at this web page. 
 
 Continue to [lab 6](lab6.md)
 
