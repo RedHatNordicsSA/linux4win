@@ -1,8 +1,8 @@
 # Linux workshop for Enterprise administrators
 
-Here is the explanation of your [environments](lab0.md)
-
 Workshop items:
+- Welcome to the lab, here you find the [prerequisites](lab0.md) of the lab.
+
 - Operations walkthrough (using the web console)
   - [**lab1** *Software management*](lab1.md)
     - Installing software
