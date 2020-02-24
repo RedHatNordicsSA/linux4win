@@ -10,16 +10,19 @@ By using the ```image builder```, you get a dependable and reproducable process 
 ## Create a "golden image" using image builder
 To start this out we need to add the image builder application. This is done at the ```Applications``` part of the menu on your left.
 
-:boom: Locate the **Image Builder** entry and install it. It may already be installed
+:boom: Locate the **Image Builder** entry and install it if it is not already installed.
 
-So now click on the image to goto the image builder it is located below the image for the system we are using.
+:boom: To access the ```image builder```, you need to go the the furthest left on the left side menu and select ```Image Builder``` as shown below.
 
-![button of imagebuilder](images/interface_imagebuilderbutt.png)
+![button of imagebuilder](images/lorax.png)
 
-Once here you see the interface, there is already a few examples installed
+:boom: Once you access the interface, you may be asked to enable the Lorax service, do so if asked.
+
+Once here you see the interface, there is already a few examples installed.
+
 ![interface of imagebuilder](images/interface_imagebuilder.png)
 
-:boom: Now its time to make a new image, this is done by creating a new **Blueprint** see the button in the top right corner? Press it.
+:boom: Now its time to make a new image, this is done by creating a new **Blueprint**. See the button in the top right corner which reads  ```Create Blueprint```? Click it.
 
 ![make new blueprint](images/interface_newblueprint.png)
 
