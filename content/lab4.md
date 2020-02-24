@@ -115,7 +115,39 @@ You should now see the Apache Web server test page, as shown below.
 
 :boom: Verify that your custom service got added.
 
-You are now done with the networking part of the lab and have hopefully learned one or two useful things about networking on Linux.
+## Basic troubleshooting
+
+There are a lot of tools available for network troubleshooting. We will just spend a minute or two to introduce you to the most common ones.
+
+:boom: Go to the ```Terminal``` menu option on the left hand menu.
+
+:boom: Ping a system five times, type below in a terminal:
+
+```
+ping -c5 www.google.com
+```
+
+:boom: Do a traceroute to a system, type below in a terminal:
+
+```
+traceroute www.google.com
+```
+
+:boom: Do a fancy mix between a traceroute and a ping, type below the terminal (exit by pressing ```ctrl+c```)
+
+```
+mtr www.google.com
+```
+
+:boom: Sniff network traffic coming in on port 80 on our system, type below in the terminal:
+
+```
+sudo tcpdump -X tcp port 80
+```
+
+:boom: Now, access the web server you setup earlier from your web browser and see how network traffic is captured. Exit the sniffing session by pressing ```ctrl+c```
+
+That was it. You are now done with the networking part of the lab and have hopefully learned one or two useful things about networking on Linux.
 
 Next up, user management.
 
