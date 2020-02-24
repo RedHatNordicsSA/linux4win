@@ -1,18 +1,28 @@
 # Management of several servers using Ansible
 
-So in the previous assignment you added a server to the interface. This enabled you to manage two servers using the web console. But it is still not super efficient way to manage lots of servers.
+In the previous assignment you added an additional server to the ```Web console```. This enabled you to manage two servers using the web console. In this chapter, you will get introduced to the worlds currently most popular automation framework, Ansible.
 
-Lets say you have 20 linux servers in your infrastructure. And a serious software vulnerability is found in a base-package present in all these 20 servers. Now you will need to click 20 times on the update software button.
+## Intro to Ansible
 
-So instead we propose using an automation framework that can help relive you of repetative tasks like updating software by hand.
+If you are handling dussins of servers, doing things such as installing software and changing configuration quickly becomes a cumbersome tasks which will require more people to manage the systems while also affecting time-to-deliver for the various tasks.
+
+To handle a larger amount of systems, you will need to adapt an automation framework to handle the previously mentioned challenges.
+
+There are many automation frameworks out there, such as Puppet, Chef and Salt. The currently most popular automation framework in the world is called Ansible.
 
 ![ansible logo](images/ansiblelogo.png)
 
+The reason why Ansible has risen to popularity, is it's lower adoption threshhold (automation is pretty close to written language) and it's clientless nature (you do not have to install anything on a system to automate it). Ansible's clientless nature underpins Ansible's ability to automate all things, including all current Operating Systems, network equipment and even IoT devices such as lightbulbs. 
+
+:thumbsup: When implementing Ansible in an enterprise on a larger scale, you will need some type of management solution to solve collaborative and security related challenges, such as ```Red Hat Ansible Tower```, or it's upstream open source project, ```AWX```. We will not cover that in this lab, but only focus on some quick hands on experience.
+
 ## Setup of ansible master
 
-:boom: To start out we will install the ansible software needed on the second server. So start by going to that server. Then open the terminal and install it
+We will choose our first (where we have spend most of our time on, so far) Red Hat Enterprise Linux server as an Ansible master, the server which we'll do Ansible automation from.
+
+:boom: To start, we will install the ansible software needed. In the ```web console```, go to that server, open the ```Terminal``` and install the required software.
 ```
-yum install ansible
+sudo dnf install ansible
 ```
 
 :boom: Once it is installed please verify that it works by running this command:
@@ -37,11 +47,14 @@ less /etc/ansible/hosts
 cp /etc/ansible/hosts /etc/ansible/hosts.backup
 ```
 
-:boom: So now we have a backup file we can lookup if needed. Now it is time to fill the file with simple context:
+:boom: So now we have a backup file we can lookup if needed. Now it is time to fill the file with simple context. Type below commands to put your Red Hat Enterprise Linux server into the inventory file:
 ```
-ip.address.of.linuxserver1
-ip.address.of.linuxserver2
+sudo su -
+echo "ip.address.of.linuxserver1" >/etc/ansible/hosts
+echo "ip.address.of.linuxserver2" >>/etc/ansible/hosts
 ```
+
+:exclamation: Please note the double ```>>``` on the last line there.
 
 ## Run ad hoc commands against your linux servers
 
@@ -57,12 +70,12 @@ ansible all -m shell -a 'cat /etc/redhat-release' -u rhel --ask-pass --become-us
 
 :boom: With this command we find out what release of Red Hat Enterprise Linux these servers are running. Imagine this beeing a loooooong list of servers. You now have some insights into you entire fleet just using one command that you can alter indefinite. So lets just update stuff.
 ```
-ansible all -m shell -a 'yum check-update' -u rhel --ask-pass --become-user rhel
+ansible all -m shell -a 'dnf check-update' -u rhel --ask-pass --become-user rhel
 ```
 
 :boom: This command list all available updates for any system. Now most likely you do not get any updates since we have already done the patching using the web-ui. But if there where any all you needed to do was run this command.
 ```
-ansible all -m shell -a 'yum update -y' -u rhel --ask-pass --become-user rhel
+ansible all -m shell -a 'dnf update -y' -u rhel --ask-pass --become-user rhel
 ```
 
 Once the command is done you have patched two servers using one command.
