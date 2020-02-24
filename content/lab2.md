@@ -53,7 +53,7 @@ In the right hand lower corner of this screen you will see the attached storage 
 
 :boom: Click on the top, called ```xvda```.  Here you will see information regarding the partitions and filesystems present on this device and what types are used.
 
-:boob: Go back to the main storage page by clicking on menu item **Storage** in the menubar to your left.
+:boom: Go back to the main storage page by clicking on menu item **Storage** in the menubar to your left.
 
 There are also two more disks attached, called ```xvdb``` and ```xvdc```, both 1 GB in size. We are going to use the ```xvdb``` device for our new filesystem.
 
@@ -67,7 +67,7 @@ There are also two more disks attached, called ```xvdb``` and ```xvdc```, both 1
 
 We have now created a volume group, to wich we in the future can add more disk to, this will prove to be useful in later labs.
 
-Next up is to create the ```Logical Volume``' on which we will create the actual filesystem.
+Next up is to create the ```Logical Volume``` on which we will create the actual filesystem.
 
 :boom: Click on your newly created Volume Group which is now diplayed on the main ```Storage``` page, as shown below. Note that a new MB was consumed by LVM meta data, as the Volume Group is not 1024 MB in size.
 

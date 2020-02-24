@@ -168,7 +168,7 @@ If an application do not have specific functions that allows for access restrict
 
 ## Using PAM to secure the Web console
 
-Red Hat Enterprise Linux comes with a PAM moduled called pam_listfile, which allows us to define a textfile which containers users or groups which should be granted access in a whitelist manner, or which would be denied access in a blacklist manner.
+Red Hat Enterprise Linux comes with a PAM moduled called pam_listfile, which allows us to define a textfile which contains users or groups which should be granted access in a whitelist manner, or which would be denied access in a blacklist manner.
 
 To create a whitelist for which group can access the ```Web console```, we need to modify its ```PAM``` ruleset.
 
