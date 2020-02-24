@@ -161,7 +161,7 @@ There are many different ways to restrict access to a Linux system, in this chap
 * Via configuration of the service itself (if supported by that service)
 * Via PAM (Pluggable Authentication Modules)
 
-```PAM``` which is a dynamic and modules access system which Linux uses. It allows services to have specific rules which governs how the services allows and denies users access.
+```PAM``` is a dynamic and modular access system which Linux uses. It allows services to have specific rules which governs how the services allows and denies users access.
 
 If an application do not have specific functions that allows for access restrictions, your choice will be PAM. We will deal with both these options, starting with PAM.
 
@@ -253,7 +253,7 @@ Now you have to be a member of the minions@linux4win.local Security Group in Act
 
 Then click on sshd.service and restart the service. The service is now secured.
 
-To use PAM to secure SSH have a look at this web page. 
+:star: [To use PAM to secure SSH and more things on SSH access controls have a look at this web page.](https://developer.ibm.com/articles/au-sshlocks/ "Securing SSH")
 
 Continue to [lab 6](lab6.md)
 
