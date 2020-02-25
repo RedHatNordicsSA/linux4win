@@ -13,6 +13,9 @@ usermod -aG wheel rhel
 echo "rhel ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/rhel
 chmod 0440 /etc/sudoers.d/rhel
 
+#cockpit update / firewalld fix
+dnf update dnf subscription-manager polkit -y
+
 #install enable and open firewall for cockpit
 yum install firewalld cockpit-composer cockpit bash-completion -y
 systemctl enable --now firewalld
