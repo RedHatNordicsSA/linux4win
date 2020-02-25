@@ -6,6 +6,9 @@ This workshop has been written specifically for people with some previous experi
 
 This workshop uses ```Red Hat Enterprise Linux 8```, but acquired knowledge is often applicable for many different Linux operating systems.
 
+# Contributions
+Please note that this workshop is also an open source project. That means that anyone who wants are welcome to submit suggestions for improvements. It does not matter if you are attending the workshop or setting it up for others, please contribute improvements if you can :)
+
 # If you are attending a workshop
 
 Welcome, below is everything you need to know in order to get started.
