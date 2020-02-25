@@ -26,9 +26,9 @@ firewall-cmd --add-service=cockpit --permanent
 setenforce 1
 
 #fix for ansible broken winrm
-yum install python3-pip -y
-pip3 install pywinrm
-cp -r /usr/local/lib/python3.6/site-packages/* /usr/lib/python3.6/site-packages/
+#yum install python3-pip -y
+#pip3 install pywinrm
+#cp -r /usr/local/lib/python3.6/site-packages/* /usr/lib/python3.6/site-packages/
 
 #protect ourselfs from network outages
 LOOP=0
