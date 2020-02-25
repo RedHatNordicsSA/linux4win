@@ -62,6 +62,17 @@ echo "ip.address.of.linuxserver2" >>/etc/ansible/hosts
 ```
 ansible all -m ping -u rhel --ask-pass
 ```
+:exclamation: You may get this kind of error if you did not do the previous assignement
+```
+"msg": "Using a SSH password instead of a key is not possible because Host Key checking is enabled and sshpass does not support this.  Please add this host's fingerprint to your known_hosts file to manage this host."
+```
+:boom: If you do please start out by doing an ssh connection to both servers:
+```
+ssh ip.address.of.linuxserver1(2)
+yes
+password
+exit
+```
 
 :boom: Next up lets run a command on the servers:
 ```
@@ -73,7 +84,7 @@ ansible all -m shell -a 'cat /etc/redhat-release' -u rhel --ask-pass --become-us
 ansible all -m shell -a 'dnf check-update' -u rhel --ask-pass --become-user rhel
 ```
 
-:boom: This command list all available updates for any system. Now most likely you do not get any updates since we have already done the patching using the web-ui. But if there where any all you needed to do was run this command.
+:boom: This command list all available updates for any system. Now most likely you do not get any updates since we have already done the patching using the web-ui. But if there where any all you needed to do was run this command to install them all.
 ```
 ansible all -m shell -a 'dnf update -y' -u rhel --ask-pass --become-user rhel
 ```
@@ -92,8 +103,12 @@ Now we need to add some stuff to the hosts file in order to be able to manage wi
 ```
 /etc/ansible/hosts
 ```
-:boom: And add all of these lines somewhere
+:boom: Copy the entire block below, this will add those lines to that file. 
+
+:exclamation: Do not forget to change the ip.address.of.winserver1 to your actual ip address.
 ```
+sudo su -
+cat >> /etc/ansible/hosts << EOF
 [win]
 ip.address.of.winserver1
 
@@ -103,9 +118,11 @@ ansible_password=Password1
 ansible_connection=winrm
 ansible_winrm_transport=ntlm
 ansible_winrm_server_cert_validation=ignore
+EOF
+exit
 ```
 
-What we did was add a group [win] and some variables for that group [win:vars]
+What we did was add a group ```[win]``` and some variables for that group ```[win:vars]```
 I know it is not the safest to have password in clear text. To make it safer you can use ansible-vault.
 
 :boom: Once you have added the stuff to the hosts file it is time to test if stuff works:
@@ -118,12 +135,12 @@ You should get some kind of result indicating that you can connect to the remote
 
 :boom: If that is successful then perhaps lets make some very common tasks like check for updates using Microsoft Updates. Be prepared that it may take quite some time to get back the list
 ```
-ansible win -m win_updates -e state=searched
+ansible win -m win_updates -e category_names=SecurityUpdates -e state=searched 
 ```
 
 :boom:  Now we see that there are some updates to lets install them
 ```
-ansible win -m win_updates -e category_names=['SecurityUpdates, CriticalUpdates, UpdateRollups'] -e reboot=yes
+ansible win -m win_updates -e category_names=SecurityUpdates -e reboot=yes
 ```
 
 :boom: If you need to reboot the win server use this command

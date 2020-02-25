@@ -353,9 +353,11 @@
       msg: "{{ groups['winhost'] }}"
 
   - name: Print IP addresses of Windows hosts to ./winhost_instances.out
-    lineinfile:
+    blockinfile:
       path: ./winhost_instances.out
-      line: "{{ item.public_ip }}"
+      block: |
+        "{{ item.public_ip }}"
+        "{{ item.private_ip }}"
       create: yes
     with_items: "{{ winhost.tagged_instances }}"
     

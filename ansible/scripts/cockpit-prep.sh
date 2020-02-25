@@ -45,6 +45,11 @@ dnf install realmd oddjob oddjob-mkhomedir sssd adcli samba-common-tools -y
 sed -i  -e 's/PasswordAuthentication no/PasswordAuthentication yes/1' /etc/ssh/sshd_config
 systemctl restart sshd
 
+#fix for ansible broken winrm
+dnf install python3-pip -y
+pip3 install pywinrm
+cp -r /usr/local/lib/python3.6/site-packages/* /usr/lib/python3.6/site-packages/
+
 # Set dns=none for NetworkManager
 sed -i -e "s/\[main\]/\[main\]\\ndns=none/" /etc/NetworkManager/NetworkManager.conf
 systemctl restart NetworkManager
