@@ -41,7 +41,7 @@ Welcome, below is everything you need to know in order to get started.
 ## Getting started
 To get started with the workshop. [Click here to come to the workshop index page](content/thews.md)
 
-# Setting up this workshop for yourself or others
+# Setting this up workshop for yourself or others
 
 If you are not attending a workshop setup by others. Continue reading.
 
