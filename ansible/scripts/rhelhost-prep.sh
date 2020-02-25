@@ -1,4 +1,7 @@
 #!/bin/bash
+(
+
+set -x
 
 RHN_ACCOUNT=THEACCOUNT
 RHN_PASSWORD=THEPASSWORD
@@ -60,5 +63,6 @@ else
         rm -f /etc/yum.repos.d/*rhui*
 fi
 
+) >/tmp/user-data.log 2>&1
 #comment out for debug
-rm -rf /var/lib/cloud/instance
+#rm -rf /var/lib/cloud/instance

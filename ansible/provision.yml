@@ -34,7 +34,7 @@
 
   - name: Create empty file to store Cockpit public IPs
     file:
-      path: "./cockpit_servers.out"
+      path: "./cockpit_instances.out"
       state: touch
 
   - name: Create empty file to store RHEL host public IPs
@@ -150,6 +150,14 @@
           to_port: 3389
           cidr_ip: 0.0.0.0/0
         - proto: tcp
+          from_port: 5985
+          to_port: 5985
+          cidr_ip: 0.0.0.0/0
+        - proto: tcp
+          from_port: 5986
+          to_port: 5986
+          cidr_ip: 0.0.0.0/0
+        - proto: tcp
           from_port: 80
           to_port: 80
           cidr_ip: 0.0.0.0/0
@@ -181,7 +189,7 @@
       region: "{{ ec2_region }}"
       group: "{{ ec2_security_group }}"
       instance_type: t2.medium
-      image: ami-0e0564dc8e882f217
+      image: "{{ win_ami_id }}"
       user_data: "{{ lookup('file', '/tmp/ad-prep.ps1') }}"
       wait: true
       exact_count: "{{ number_of_ad_systems }}"
@@ -307,12 +315,16 @@
     debug:
       msg: "{{ groups['cockpit'] }}"
 
-  - name: Print IP addresses of Cockpit systems to ./cockpit_instances.out
-    lineinfile:
+  - name: Print Public IP addresses of Cockpit systems to ./cockpit_instances.out
+    blockinfile:
       path: ./cockpit_instances.out
-      line: "{{ item.public_ip }}"
+      block: |
+        "{{ item.public_ip }}"
+        "{{ item.private_ip }}"
       create: yes
+      marker: "# {mark} cockpit host"
     with_items: "{{ cockpit.tagged_instances }}"
+
 
   - name: Add RHEL host instance public IPs to host group
     add_host: hostname={{ item.public_ip }} groups=rhelhost
@@ -322,11 +334,14 @@
     debug:
       msg: "{{ groups['rhelhost'] }}"
 
-  - name: Print IP addresses of RHEL hosts to ./rhelhost_instances.out
-    lineinfile:
+  - name: Print Private IP addresses of RHEL hosts to ./rhelhost_instances.out
+    blockinfile:
       path: ./rhelhost_instances.out
-      line: "{{ item.public_ip }}"
+      block: |
+        "{{ item.public_ip }}"
+        "{{ item.private_ip }}"
       create: yes
+      marker: "# {mark} rhelhost"
     with_items: "{{ rhelhost.tagged_instances }}"
 
   - name: Add Windows host instance public IPs to host group
