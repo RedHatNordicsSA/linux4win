@@ -41,6 +41,10 @@ dnf install https://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/p/python2-ht
 #prep for lab 5
 dnf install realmd oddjob oddjob-mkhomedir sssd adcli samba-common-tools -y
 
+#prep for assign3,4
+sed -i  -e 's/PasswordAuthentication no/PasswordAuthentication yes/1' /etc/ssh/sshd_config
+systemctl restart sshd
+
 # Set dns=none for NetworkManager
 sed -i -e "s/\[main\]/\[main\]\\ndns=none/" /etc/NetworkManager/NetworkManager.conf
 systemctl restart NetworkManager

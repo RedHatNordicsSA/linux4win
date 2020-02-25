@@ -44,7 +44,7 @@ less /etc/ansible/hosts
 
 :boom: To exit less you press the **Q** button. So this information is good to shave for the future. Lets make a copy of that file
 ```
-cp /etc/ansible/hosts /etc/ansible/hosts.backup
+sudo cp /etc/ansible/hosts /etc/ansible/hosts.backup
 ```
 
 :boom: So now we have a backup file we can lookup if needed. Now it is time to fill the file with simple context. Type below commands to put your Red Hat Enterprise Linux server into the inventory file:

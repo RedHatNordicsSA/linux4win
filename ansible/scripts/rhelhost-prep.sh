@@ -30,6 +30,10 @@ setenforce 1
 #pip3 install pywinrm
 #cp -r /usr/local/lib/python3.6/site-packages/* /usr/lib/python3.6/site-packages/
 
+#prep for assign3,4
+sed -i  -e 's/PasswordAuthentication no/PasswordAuthentication yes/1' /etc/ssh/sshd_config
+systemctl restart sshd
+
 #protect ourselfs from network outages
 LOOP=0
 while true; do
