@@ -25,7 +25,7 @@ Welcome, below is everything you need to know in order to get started.
 - **(lab2) Storage management**
     - An intro to storage management, learn about management of storage devices and filesystems.
 - **(lab3) Service management**
-    - How to do handle services? Learn the basics including starting, stopping and installing new ones.
+    - How to handle services? Learn the basics including starting, stopping and installing new ones.
 - **(lab4) Network configuration**
     - Get introduced to the basics of managing the network of a server, including configuring network interfaces, the local firewall and troubleshooting network issues.
 - **(lab5) User management**
