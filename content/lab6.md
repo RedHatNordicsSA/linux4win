@@ -131,6 +131,8 @@ journalctr -u httpd -r
 journalctr -u httpd -f
 ```
 
+:star: Finaly, if you have time, here's one of the best troubleshooting resources for Red Hat Enterprise Linux, which has been seen in a while, written by ```Red Hatter Marko Myllynen```: https://github.com/myllynen/rhel-troubleshooting-guide/blob/master/README.md 
+
 That was it! Give youself a hand, as you have now gone through all the main sections of this workshop. If you need some more challenges, continue forward to the extra assignments.
 
 Continue to [assignment 1](assign1.md)
