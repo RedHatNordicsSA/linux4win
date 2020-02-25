@@ -54,9 +54,9 @@ If you break your system, you get to keep all the pieces.
 
 Here is a view of your lab-environment:
 
-There are two servers which runs Red Hat Enterprise Linux and two servers running Microsoft Windows, one of the Windows servers provides an Active Directory services.
+There are two servers which runs Red Hat Enterprise Linux and two servers running Microsoft Windows, one of the Windows servers provides an Active Directory services, they are all located on the same network and can all reach each other.
 
-![Overview of workshop](images/cockpitws.png)
+![Overview of workshop](images/aws.png)
 
 :exclamation: Your instructor will provide a list of ip-addresses and user credentials to use during the day.
 
