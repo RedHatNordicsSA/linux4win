@@ -92,5 +92,5 @@ fi
 ) >/tmp/user-data.log 2>&1
 
 #comment out in case of debug
-#rm -rf /var/lib/cloud/instance
-#rm -f /tmp/user-data.log
+rm -rf /var/lib/cloud/instance
+rm -f /tmp/user-data.log

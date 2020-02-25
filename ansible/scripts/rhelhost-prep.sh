@@ -69,5 +69,5 @@ fi
 ) >/tmp/user-data.log 2>&1
 
 #comment out for debug
-#rm -rf /var/lib/cloud/instance
-#rm -f /user-data.log
+rm -rf /var/lib/cloud/instance
+rm -f /tmp/user-data.log
