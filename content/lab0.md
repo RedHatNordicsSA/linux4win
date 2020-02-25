@@ -46,9 +46,11 @@ If by some reason you get stuck in a lab - then here's what you should do. **Fol
 * One of the supported browsers: Firefox, Chrome or Microsoft Edge.
 
 # :exclamation: Your powers and breaking things
-You have complete administrator access in your systems. If you do not properly read the instructions or if you do things which you do not fully understand, it is ```very``` easy to break your system. 
+You have complete administrator access in your systems. This is so that you are free to explore your systems fully. 
 
-If you break your system, you get to keep all the pieces. 
+With that said, if you do not properly read all the instructions or if you do things which you do not fully understand - it is ```very easy``` to break your system. If you do that, your lab instructor look upon you in a judging manner.
+
+Also, **if you break your system, you get to keep all the pieces.** 
 
 # Your environment
 
