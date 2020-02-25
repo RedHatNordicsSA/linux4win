@@ -31,7 +31,7 @@ In short, ```yum``` helps with the following tasks:
 * Automatically installing dependencies for your software
 * Installing, updating and removing packages (and their dependencies)
 
-When we later on will be updating software, the ```Web console``` will be calling ```yum``` to do the actual work. But ```yum``` can also be called directly in a terminal to do the work.
+When you are managing software using the ```Web console```, it uses underlying technolog in the operating system to get things done. 
 
 ## Updating packages using the Web console
 
