@@ -2,6 +2,8 @@
 
 This workshop aims to get people with limited or no experience of Linux a good foundation to start. While it does deal with some of the theory, it focuses on hands on experience of common tasks that a system administrator likely will have to do.
 
+This workshop uses ```Red Hat Enterprise Linux 8```, but acquired knowledge is often applicable for many different Linux operating systems.
+
 # If you are attending a workshop
 
 Welcome, below is everything you need to know in order to get started.
