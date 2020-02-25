@@ -2,8 +2,10 @@
 
 :exclamation: You need to complete the labs (0-6) in strict sequential order, as things you do early on will be used later on.
 
+Start by clicking on the lab0 link. Good luck!
+
 List of labs:
-- [**lab0** *Prerequisites*](lab0.md)
+- [**lab0** *Click here to start*](lab0.md)
 - [**lab1** *Software management*](lab1.md)
 - [**lab2** *Storage management*](lab2.md)
 - [**lab3** *Service management*](lab3.md)
