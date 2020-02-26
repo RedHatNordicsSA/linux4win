@@ -150,7 +150,34 @@ Let's have a quick look.
 systemctl status tuned
 ```
 
-:boom: Now that we know it's running, let's see what tuning profile is in use for your system.
+The output should be something like below:
+```
+● tuned.service - Dynamic System Tuning Daemon
+   Loaded: loaded (/usr/lib/systemd/system/tuned.service; enabled; vendor preset: enabled)
+   Active: active (running) since Wed 2020-02-26 07:04:21 UTC; 3h 6min ago
+     Docs: man:tuned(8)
+           man:tuned.conf(5)
+           man:tuned-adm(8)
+ Main PID: 17820 (tuned)
+    Tasks: 4 (limit: 23940)
+   Memory: 17.2M
+   CGroup: /system.slice/tuned.service
+           └─17820 /usr/libexec/platform-python -Es /usr/sbin/tuned -l -P
+
+Feb 26 07:04:20 ip-172-31-17-188.eu-central-1.compute.internal systemd[1]: Stopped Dynamic System Tuning Daemon.
+Feb 26 07:04:20 ip-172-31-17-188.eu-central-1.compute.internal systemd[1]: Starting Dynamic System Tuning Daemon...
+Feb 26 07:04:21 ip-172-31-17-188.eu-central-1.compute.internal systemd[1]: Started Dynamic System Tuning Daemon.
+```
+
+:boom: Please note how we are told what manual pages are intresting to look at for this specific service. If you try and look at them, you will run:
+
+```
+man tuned
+man tuned.conf
+man tuned-adm
+```
+
+:boom: Now that we know ```tuned``` is running, let's see what tuning profile is in use for your system.
 
 ```
 sudo tuned-adm list
