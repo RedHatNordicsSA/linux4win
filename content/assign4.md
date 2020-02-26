@@ -81,24 +81,10 @@ ansible all -m shell -a 'dnf check-update' --ask-pass
 
 :boom: This command list all available updates for any system. Now most likely you do not get any updates since we have already done the patching using the web-ui. But if there where any all you needed to do was run this command to install them all.
 ```
-ansible all -m shell -a 'dnf update -y' --ask-pass --become
+ansible all -m shell -a 'sudo dnf update -y' --ask-pass --become
 ```
 
 Once the command is done you have patched two servers using one command.
-
-:star: Did you get quite tired of typing passwords? You can also use ssh keys.
-
-:boom: Do not enter a password for the key. Type below command:
-```
-ssh-keygen
-```
-
-:boom: Copy the key to your servers by running below command:
-```
-for item in $(cat /etc/ansible/hosts); do ssh-copy-id rhel@$item; done
-```
-
-:boom: Now try and see some of the previous tasks.
 
 ## Run ad hoc commands against your windows server
 
