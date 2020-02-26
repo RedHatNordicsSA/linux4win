@@ -70,7 +70,7 @@ To get access to the Red Hat Enterprise Linux machines, we will use a feature ca
 
 Now, let's log in to your first Red Hat Enterprise Linux server.
 
-:boom: From the list provided by the instructor, locate the address labeled **Start here** and open a web-browser. 
+:boom: From the list provided by the instructor, locate the address labeled **System 1** and open a web-browser. 
 
 :boom: Input the address, into your web browser like such:
 ```
