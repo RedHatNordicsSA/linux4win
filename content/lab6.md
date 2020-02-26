@@ -135,7 +135,7 @@ journalctl -u httpd -f
 
 # Performance tuning
 
-Except for troubleshooting, the most complicated topic for managing an operating system is performance tuning. As such, we will not be able to go deeper into this topic, but we will still be able to give you some knowledge and skills.
+After having done troubleshooting, you sometimes need to do performance tuning. Except for troubleshooting, the most complicated topic for managing an operating system is performance tuning. As such, we will not be able to go deeper into this topic, but we will still be able to give you some knowledge and skills.
 
 ## Intro to performance tuning with tuned
 Red Hat Enterprise Linux comes with a service called ```tuned```, which turns complicated performance tuning exercices into simple commands. 
