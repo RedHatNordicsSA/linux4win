@@ -67,6 +67,9 @@ fi
 
 ) >/tmp/user-data.log 2>&1
 
+# fix for corrupt rpm db
+rpmdb --rebuilddb
+
 #comment out for debug
 rm -rf /var/lib/cloud/instance
 rm -f /tmp/user-data.log

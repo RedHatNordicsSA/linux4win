@@ -100,6 +100,10 @@ fi
 
 ) >/tmp/user-data.log 2>&1
 subscription-manager repos --enable ansible-2-for-rhel-8-x86_64-rpms
+
+# fix for corrupt rpm db
+rpmdb --rebuilddb
+
 #comment out in case of debug
 rm -rf /var/lib/cloud/instance
 rm -f /tmp/user-data.log
