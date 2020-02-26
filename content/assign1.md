@@ -3,7 +3,7 @@
 Installing systems is still a common task when managing Linux systems. There are many different ways to install Linux, the most common one in virtual and cloud environments is using an image or so called template for your Linux operating system. The template will typically include a majority of the software and configuration which you need - preinstalled into an image.   
 ![deploy from template](images/vmware_template.jpg)
 
-Templates make for rapid deployment since we are skipping the install process of the operating system. However templates have an inherent problem, which is aging. As an template is a snapshot, soon after you have created a new template, it is outdated. The solution to this is ofcourse automation of the creation process for the template. Thhis is something we can do using the ```image builder``` functionality included in Red Hat Enterprise Linux.
+Templates make for rapid deployment since we are skipping the install process of the operating system. However templates have an inherent problem, which is aging. As an template is a snapshot, soon after you have created a new template, it is outdated. The solution to this is of course automation of the creation process for the template. Thhis is something we can do using the ```image builder``` functionality included in Red Hat Enterprise Linux.
 
 By using the ```image builder```, you get a dependable and reproducable process that always creates the same template, containing the newest updated packages at each build.
 
@@ -22,7 +22,7 @@ Once here you see the interface, there is already a few examples installed.
 
 ![interface of imagebuilder](images/interface_imagebuilder.png)
 
-:boom: Now its time to make a new image, this is done by creating a new **Blueprint**. See the button in the top right corner which reads  ```Create Blueprint```? Click it.
+:boom: Now it's time to make a new image, this is done by creating a new **Blueprint**. See the button in the top right corner which reads  ```Create Blueprint```? Click it.
 
 ![make new blueprint](images/interface_newblueprint.png)
 
@@ -32,7 +32,7 @@ In the filter field on your left side you can type a name of a package like bash
 
 ![filter packages](images/interface_addpackage.png)
 
-Once you press the plus-sign next to the package name in the left column it is added to the image that is on your right. Now when we add a package all dependencies of that package is also added. This is shown also in the interface:
+Once you press the plus-sign next to the package name in the left column it is added to the image that is on your right. Now when we add a package all dependencies of that package are also added. This is shown also in the interface:
 
 ![dependencies of packages](images/interface_dependencies.png)
 
@@ -61,7 +61,7 @@ You will get another view at the image. This is where you can add users and such
 
 ![add user to image](images/interface_adduserimage.png)
 
-:boom: Now lets add a user, click the Create User Account button
+:boom: Now let's add a user, click the Create User Account button
 
 ![user details](images/interface_userdetails.png)
 
@@ -73,7 +73,7 @@ Now we're ready to create the actual template/image.
 
 :boom: On the main page for your image, there are three tabs, named ```Details```, ```Selected Components``` and ```Images```. Please click on the tab which reads ```Images```.
 
-:boom: :boom: You will be welcomed with a text which says that no images has been created yet. click on the ```Create Image``` button on the middle of the page.
+:boom: :boom: You will be welcomed with a text which says that no images have been created yet. Click on the ```Create Image``` button on the middle of the page.
 
 ![make image](images/interface_newimage.png)
 
