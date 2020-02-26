@@ -210,7 +210,7 @@ sudo tuned-adm recommended
 sudo tuned-adm profile name-of-profile
 ```
 
-Performance tuning does not have to be rocket science :-)
+Suprisingly enough, as you have seen, performance tuning does not have to be rocket science. Please note that the difference between a tuned and a not tuned system is often a lot, up to over 100% improvements are not rare to see. So if you are not yet a performance tuning expert, try using ```tuned```.
 
 That was it! Give youself a hand, as you have now gone through all the main sections of this workshop. If you need some more challenges, continue forward to the extra assignments.
 
