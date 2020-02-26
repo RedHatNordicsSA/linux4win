@@ -73,6 +73,8 @@ Just keeping your system updated may not be enough. Sometimes people will ask yo
 
 ![terminal user interface](images/terminal.png)
 
+:exclamation: If you find yourself disconnected from the terminal then all you need to do is press the ```Reset``` button in the top right corner
+
 First off, we will use the ```rpm``` command line tool, to query about the status of packages. We will query a familiar piece of software, the ```Web console``` we are using right now. Try below tricks and see if you find them useful.
 
 :boom: Run below command to query if a package exists.
