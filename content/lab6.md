@@ -133,6 +133,52 @@ journalctr -u httpd -f
 
 :star: Finally, if you have time, here's one of the best troubleshooting resources for Red Hat Enterprise Linux, which has been seen in a while, written by ```Red Hatter Marko Myllynen```: https://github.com/myllynen/rhel-troubleshooting-guide/blob/master/README.md 
 
+# Performance tuning
+
+Except for troubleshooting, the most complicated topic for managing an operating system is performance tuning. As such, we will not be able to go deeper into this topic, but we will still be able to give you some knowledge and skills.
+
+## Intro to performance tuning with tuned
+Red Hat Enterprise Linux comes with a service called ```tuned```, which turns complicated performance tuning exercices into simple commands. 
+
+```Tuned``` continiously scans the systems and tries to tune it accordingly to the workload. It comes with a number of tuning profiles, which you can select from. Without you doing something, it identifies if your server is running as a virtual machine and does tuning suitable for virtual machines.
+
+Let's have a quick look.
+
+:boom: Click on the ```Terminal``` menu item on the left side menu to review what tuning profile is in use for your system.
+
+```
+sudo tuned-adm list
+```
+
+The output will be something like below:
+```
+Available profiles:
+- balanced                    - General non-specialized tuned profile
+- desktop                     - Optimize for the desktop use-case
+- latency-performance         - Optimize for deterministic performance at the cost of increased power consumption
+- network-latency             - Optimize for deterministic performance at the cost of increased power consumption, focused on low latency network performance
+- network-throughput          - Optimize for streaming network throughput, generally only necessary on older CPUs or 40G+ networks
+- powersave                   - Optimize for low power consumption
+- throughput-performance      - Broadly applicable tuning that provides excellent performance across a variety of common server workloads
+- virtual-guest               - Optimize for running inside a virtual guest
+- virtual-host                - Optimize for running KVM guests
+Current active profile: virtual-guest
+```
+
+:boom: Note how the last line indicates what profile is used currently. To see what tuning profile is recommended. We will run another command:
+
+```
+sudo tuned-adm recommended
+```
+
+:boom: Try changing tuning profile to something new using below command:
+
+```
+sudo tuned-adm profile name-of-profile
+```
+
+Performance tuning does not have to be rocket science :-)
+
 That was it! Give youself a hand, as you have now gone through all the main sections of this workshop. If you need some more challenges, continue forward to the extra assignments.
 
 Continue to [assignment 1](assign1.md)
