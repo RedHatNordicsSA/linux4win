@@ -58,20 +58,15 @@ echo "ip.address.of.linuxserver2" >>/etc/ansible/hosts
 
 ## Run ad hoc commands against your linux servers
 
+:boom: First we're going to tell SSH that we trust that these servers cryptographic fingerprints are correct. Type the following to do that:
+
+```
+cat /etc/ansible/hosts|xargs ssh-keyscan -H >> ~/.ssh/known_hosts
+```
+
 :boom: Now it is possible to do stuff on both (but this can be a looooong list of servers) servers in one go. Lets start by verifying that we can connect by this command
 ```
 ansible all -m ping -u rhel --ask-pass
-```
-:exclamation: You may get this kind of error if you did not do the previous assignement
-```
-"msg": "Using a SSH password instead of a key is not possible because Host Key checking is enabled and sshpass does not support this.  Please add this host's fingerprint to your known_hosts file to manage this host."
-```
-:boom: If you do please start out by doing an ssh connection to both servers:
-```
-ssh ip.address.of.linuxserver1(2)
-yes
-password
-exit
 ```
 
 :boom: Next up lets run a command on the servers:
