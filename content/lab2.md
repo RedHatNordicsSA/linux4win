@@ -47,9 +47,9 @@ You will now learn how to create a new filesystem in Red Hat Enterprise Linux. W
 
 :boom: Go to the main ```Storage``` page as shown below.
 
-![storage user interface](images/interface_storage.png)
+![storage user interface](images/storage_overview.png)
 
-In the right hand lower corner of this screen you will see the attached storage devices under ```Drives```.
+In the right hand lower corner of this screen you will see the attached storage devices under ```Other Devices```.
 
 :boom: Click on the top, called ```xvda```.  Here you will see information regarding the partitions and filesystems present on this device and what types are used.
 
