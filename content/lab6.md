@@ -201,7 +201,7 @@ Current active profile: virtual-guest
 :boom: Note how the last line indicates what profile is used currently. To see what tuning profile is recommended. We will run another command:
 
 ```
-sudo tuned-adm recommended
+sudo tuned-adm recommend
 ```
 
 :boom: Try changing tuning profile to something new using below command:
