@@ -122,13 +122,13 @@ journalctl -f
 :boom: List specific logs for a service, show newer logs first.
 
 ```
-journalctr -u httpd -r
+journalctl -u httpd -r
 ```
 
 :boom: Continiously show new log entries for a service.
 
 ```
-journalctr -u httpd -f
+journalctl -u httpd -f
 ```
 
 :star: Finally, if you have time, here's one of the best troubleshooting resources for Red Hat Enterprise Linux, which has been seen in a while, written by ```Red Hatter Marko Myllynen```: https://github.com/myllynen/rhel-troubleshooting-guide/blob/master/README.md 
