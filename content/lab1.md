@@ -124,7 +124,7 @@ sudo rpmdb --rebuilddb
 ```
 
 ```
-sudo dnf search nmap
+dnf search nmap
 ```
 
 :boom: Let's install this software, which is a security scanner. We'll again escalate our priviledges using ```sudo```.
