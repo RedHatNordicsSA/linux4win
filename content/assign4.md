@@ -66,22 +66,22 @@ cat /etc/ansible/hosts|xargs ssh-keyscan -H >> ~/.ssh/known_hosts
 
 :boom: Now it is possible to do stuff on both (but this can be a looooong list of servers) servers in one go. Lets start by verifying that we can connect by this command
 ```
-ansible all -m ping -u rhel --ask-pass
+ansible all -m ping --ask-pass
 ```
 
-:boom: Next up lets run a command on the servers:
+:boom: Next up lets run a command on the servers, and check what version of Red Hat Enterprint Linux they are running:
 ```
-ansible all -m shell -a 'cat /etc/redhat-release' -u rhel --ask-pass --become-user rhel
+ansible all -m shell -a 'cat /etc/redhat-release'
 ```
 
 :boom: With this command we find out what release of Red Hat Enterprise Linux these servers are running. Imagine this beeing a loooooong list of servers. You now have some insights into you entire fleet just using one command that you can alter indefinite. So lets just update stuff.
 ```
-ansible all -m shell -a 'dnf check-update' -u rhel --ask-pass --become-user rhel
+ansible all -m shell -a 'dnf check-update' --ask-pass
 ```
 
 :boom: This command list all available updates for any system. Now most likely you do not get any updates since we have already done the patching using the web-ui. But if there where any all you needed to do was run this command to install them all.
 ```
-ansible all -m shell -a 'dnf update -y' -u rhel --ask-pass --become-user rhel
+ansible all -m shell -a 'dnf update -y' --ask-pass --become
 ```
 
 Once the command is done you have patched two servers using one command.
