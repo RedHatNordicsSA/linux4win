@@ -56,7 +56,7 @@ sudo /opt/mssql/bin/mssql-conf setup
 
 ## Set MSSQL service to start at boot
 
-You can now use the services part of the menu to your left to setup the service to be **Enabled** which will then start the MSSQL server at boot. Once you have enabled reboot the machine to make sure you have setup correctly
+You can now use the services part of the menu to your left to setup the service to be **Enabled** which will then start the MSSQL server at boot. Once you have enabled it, then reboot the machine to make sure you have setup correctly.
 
 ## Open firewall for correct port
 
