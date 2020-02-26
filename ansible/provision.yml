@@ -359,6 +359,7 @@
         "{{ item.public_ip }}"
         "{{ item.private_ip }}"
       create: yes
+      marker: "# {mark} windows host"
     with_items: "{{ winhost.tagged_instances }}"
     
  
