@@ -86,7 +86,7 @@ ansible all -m shell -a 'dnf check-update' -u rhel --ask-pass --become-user rhel
 
 :boom: This command list all available updates for any system. Now most likely you do not get any updates since we have already done the patching using the web-ui. But if there where any all you needed to do was run this command to install them all.
 ```
-ansible all -m shell -a 'dnf update -y' -u rhel --ask-pass --become-user rhel
+ansible all -m shell -a 'dnf update -y' -u rhel --ask-pass --become
 ```
 
 Once the command is done you have patched two servers using one command.
