@@ -71,7 +71,7 @@ Installed size: 6.1 M
 Is this ok [y/N]: y
 ```
 
-Selecting ```y``` installs not only the binaries for the Apache web server and it's dependencies it needs to work, but also a services definition for it. This allows us to manage the state of Apache using the ```Services``` interface in the ```Web console```.
+Selecting ```y``` installs not only the binaries for the Apache web server and the dependencies it needs to work, but also a services definition for it. This allows us to manage the state of Apache using the ```Services``` interface in the ```Web console```.
 
 :boom: Click on services and filter for ```httpd```, just as you did previously with ssh. You should see an entry called ```httpd.service```. Click on that entry, which will take you to the below shown page.
 

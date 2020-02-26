@@ -1,6 +1,6 @@
 # Management of several servers using Ansible
 
-In the previous assignment you added an additional server to the ```Web console```. This enabled you to manage two servers using the web console. In this chapter, you will get introduced to the worlds currently most popular automation framework, Ansible.
+In the previous assignment you added an additional server to the ```Web console```. This enabled you to manage two servers using the web console. In this chapter, you will get introduced to the world's currently most popular automation framework, Ansible.
 
 ## Intro to Ansible
 
@@ -58,35 +58,30 @@ echo "ip.address.of.linuxserver2" >>/etc/ansible/hosts
 
 ## Run ad hoc commands against your linux servers
 
-:boom: Now it is possible to do stuff on both (but this can be a looooong list of servers) servers in one go. Lets start by verifying that we can connect by this command
+:boom: First we're going to tell SSH that we trust that these servers cryptographic fingerprints are correct. Type the following to do that:
+
 ```
-ansible all -m ping -u rhel --ask-pass
-```
-:exclamation: You may get this kind of error if you did not do the previous assignement
-```
-"msg": "Using a SSH password instead of a key is not possible because Host Key checking is enabled and sshpass does not support this.  Please add this host's fingerprint to your known_hosts file to manage this host."
-```
-:boom: If you do please start out by doing an ssh connection to both servers:
-```
-ssh ip.address.of.linuxserver1(2)
-yes
-password
-exit
+cat /etc/ansible/hosts|xargs ssh-keyscan -H >> ~/.ssh/known_hosts
 ```
 
-:boom: Next up lets run a command on the servers:
+:boom: Now it is possible to do stuff on both (but this can be a looooong list of servers) servers in one go. Lets start by verifying that we can connect by this command
 ```
-ansible all -m shell -a 'cat /etc/redhat-release' -u rhel --ask-pass --become-user rhel
+ansible all -m ping --ask-pass
+```
+
+:boom: Next up lets run a command on the servers, and check what version of Red Hat Enterprint Linux they are running:
+```
+ansible all -m shell -a 'cat /etc/redhat-release'
 ```
 
 :boom: With this command we find out what release of Red Hat Enterprise Linux these servers are running. Imagine this beeing a loooooong list of servers. You now have some insights into you entire fleet just using one command that you can alter indefinite. So lets just update stuff.
 ```
-ansible all -m shell -a 'dnf check-update' -u rhel --ask-pass --become-user rhel
+ansible all -m shell -a 'dnf check-update' --ask-pass
 ```
 
 :boom: This command list all available updates for any system. Now most likely you do not get any updates since we have already done the patching using the web-ui. But if there where any all you needed to do was run this command to install them all.
 ```
-ansible all -m shell -a 'dnf update -y' -u rhel --ask-pass --become-user rhel
+ansible all -m shell -a 'dnf update -y' --ask-pass --become
 ```
 
 Once the command is done you have patched two servers using one command.

@@ -122,16 +122,95 @@ journalctl -f
 :boom: List specific logs for a service, show newer logs first.
 
 ```
-journalctr -u httpd -r
+journalctl -u httpd -r
 ```
 
 :boom: Continiously show new log entries for a service.
 
 ```
-journalctr -u httpd -f
+journalctl -u httpd -f
 ```
 
 :star: Finally, if you have time, here's one of the best troubleshooting resources for Red Hat Enterprise Linux, which has been seen in a while, written by ```Red Hatter Marko Myllynen```: https://github.com/myllynen/rhel-troubleshooting-guide/blob/master/README.md 
+
+# Performance tuning
+
+After having done troubleshooting, you sometimes need to do performance tuning. Except for troubleshooting, the most complicated topic for managing an operating system is performance tuning. As such, we will not be able to go deeper into this topic, but we will still be able to give you some knowledge and skills.
+
+## Intro to performance tuning with tuned
+Red Hat Enterprise Linux comes with a service called ```tuned```, which turns complicated performance tuning exercices into simple commands. 
+
+```Tuned``` continiously scans the systems and tries to tune it accordingly to the workload. It comes with a number of tuning profiles, which you can select from. Without you doing something, it identifies if your server is running as a virtual machine and does tuning suitable for virtual machines.
+
+Let's have a quick look.
+
+:boom: Click on the ```Terminal``` menu item on the left side menu to verify if the ```tuned``` service really is running. 
+
+```
+systemctl status tuned
+```
+
+The output should be something like below:
+```
+● tuned.service - Dynamic System Tuning Daemon
+   Loaded: loaded (/usr/lib/systemd/system/tuned.service; enabled; vendor preset: enabled)
+   Active: active (running) since Wed 2020-02-26 07:04:21 UTC; 3h 6min ago
+     Docs: man:tuned(8)
+           man:tuned.conf(5)
+           man:tuned-adm(8)
+ Main PID: 17820 (tuned)
+    Tasks: 4 (limit: 23940)
+   Memory: 17.2M
+   CGroup: /system.slice/tuned.service
+           └─17820 /usr/libexec/platform-python -Es /usr/sbin/tuned -l -P
+
+Feb 26 07:04:20 ip-172-31-17-188.eu-central-1.compute.internal systemd[1]: Stopped Dynamic System Tuning Daemon.
+Feb 26 07:04:20 ip-172-31-17-188.eu-central-1.compute.internal systemd[1]: Starting Dynamic System Tuning Daemon...
+Feb 26 07:04:21 ip-172-31-17-188.eu-central-1.compute.internal systemd[1]: Started Dynamic System Tuning Daemon.
+```
+
+:boom: Please note how we are told what manual pages are intresting to look at for this specific service. If you try and look at them, you will run:
+
+```
+man tuned
+man tuned.conf
+man tuned-adm
+```
+
+:boom: Now that we know ```tuned``` is running, let's see what tuning profile is in use for your system.
+
+```
+sudo tuned-adm list
+```
+
+The output will be something like below:
+```
+Available profiles:
+- balanced                    - General non-specialized tuned profile
+- desktop                     - Optimize for the desktop use-case
+- latency-performance         - Optimize for deterministic performance at the cost of increased power consumption
+- network-latency             - Optimize for deterministic performance at the cost of increased power consumption, focused on low latency network performance
+- network-throughput          - Optimize for streaming network throughput, generally only necessary on older CPUs or 40G+ networks
+- powersave                   - Optimize for low power consumption
+- throughput-performance      - Broadly applicable tuning that provides excellent performance across a variety of common server workloads
+- virtual-guest               - Optimize for running inside a virtual guest
+- virtual-host                - Optimize for running KVM guests
+Current active profile: virtual-guest
+```
+
+:boom: Note how the last line indicates what profile is used currently. To see what tuning profile is recommended. We will run another command:
+
+```
+sudo tuned-adm recommend
+```
+
+:boom: Try changing tuning profile to something new using below command:
+
+```
+sudo tuned-adm profile name-of-profile
+```
+
+Suprisingly enough, as you have seen, performance tuning does not have to be rocket science. Please note that the difference between a tuned and a not tuned system is often a lot, up to over 100% improvements are not rare to see. So if you are not yet a performance tuning expert, try using ```tuned```.
 
 That was it! Give youself a hand, as you have now gone through all the main sections of this workshop. If you need some more challenges, continue forward to the extra assignments.
 

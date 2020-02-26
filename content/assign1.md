@@ -3,7 +3,7 @@
 Installing systems is still a common task when managing Linux systems. There are many different ways to install Linux, the most common one in virtual and cloud environments is using an image or so called template for your Linux operating system. The template will typically include a majority of the software and configuration which you need - preinstalled into an image.   
 ![deploy from template](images/vmware_template.jpg)
 
-Templates make for rapid deployment since we are skipping the install process of the operating system. However templates have an inherent problem, which is aging. As an template is a snapshot, soon after you have created a new template, it is outdated. The solution to this is ofcourse automation of the creation process for the template. Thhis is something we can do using the ```image builder``` functionality included in Red Hat Enterprise Linux.
+Templates make for rapid deployment since we are skipping the install process of the operating system. However templates have an inherent problem, which is aging. As an template is a snapshot, soon after you have created a new template, it is outdated. The solution to this is ofcourse automation of the creation process for the template. This is something we can do using the ```image builder``` functionality included in Red Hat Enterprise Linux.
 
 By using the ```image builder```, you get a dependable and reproducable process that always creates the same template, containing the newest updated packages at each build.
 
