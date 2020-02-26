@@ -144,7 +144,13 @@ Red Hat Enterprise Linux comes with a service called ```tuned```, which turns co
 
 Let's have a quick look.
 
-:boom: Click on the ```Terminal``` menu item on the left side menu to review what tuning profile is in use for your system.
+:boom: Click on the ```Terminal``` menu item on the left side menu to verify if the ```tuned``` service really is running. 
+
+```
+systemctl status tuned
+```
+
+:boom: Now that we know it's running, let's see what tuning profile is in use for your system.
 
 ```
 sudo tuned-adm list
