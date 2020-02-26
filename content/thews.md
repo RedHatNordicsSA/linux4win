@@ -2,6 +2,8 @@
 
 :exclamation: You need to complete the labs (0-6) in strict sequential order, as things you do early on will be used later on.
 
+Find your IPs here: http://18.197.180.161/labstuff/index.html
+
 Start by clicking on the lab0 link. Good luck!
 
 List of labs:
