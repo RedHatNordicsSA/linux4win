@@ -88,7 +88,7 @@ Once the command is done you have patched two servers using one command.
 
 :star: Did you get quite tired of typing passwords? You can also use ssh keys.
 
-:boom: Do not enter a password for the key. Type below command:
+:boom: Do not enter a password for the key. Type below command (just press enter for all questions):
 ```
 ssh-keygen
 ```
