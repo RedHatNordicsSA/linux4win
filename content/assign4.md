@@ -86,6 +86,20 @@ ansible all -m shell -a 'dnf update -y' --ask-pass --become
 
 Once the command is done you have patched two servers using one command.
 
+:star: Did you get quite tired of typing passwords? You can also use ssh keys.
+
+:boom: Do not enter a password for the key. Type below command:
+```
+ssh-keygen
+```
+
+:boom: Copy the key to your servers by running below command:
+```
+for item in $(cat /etc/ansible/hosts); do ssh-copy-id rhel@$item; done
+```
+
+:boom: Now try and see some of the previous tasks.
+
 ## Run ad hoc commands against your windows server
 
 Now lets see if we can do this also with our windows server. On the server we do not have to do anything it is already prepared for ansible management. Here you find info about what was done to enable this:
