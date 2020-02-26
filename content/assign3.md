@@ -24,7 +24,7 @@ Which will output something like this:
 ```
 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDSCAXaZu7Bz4eSs/zyRi1MB1Nm7oR5XXBkjvbhpDdszPkUouDk+2MJ6/nK19NEtJ1yGU6t02kPQLTq6aOvUaPZsQ+wXFL3qPWhxSb60Tbc/t1+Nhh9FfeIQO+cqzq4PtCkC7DThSjParCkmkTn5JnIYNaVvOimaI9c4lO0qrt+6kdty2oTIbdcOrM0CERDBWhzECCmCDpAXv6R4/G+g2WXTXefpmGgwEdNiDVfV79niJQj4DnG0DVQV/uFNKoV/AyzGcKFVNzaO7PSqoY5kdQjlAEa3tr2SETLH8jjSec7ux4BDoAyPU+qNLWTCHNnlZ6yB4isbPbKw5RcOaDnZiLr rhel@linux4win
 ```
-We are interested in the long string starting with *ssh-rsa*, which comes before *rhel@hostname*. This string can be used to authenticate password-less from this server to that other server. Key based authentication is stronger than using a password, but on the other side, if someone steals our private key, they will have access to our systems.
+We are interested in the long string starting with *ssh-rsa*, which comes before *rhel@hostname*. This string can be used to authenticate password-less from this server to the other server. Key based authentication is stronger than using a password, but on the other side, if someone steals our private key, they will have access to our systems.
 
 :boom: Now we are going to send this key to another server. For this you need the ip of the server or the FQDN. 
 ```

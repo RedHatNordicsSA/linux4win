@@ -1,6 +1,6 @@
 # Lab 4 Network configuration
 
-The part of the labs deals with the basic network operations you are likely to want to do in Linux, including settings for network interfaces, managing firewall openings and doing basic troubleshooting of your networking. 
+This part of the labs deals with the basic network operations you are likely to want to do in Linux, including settings for network interfaces, managing firewall openings and doing basic troubleshooting of your networking. 
 
 :boom: Please locate the menu entry called **Networking** and click on it. Spend some time exploring the page, without changing anything.
 

@@ -232,6 +232,15 @@
       line: "RHN_PASSWORD=\"{{ rhn_password }}\""
       create: yes
 
+  - name: Replace AD variable placeholder in rhelhost prep files
+      lineinfile:
+        path: /tmp/rhelhost-prep.sh
+        regexp: '^DNSIP=ADIPADDRESS'
+        line: "DNSIP={{ item.private_ip }}"
+        create: yes
+      with_items: "{{ ad.tagged_instances }}"
+  
+
   - name: Replace RHN_ACCOUNT variable placeholder in rhelhost prep files
     lineinfile:
       path: /tmp/rhelhost-prep.sh
