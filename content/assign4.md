@@ -133,12 +133,9 @@ ansible win -m win_ping
 
 You should get some kind of result indicating that you can connect to the remote windows server.
 
-:boom: If that is successful then perhaps lets make some very common tasks like check for updates using Microsoft Updates. Be prepared that it may take quite some time to get back the list
-```
-ansible win -m win_updates -e category_names=SecurityUpdates -e state=searched 
-```
+If that is successful then perhaps lets make some very common tasks like install SecurityUpdates only, there are three categories, SecurityUpdates,CriticalUpdates and UpdateRollups.
 
-:boom:  Now we see that there are some updates to lets install them
+:boom: So we are going to just install the first category (this to shave some time).
 ```
 ansible win -m win_updates -e category_names=SecurityUpdates -e reboot=yes
 ```
@@ -146,6 +143,9 @@ ansible win -m win_updates -e category_names=SecurityUpdates -e reboot=yes
 :boom: If you need to reboot the win server use this command
 ```
 ansible win -m win_reboot
+```
+
+This module are very well documented [here](https://docs.ansible.com/ansible/latest/modules/win_updates_module.html)
 ```
 
 Back to [index](thews.md)
