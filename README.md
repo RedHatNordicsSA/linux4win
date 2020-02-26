@@ -30,8 +30,8 @@ Welcome, below is everything you need to know in order to get started.
     - Get introduced to the basics of managing the network of a server, including configuring network interfaces, the local firewall and troubleshooting network issues.
 - **(lab5) User management**
     - Learn how to manage local and centrally managed users, including joining a server to Active Directory and creating access controls.
-- **(lab6) Troubleshooting**
-    - Learn the basic troubleshooting tricks of Linux
+- **(lab6) Troubleshooting and performance tuning**
+    - Learn the basic troubleshooting tricks of Linux and do some performance tuning.
 
 ```Extra assignments:```
 

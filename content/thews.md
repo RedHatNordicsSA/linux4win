@@ -13,7 +13,7 @@ List of labs:
 - [**lab3** *Service management*](lab3.md)
 - [**lab4** *Network configuration*](lab4.md)
 - [**lab5** *User management*](lab5.md)
-- [**lab6** *Troubleshooting*](lab6.md)
+- [**lab6** *Troubleshooting and performance tuning*](lab6.md)
 
 Extra assignments:
 - [**assign1** *Create image for use in the cloud or virtual*](assign1.md)
