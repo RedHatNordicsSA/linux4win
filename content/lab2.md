@@ -69,7 +69,7 @@ We have now created a volume group, to wich we in the future can add more disk t
 
 Next up is to create the ```Logical Volume``` on which we will create the actual filesystem.
 
-:boom: Click on your newly created Volume Group which is now diplayed on the main ```Storage``` page, as shown below. Note that a new MB was consumed by LVM meta data, as the Volume Group is not 1024 MB in size.
+:boom: Click on your newly created Volume Group which is now diplayed on the main ```Storage``` page, as shown below. Note that a few MB was consumed by LVM meta data, as the Volume Group is not 1024 MB in size.
 
 ![create logical vol](images/create_lv1.png)
 
