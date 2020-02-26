@@ -1,6 +1,6 @@
 # Management of several servers using Ansible
 
-In the previous assignment you added an additional server to the ```Web console```. This enabled you to manage two servers using the web console. In this chapter, you will get introduced to the worlds currently most popular automation framework, Ansible.
+In the previous assignment you added an additional server to the ```Web console```. This enabled you to manage two servers using the web console. In this chapter, you will get introduced to the world's currently most popular automation framework, Ansible.
 
 ## Intro to Ansible
 

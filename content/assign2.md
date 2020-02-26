@@ -37,7 +37,7 @@ As you can see from the list above there is two files (at least) an one is named
 
 ## Install MSSQL binaries from the repo
 
-Now its time to install the MSSQL server. This is also done using the terminal.
+Now it's time to install the MSSQL server. This is also done using the terminal.
 
 :boom: Run the ```dnf``` command to install the MS SQL server on your system, as shown below:
 
@@ -45,7 +45,7 @@ Now its time to install the MSSQL server. This is also done using the terminal.
 sudo dnf install mssql-server
 ```
 
-Type ```y``` when asked and MS SQL server and it's dependencies get's installed.
+Type ```y``` when asked and MS SQL server and its dependencies will get installed.
 
 When the installation is done it is time to configure the SQL server with the SA password and such.
 
@@ -56,7 +56,7 @@ sudo /opt/mssql/bin/mssql-conf setup
 
 ## Set MSSQL service to start at boot
 
-You can now use the services part of the menu to your left to setup the service to be **Enabled** which will then start the MSSQL server at boot. Once you have enabled reboot the machine to make sure you have setup correctly
+You can now use the services part of the menu to your left to setup the service to be **Enabled** which will then start the MSSQL server at boot. Once you have enabled it, then reboot the machine to make sure you have setup correctly.
 
 ## Open firewall for correct port
 
