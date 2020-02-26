@@ -118,6 +118,10 @@ Now we'll try to install and remove a piece of software, to do that, we'll use t
 :boom: Run below command to run the ```dnf``` command to search for a piece of software called nmap. Please note the prefixing of the ```dnf``` command with ```sudo```. This is what makes the command run as an administrator. This is less dangerous than using administrator powers all the time.
 
 ```
+sudo rpmdb --rebuilddb
+```
+
+```
 sudo dnf search nmap
 ```
 
