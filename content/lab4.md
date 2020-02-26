@@ -60,7 +60,7 @@ In lab3 we installed and started the apache webserver. The service is running bu
 :boom: Try accessing the web server by typing in the IP-address of your system into a new tab on your web browser as shown below and verify that the communication is blocked:
 
 ```
-http://IP-ADDRESS
+http://same.ipaddress.as-your.webconsole
 ```
 
 :exclamation: Please note that it's ```http://``` and not ```https://```.
