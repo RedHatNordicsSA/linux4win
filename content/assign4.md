@@ -56,6 +56,8 @@ echo "ip.address.of.linuxserver2" >>/etc/ansible/hosts
 
 :exclamation: Please note the double ```>>``` on the last line there.
 
+:exclamation: You might need to add `/home/rhel/.ssh/authorized_keys` to `ip.address.of.linuxserver1` - remember `chmod 600 /home/rhel/.ssh/authorized_keys`
+
 ## Run ad hoc commands against your linux servers
 
 :boom: Now it is possible to do stuff on both (but this can be a looooong list of servers) servers in one go. Lets start by verifying that we can connect by this command
