@@ -53,6 +53,5 @@ To get started with the workshop. [Click here to come to the workshop index page
 If you are not attending a workshop setup by others. Continue reading.
 
 * If you want to deploy the workshop for one or several attendees on AWS, [click on this link](content/aws.md)
-* If you want to deploy the workshop locally on your computer using Vagrant, [click on this link](content/vagrant.md).
 
 And here is a [pitch](pitch.md)
