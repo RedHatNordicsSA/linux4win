@@ -26,7 +26,7 @@ The predictable naming scheme, which is the default one used in Red Hat Enterpri
 ### Firewalling on Linux
 Depending on what Linux operating system are you using, there may be different tooling to manage firewalling. The most used technology to filter network traffic on Linux is called ```iptables```. In Red Hat Enterprise Linux 8, the technology used to filter packages is called ```nftables```. ```Nftables``` has the advantage that you can handle mixes of IPv4 and IPv6 rules easier. It's still very common to see ```iptables``` being used though. Rules are then managed using a command line interface in a terminal.
 
-In Red Hat Enterprise Linux, since version 7 of the operating system, a management service called ```firewalld``` has been provided to abstract away from what technology is used and to better provide a programmable interface for firewall rules. Using ```firewalld``` is what allows the ```Web console``` to provide it's firewall management features.
+In Red Hat Enterprise Linux, since version 7 of the operating system, a management service called ```firewalld``` has been provided to abstract away from what technology is used and to better provide a programmable interface for firewall rules. Using ```firewalld``` is what allows the ```Web console``` to provide its firewall management features.
 
 ## Static and Dynamic IP assignment
 
