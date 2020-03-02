@@ -86,19 +86,21 @@ ansible all -m shell -a 'dnf update -y' --ask-pass --become
 
 Once the command is done you have patched two servers using one command.
 
-:star: Did you get quite tired of typing passwords? You can also use ssh keys.
+:star: :boom: Did you get quite tired of typing passwords? You can also use ssh keys.
 
-:boom: Do not enter a password for the key. Type below command (just press enter for all questions):
+:star: :boom: Do not enter a password for the key. Type below command (just press enter for all questions):
 ```
 ssh-keygen
 ```
 
-:boom: Copy the key to your servers by running below command:
+:star: :boom: Copy the key to your servers by running below command:
 ```
 for item in $(cat /etc/ansible/hosts); do ssh-copy-id rhel@$item; done
 ```
 
-:boom: Now try and see some of the previous tasks.
+:star: :boom: Now try and redo some of the previous tasks. Nice isn't it?
+
+:thumbsup: Please note that when using a SSH key, protecting the key become paramout. AWX (https://github.com/ansible/awx) and Red Hat Ansible Tower (https://www.ansible.com/products/tower) are ways you can protect SSH keys from unauthorized access and allow you to share use of a key, without sharing the key itself.
 
 ## Run ad hoc commands against your windows server
 
