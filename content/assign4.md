@@ -4,7 +4,7 @@ In the previous assignment you added an additional server to the ```Web console`
 
 ## Intro to Ansible
 
-If you are handling dussins of servers, doing things such as installing software and changing configuration quickly becomes a cumbersome tasks which will require more people to manage the systems while also affecting time-to-deliver for the various tasks.
+If you are handling dussins of servers, doing things such as installing software and changing configuration quickly becomes a cumbersome task which will require more people to manage the systems while also affecting time-to-deliver for the various tasks.
 
 To handle a larger amount of systems, you will need to adapt an automation framework to handle the previously mentioned challenges.
 
@@ -12,9 +12,9 @@ There are many automation frameworks out there, such as Puppet, Chef and Salt. T
 
 ![ansible logo](images/ansiblelogo.png)
 
-The reason why Ansible has risen to popularity, is it's lower adoption threshhold (automation is pretty close to written language) and it's clientless nature (you do not have to install anything on a system to automate it). Ansible's clientless nature underpins Ansible's ability to automate all things, including all current Operating Systems, network equipment and even IoT devices such as lightbulbs. 
+The reason why Ansible has risen to popularity, is its lower adoption threshhold (automation is pretty close to written language) and its clientless nature (you do not have to install anything on a system to automate it). Ansible's clientless nature underpins Ansible's ability to automate all things, including all current Operating Systems, network equipment and even IoT devices such as lightbulbs. 
 
-:thumbsup: When implementing Ansible in an enterprise on a larger scale, you will need some type of management solution to solve collaborative and security related challenges, such as ```Red Hat Ansible Tower```, or it's upstream open source project, ```AWX```. We will not cover that in this lab, but only focus on some quick hands on experience.
+:thumbsup: When implementing Ansible in an enterprise on a larger scale, you will need some type of management solution to solve collaborative and security related challenges, such as ```Red Hat Ansible Tower```, or its upstream open source project, ```AWX```. We will not cover that in this lab, but only focus on some quick hands on experience.
 
 ## Setup of ansible master
 
@@ -37,12 +37,12 @@ Now you are ready to add some servers to be managed. This is done by createing a
 /etc/ansible/hosts
 ```
 
-If you look into this file you will see lots of good instuctions:
+If you look into this file you will see lots of good instructions:
 ```
 less /etc/ansible/hosts
 ```
 
-:boom: To exit less you press the **Q** button. So this information is good to shave for the future. Lets make a copy of that file
+:boom: To exit less you press the **Q** button. So this information is good to shave for the future. Let's make a copy of that file
 ```
 sudo cp /etc/ansible/hosts /etc/ansible/hosts.backup
 ```
@@ -64,7 +64,7 @@ echo "ip.address.of.linuxserver2" >>/etc/ansible/hosts
 cat /etc/ansible/hosts|xargs ssh-keyscan -H >> ~/.ssh/known_hosts
 ```
 
-:boom: Now it is possible to do stuff on both (but this can be a looooong list of servers) servers in one go. Lets start by verifying that we can connect by this command
+:boom: Now it is possible to do stuff on both (but this can be a looooong list of servers) servers in one go. Let's start by verifying that we can connect by this command
 ```
 ansible all -m ping --ask-pass
 ```
@@ -74,7 +74,7 @@ ansible all -m ping --ask-pass
 ansible all -m shell -a 'cat /etc/redhat-release'
 ```
 
-:boom: With this command we find out what release of Red Hat Enterprise Linux these servers are running. Imagine this beeing a loooooong list of servers. You now have some insights into you entire fleet just using one command that you can alter indefinite. So lets just update stuff.
+:boom: With this command we find out what release of Red Hat Enterprise Linux these servers are running. Imagine this being a loooooong list of servers. You now have some insights into you entire fleet just using one command that you can alter indefinite. So let's just update stuff.
 ```
 ansible all -m shell -a 'dnf check-update' --ask-pass
 ```
@@ -104,13 +104,13 @@ for item in $(cat /etc/ansible/hosts); do ssh-copy-id rhel@$item; done
 
 ## Run ad hoc commands against your windows server
 
-Now lets see if we can do this also with our windows server. On the server we do not have to do anything it is already prepared for ansible management. Here you find info about what was done to enable this:
+Now let's see if we can do this also with our windows server. On the server we do not have to do anything it is already prepared for ansible management. Here you find info about what was done to enable this:
 
 [Windows server setup](https://docs.ansible.com/ansible/latest/user_guide/windows_setup.html)
 
 Now we need to add some stuff to the hosts file in order to be able to manage windows servers.
 
-:boom: So lets edit the hosts file again:
+:boom: So let's edit the hosts file again:
 ```
 /etc/ansible/hosts
 ```
@@ -144,9 +144,9 @@ ansible win -m win_ping
 
 You should get some kind of result indicating that you can connect to the remote windows server.
 
-If that is successful then perhaps lets make some very common tasks like install SecurityUpdates only, there are three categories, SecurityUpdates,CriticalUpdates and UpdateRollups.
+If that is successful then perhaps let's make some very common tasks like install SecurityUpdates only, there are three categories, SecurityUpdates,CriticalUpdates and UpdateRollups.
 
-:boom: So we are going to just install the first category (this to shave some time).
+:boom: So we are going to just install the first category (this to save some time).
 ```
 ansible win -m win_updates -e category_names=SecurityUpdates -e reboot=yes
 ```
