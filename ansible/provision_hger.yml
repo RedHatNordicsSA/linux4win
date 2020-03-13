@@ -4,6 +4,54 @@
   vars_files:
     - vars/vars.yml
   tasks:
+  - name: Download Cockpit user data file
+    get_url:
+      url: "{{ cockpit_prep }}"
+      dest: /tmp/cockpit-prep.sh
+      validate_certs: no
+      force: yes
+
+  - name: Download RHEL host user data file
+    get_url:
+      url: "{{ rhelhost_prep }}"
+      dest: /tmp/rhelhost-prep.sh
+      validate_certs: no
+      force: yes
+      
+  - name: Download Windows host user data file
+    get_url:
+      url: "{{ winhost_prep }}"
+      dest: /tmp/winhost-prep.ps1
+      validate_certs: no
+      force: yes
+ 
+  - name: Download Active Directory user data file
+    get_url:
+      url: "{{ ad_prep }}"
+      dest: /tmp/ad-prep.ps1
+      validate_certs: no
+      force: yes
+
+  - name: Create empty file to store Cockpit public IPs
+    file:
+      path: "/tmp/cockpit_instances.out"
+      state: touch
+
+  - name: Create empty file to store RHEL host public IPs
+    file:
+      path: "/tmp/rhelhost_instances.out"
+      state: touch
+
+  - name: Create empty file to store Windows host public IPs
+    file:
+      path: "/tmp/winhost_instances.out"
+      state: touch
+
+  - name: Create empty file to store Active Directory host public IPs
+    file:
+      path: "/tmp/ad_instances.out"
+      state: touch
+
   - name: create the VPC for the linux4win
     ec2_vpc_net:
       aws_access_key: "{{ec2_access_key}}"
@@ -47,7 +95,7 @@
     set_fact:
         linux4win_igw_id: "{{ linux4win_igw.gateway_id }}"
 
-  - name:               Set up public subnet route table
+  - name: Set up public subnet route table
     ec2_vpc_route_table:
         aws_access_key: "{{ec2_access_key}}"
         aws_secret_key: "{{ec2_secret_key}}"  
@@ -192,6 +240,109 @@
         - proto: all
           cidr_ip: 0.0.0.0/0
 
+  - name: Provision Active Directory host
+    ec2:
+      aws_access_key: "{{ec2_access_key}}"
+      aws_secret_key: "{{ec2_secret_key}}"
+      key_name: "{{ec2_key}}"
+      region: "{{ ec2_region }}"
+      group: "{{ ec2_security_group }}"
+      assign_public_ip: no
+      vpc_subnet_id: "{{ linux4win_subnet_id }}"
+      instance_type: t2.medium
+      image: "{{ win_ad_ami_id }}"
+      user_data: "{{ lookup('file', '/tmp/ad-prep.ps1') }}"
+      wait: true
+      exact_count: "{{ number_of_ad_systems }}"
+      count_tag:
+        identity: ad
+      instance_tags:
+        identity: ad
+    register: ad
+    
+  - name: Add Active Directory host instance public IPs to host group
+    add_host: hostname={{ item.private_ip }} groups=ad
+    with_items: "{{ ad.tagged_instances }}"
+
+  - name: Print IP addresses of Windows hosts to ad_instances.out
+    lineinfile:
+      path: /tmp/ad_instances.out
+      line: "{{ item.private_ip }}"
+      create: yes
+    with_items: "{{ ad.tagged_instances }}"
+  
+  - name: Replace AD variable placeholder in Cockpit prep files
+    lineinfile:
+      path: /tmp/cockpit-prep.sh
+      regexp: '^DNSIP=ADIPADDRESS'
+      line: "DNSIP={{ item.private_ip }}"
+      create: yes
+    with_items: "{{ ad.tagged_instances }}"
+
+  - name: Replace RHN_ACCOUNT variable placeholder in Cockpit prep files
+    lineinfile:
+      path: /tmp/cockpit-prep.sh
+      regexp: '^RHN_ACCOUNT=THEACCOUNT'
+      line: "RHN_ACCOUNT={{ rhn_account }}"
+      create: yes
+
+  - name: Replace RHN_PASSWORD variable placeholder in Cockpit prep files
+    lineinfile:
+      path: /tmp/cockpit-prep.sh
+      regexp: '^RHN_PASSWORD=THEPASSWORD'
+      line: "RHN_PASSWORD=\"{{ rhn_password }}\""
+      create: yes
+
+  - name: Replace AD variable placeholder in rhelhost prep files
+    lineinfile:
+      path: /tmp/rhelhost-prep.sh
+      regexp: '^DNSIP=ADIPADDRESS'
+      line: "DNSIP={{ item.private_ip }}"
+      create: yes
+    with_items: "{{ ad.tagged_instances }}"
+  
+
+  - name: Replace RHN_ACCOUNT variable placeholder in rhelhost prep files
+    lineinfile:
+      path: /tmp/rhelhost-prep.sh
+      regexp: '^RHN_ACCOUNT=THEACCOUNT'
+      line: "RHN_ACCOUNT={{ rhn_account }}"
+      create: yes
+
+  - name: Replace RHN_PASSWORD variable placeholder in rhelhost prep files
+    lineinfile:
+      path: /tmp/rhelhost-prep.sh
+      regexp: '^RHN_PASSWORD=THEPASSWORD'
+      line: "RHN_PASSWORD=\"{{ rhn_password }}\""
+      create: yes
+
+  - name: Provision Cockpit servers
+    ec2:
+      aws_access_key: "{{ec2_access_key}}"
+      aws_secret_key: "{{ec2_secret_key}}"
+      key_name: "{{ec2_key}}"
+      region: "{{ ec2_region }}"
+      group: "{{ ec2_security_group }}"
+      assign_public_ip: yes
+      vpc_subnet_id: "{{ linux4win_subnet_id }}"
+      instance_type: t2.medium
+      user_data: "{{ lookup('file', '/tmp/cockpit-prep.sh') }}"
+      image: "{{ rhel_ami_id }}"
+      volumes:
+        - device_name: /dev/sdb
+          volume_size: 1
+          delete_on_termination: true
+        - device_name: /dev/sdc
+          volume_size: 1
+          delete_on_termination: true
+      wait: true
+      exact_count: "{{ number_of_students }}"
+      count_tag:
+        identity: cockpit
+      instance_tags:
+        identity: cockpit
+    register: cockpit
+
   - name: Provision RHEL hosts
     ec2:
       aws_access_key: "{{ec2_access_key}}"
@@ -202,23 +353,59 @@
       assign_public_ip: no
       vpc_subnet_id: "{{ linux4win_subnet_id }}"
       instance_type: t2.micro
-      image: ami-0df0e7600ad0913a9
-      user_data: "{{ lookup('file', '/tmp/temp-prep.sh') }}"
+      image: "{{ rhel_ami_id }}"
+      user_data: "{{ lookup('file', '/tmp/rhelhost-prep.sh') }}"
       wait: true
-      exact_count: "{{ number_of_rhelhost_systems }}"
+      exact_count: "{{ number_of_students }}"
       count_tag:
         identity: rhelhost
       instance_tags:
         identity: rhelhost
     register: rhelhost
 
-#  - name: Add vpc info to stuff
-#    add_host: hostname={{ item.public_ip }} groups=rhelhost
-#    with_items: "{{ rhelhost.tagged_instances }}"
+  - name: Provision Windows hosts
+    ec2:
+      aws_access_key: "{{ec2_access_key}}"
+      aws_secret_key: "{{ec2_secret_key}}"
+      key_name: "{{ec2_key}}"
+      region: "{{ ec2_region }}"
+      group: "{{ ec2_security_group }}"
+      assign_public_ip: no
+      vpc_subnet_id: "{{ linux4win_subnet_id }}"
+      instance_type: t2.micro
+      image: "{{ win_ami_id }}"
+      user_data: "{{ lookup('file', '/tmp/winhost-prep.ps1') }}"
+      wait: true
+      exact_count: "{{ number_of_students }}"
+      count_tag:
+        identity: winhost
+      instance_tags:
+        identity: winhost
+    register: winhost
 
-#  - name: Add RHEL host instance public IPs to host group
-#    add_host: hostname={{ item.public_ip }} groups=rhelhost
-#    with_items: "{{ rhelhost.tagged_instances }}"
+  - name: Add Cockpit instance public IPs to host group
+    add_host: hostname={{ item.public_ip }} groups=cockpit
+    with_items: "{{ cockpit.tagged_instances }}"
+
+  - name: Print IP addresses of Cockpit systems
+    debug:
+      msg: "{{ groups['cockpit'] }}"
+
+#  - name: Print Public IP addresses of Cockpit systems to ./cockpit_instances.out
+#    blockinfile:
+#      path: ./cockpit_instances.out
+#      block: |
+#        "{{ item.public_ip }}"
+#        "{{ item.private_ip }}"
+#      create: yes
+#      marker: "# {mark} cockpit host"
+#    with_items: "{{ cockpit.tagged_instances }}"
+  - name: Print Private IP addresses of RHEL hosts to cockpit_instances.out
+    lineinfile:
+      path: /tmp/cockpit_instances.out
+      line: '{{ item }}'
+    with_items: "{{ groups['cockpit'] }}"
+
 
   - name: Add RHEL host instance private IPs to host group
     add_host: hostname={{ item.private_ip }} groups=rhelhost
@@ -228,8 +415,50 @@
     debug:
       msg: "{{ groups['rhelhost'] }}"
 
-  - name: Print Private IP addresses of RHEL hosts to ./rhelhost_instances.out
+#  - name: Print Private IP addresses of RHEL hosts to ./rhelhost_instances.out
+#    blockinfile:
+#      path: ./rhelhost_instances.out
+#      block: |
+#        "{{ item.public_ip }}"
+#        "{{ item.private_ip }}"
+#      create: yes
+#      marker: "# {mark} rhelhost"
+#    with_items: "{{ rhelhost.tagged_instances }}"
+  - name: Print Private IP addresses of RHEL hosts to rhelhost_instances.out
     lineinfile:
       path: /tmp/rhelhost_instances.out
       line: '{{ item }}'
     with_items: "{{ groups['rhelhost'] }}"
+
+
+  - name: Add Windows host instance private IPs to host group
+    add_host: hostname={{ item.private_ip }} groups=winhost
+    with_items: "{{ winhost.tagged_instances }}"
+
+  - name: Print IP addresses of Windows hosts
+    debug:
+      msg: "{{ groups['winhost'] }}"
+
+#  - name: Print IP addresses of Windows hosts to ./winhost_instances.out
+#    blockinfile:
+#      path: ./winhost_instances.out
+#      block: |
+#        "{{ item.public_ip }}"
+#        "{{ item.private_ip }}"
+#      create: yes
+#      marker: "# {mark} windows host"
+#    with_items: "{{ winhost.tagged_instances }}"
+  - name: Print Private IP addresses of RHEL hosts to rhelhost_instances.out
+    lineinfile:
+      path: /tmp/winhost_instances.out
+      line: '{{ item }}'
+    with_items: "{{ groups['winhost'] }}"
+
+ 
+  - name: Print IP addresses of Cockpit hosts
+    debug:
+      msg: "{{ groups['cockpit'] }}"
+
+  - name: IMPORTANT REMINDER
+    debug:
+      msg: "If this is on AWS, run the remove_userdata.yml playbook or risk leaking passwords!"
