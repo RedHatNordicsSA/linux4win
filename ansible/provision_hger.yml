@@ -4,52 +4,63 @@
   vars_files:
     - vars/vars.yml
   tasks:
+  - name: create temporary build directory
+    tempfile:
+      state: directory
+      prefix: "linux4win_"
+      path: /tmp/
+    register: mytempdir
+
   - name: Download Cockpit user data file
     get_url:
       url: "{{ cockpit_prep }}"
-      dest: /tmp/cockpit-prep.sh
+      dest: "{{ mytempdir['path'] }}/cockpit-prep.sh"
       validate_certs: no
       force: yes
+    register: cockpituserdata
 
   - name: Download RHEL host user data file
     get_url:
       url: "{{ rhelhost_prep }}"
-      dest: /tmp/rhelhost-prep.sh
+      dest: "{{ mytempdir['path'] }}/rhelhost-prep.sh"
       validate_certs: no
       force: yes
+    register: rhelhostuserdata
       
   - name: Download Windows host user data file
     get_url:
       url: "{{ winhost_prep }}"
-      dest: /tmp/winhost-prep.ps1
+      dest: "{{ mytempdir['path'] }}/winhost-prep.ps1"
       validate_certs: no
       force: yes
+    register: winhostuserdata
  
   - name: Download Active Directory user data file
     get_url:
       url: "{{ ad_prep }}"
-      dest: /tmp/ad-prep.ps1
+      dest: "{{ mytempdir['path'] }}/ad-prep.ps1"
       validate_certs: no
       force: yes
+    register: aduserdata
 
   - name: Create empty file to store Cockpit public IPs
     file:
-      path: "/tmp/cockpit_instances.out"
+      path: "{{ mytempdir['path'] }}/cockpit_instances.out"
       state: touch
 
   - name: Create empty file to store RHEL host public IPs
     file:
-      path: "/tmp/rhelhost_instances.out"
+      path: "{{ mytempdir['path'] }}/rhelhost_instances.out"
       state: touch
 
   - name: Create empty file to store Windows host public IPs
     file:
-      path: "/tmp/winhost_instances.out"
+      path: "{{ mytempdir['path'] }}/winhost_instances.out"
       state: touch
 
   - name: Create empty file to store Active Directory host public IPs
     file:
-      path: "/tmp/ad_instances.out"
+      path: "{{ mytempdir['path'] }}/ad_instances.out"
       state: touch
 
   - name: create the VPC for the linux4win
@@ -251,7 +262,7 @@
       vpc_subnet_id: "{{ linux4win_subnet_id }}"
       instance_type: t2.medium
       image: "{{ win_ad_ami_id }}"
-      user_data: "{{ lookup('file', '/tmp/ad-prep.ps1') }}"
+      user_data: "{{ lookup('file', "{{ aduserdata['dest'] }}") }}"
       wait: true
       exact_count: "{{ number_of_ad_systems }}"
       count_tag:
@@ -266,14 +277,14 @@
 
   - name: Print IP addresses of Windows hosts to ad_instances.out
     lineinfile:
-      path: /tmp/ad_instances.out
+      path: "{{ mytempdir['path'] }}/ad_instances.out"
       line: "{{ item.private_ip }}"
       create: yes
     with_items: "{{ ad.tagged_instances }}"
   
   - name: Replace AD variable placeholder in Cockpit prep files
     lineinfile:
-      path: /tmp/cockpit-prep.sh
+      path: "{{ mytempdir['path'] }}/cockpit-prep.sh"
       regexp: '^DNSIP=ADIPADDRESS'
       line: "DNSIP={{ item.private_ip }}"
       create: yes
@@ -281,21 +292,21 @@
 
   - name: Replace RHN_ACCOUNT variable placeholder in Cockpit prep files
     lineinfile:
-      path: /tmp/cockpit-prep.sh
+      path: "{{ mytempdir['path'] }}/cockpit-prep.sh"
       regexp: '^RHN_ACCOUNT=THEACCOUNT'
       line: "RHN_ACCOUNT={{ rhn_account }}"
       create: yes
 
   - name: Replace RHN_PASSWORD variable placeholder in Cockpit prep files
     lineinfile:
-      path: /tmp/cockpit-prep.sh
+      path: "{{ mytempdir['path'] }}/cockpit-prep.sh"
       regexp: '^RHN_PASSWORD=THEPASSWORD'
       line: "RHN_PASSWORD=\"{{ rhn_password }}\""
       create: yes
 
   - name: Replace AD variable placeholder in rhelhost prep files
     lineinfile:
-      path: /tmp/rhelhost-prep.sh
+      path: "{{ mytempdir['path'] }}/rhelhost-prep.sh"
       regexp: '^DNSIP=ADIPADDRESS'
       line: "DNSIP={{ item.private_ip }}"
       create: yes
@@ -304,14 +315,14 @@
 
   - name: Replace RHN_ACCOUNT variable placeholder in rhelhost prep files
     lineinfile:
-      path: /tmp/rhelhost-prep.sh
+      path: "{{ mytempdir['path'] }}/rhelhost-prep.sh"
       regexp: '^RHN_ACCOUNT=THEACCOUNT'
       line: "RHN_ACCOUNT={{ rhn_account }}"
       create: yes
 
   - name: Replace RHN_PASSWORD variable placeholder in rhelhost prep files
     lineinfile:
-      path: /tmp/rhelhost-prep.sh
+      path: "{{ mytempdir['path'] }}/rhelhost-prep.sh"
       regexp: '^RHN_PASSWORD=THEPASSWORD'
       line: "RHN_PASSWORD=\"{{ rhn_password }}\""
       create: yes
@@ -326,7 +337,7 @@
       assign_public_ip: yes
       vpc_subnet_id: "{{ linux4win_subnet_id }}"
       instance_type: t2.medium
-      user_data: "{{ lookup('file', '/tmp/cockpit-prep.sh') }}"
+      user_data: "{{ lookup('file', "{{ mytempdir['path'] }}/cockpit-prep.sh") }}"
       image: "{{ rhel_ami_id }}"
       volumes:
         - device_name: /dev/sdb
@@ -354,7 +365,7 @@
       vpc_subnet_id: "{{ linux4win_subnet_id }}"
       instance_type: t2.micro
       image: "{{ rhel_ami_id }}"
-      user_data: "{{ lookup('file', '/tmp/rhelhost-prep.sh') }}"
+      user_data: "{{ lookup('file', "{{ mytempdir['path'] }}/rhelhost-prep.sh") }}"
       wait: true
       exact_count: "{{ number_of_students }}"
       count_tag:
@@ -374,7 +385,7 @@
       vpc_subnet_id: "{{ linux4win_subnet_id }}"
       instance_type: t2.micro
       image: "{{ win_ami_id }}"
-      user_data: "{{ lookup('file', '/tmp/winhost-prep.ps1') }}"
+      user_data: "{{ lookup('file', "{{ mytempdir['path'] }}/winhost-prep.ps1") }}"
       wait: true
       exact_count: "{{ number_of_students }}"
       count_tag:
@@ -402,7 +413,7 @@
 #    with_items: "{{ cockpit.tagged_instances }}"
   - name: Print Private IP addresses of RHEL hosts to cockpit_instances.out
     lineinfile:
-      path: /tmp/cockpit_instances.out
+      path: "{{ mytempdir['path'] }}/cockpit_instances.out"
       line: '{{ item }}'
     with_items: "{{ groups['cockpit'] }}"
 
@@ -426,7 +437,7 @@
 #    with_items: "{{ rhelhost.tagged_instances }}"
   - name: Print Private IP addresses of RHEL hosts to rhelhost_instances.out
     lineinfile:
-      path: /tmp/rhelhost_instances.out
+      path: "{{ mytempdir['path'] }}/rhelhost_instances.out"
       line: '{{ item }}'
     with_items: "{{ groups['rhelhost'] }}"
 
@@ -450,7 +461,7 @@
 #    with_items: "{{ winhost.tagged_instances }}"
   - name: Print Private IP addresses of RHEL hosts to rhelhost_instances.out
     lineinfile:
-      path: /tmp/winhost_instances.out
+      path: "{{ mytempdir['path'] }}/winhost_instances.out"
       line: '{{ item }}'
     with_items: "{{ groups['winhost'] }}"
 
