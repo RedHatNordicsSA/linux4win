@@ -262,7 +262,7 @@
       vpc_subnet_id: "{{ linux4win_subnet_id }}"
       instance_type: t2.medium
       image: "{{ win_ad_ami_id }}"
-      user_data: "{{ lookup('file', "{{ aduserdata['dest'] }}") }}"
+      user_data: "{{ lookup('file', aduserdata['dest']) }}"
       wait: true
       exact_count: "{{ number_of_ad_systems }}"
       count_tag:
@@ -337,7 +337,7 @@
       assign_public_ip: yes
       vpc_subnet_id: "{{ linux4win_subnet_id }}"
       instance_type: t2.medium
-      user_data: "{{ lookup('file', "{{ mytempdir['path'] }}/cockpit-prep.sh") }}"
+      user_data: "{{ lookup('file', cockpituserdata['dest']) }}"
       image: "{{ rhel_ami_id }}"
       volumes:
         - device_name: /dev/sdb
@@ -365,7 +365,7 @@
       vpc_subnet_id: "{{ linux4win_subnet_id }}"
       instance_type: t2.micro
       image: "{{ rhel_ami_id }}"
-      user_data: "{{ lookup('file', "{{ mytempdir['path'] }}/rhelhost-prep.sh") }}"
+      user_data: "{{ lookup('file', rhelhostuserdata['dest']) }}"
       wait: true
       exact_count: "{{ number_of_students }}"
       count_tag:
@@ -385,7 +385,7 @@
       vpc_subnet_id: "{{ linux4win_subnet_id }}"
       instance_type: t2.micro
       image: "{{ win_ami_id }}"
-      user_data: "{{ lookup('file', "{{ mytempdir['path'] }}/winhost-prep.ps1") }}"
+      user_data: "{{ lookup('file', winhostuserdata['dest']) }}"
       wait: true
       exact_count: "{{ number_of_students }}"
       count_tag:
