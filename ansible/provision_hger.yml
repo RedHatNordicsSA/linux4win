@@ -361,7 +361,7 @@
       key_name: "{{ec2_key}}"
       region: "{{ ec2_region }}"
       group: "{{ ec2_security_group }}"
-      assign_public_ip: no
+      assign_public_ip: yes
       vpc_subnet_id: "{{ linux4win_subnet_id }}"
       instance_type: t2.micro
       image: "{{ rhel_ami_id }}"
@@ -381,7 +381,7 @@
       key_name: "{{ec2_key}}"
       region: "{{ ec2_region }}"
       group: "{{ ec2_security_group }}"
-      assign_public_ip: no
+      assign_public_ip: yes
       vpc_subnet_id: "{{ linux4win_subnet_id }}"
       instance_type: t2.micro
       image: "{{ win_ami_id }}"
