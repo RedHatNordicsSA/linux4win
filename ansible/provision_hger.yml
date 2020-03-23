@@ -275,7 +275,7 @@
     add_host: hostname={{ item.private_ip }} groups=ad
     with_items: "{{ ad.tagged_instances }}"
 
-  - name: Print IP addresses of Windows hosts to ad_instances.out
+  - name: Print IP addresses of Active Directory to ad_instances.out
     lineinfile:
       path: "{{ mytempdir['path'] }}/ad_instances.out"
       line: "{{ item.private_ip }}"
@@ -465,7 +465,6 @@
       line: '{{ item }}'
     with_items: "{{ groups['winhost'] }}"
 
- 
   - name: Print IP addresses of Cockpit hosts
     debug:
       msg: "{{ groups['cockpit'] }}"
