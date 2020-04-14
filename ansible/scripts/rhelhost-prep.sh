@@ -79,6 +79,10 @@ fi
 # fix for corrupt rpm db
 rpmdb --rebuilddb
 
+# Install and register Red Hat Insight
+dnf install -y insights-client
+insights-client --register
+
 #comment out for debug
 rm -rf /var/lib/cloud/instance
 rm -f /tmp/user-data.log
