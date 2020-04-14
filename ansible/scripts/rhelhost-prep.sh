@@ -76,6 +76,9 @@ fi
 
 ) >/tmp/user-data.log 2>&1
 
+# fix for corrupt rpmdb
+rpmdb --rebuilddb
+
 # Install and register Red Hat Insight
 dnf install -y insights-client
 insights-client --register
