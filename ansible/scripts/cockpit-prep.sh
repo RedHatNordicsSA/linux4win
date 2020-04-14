@@ -109,6 +109,10 @@ rpmdb --rebuilddb
 dnf install -y insights-client
 insights-client --register
 
+# FIXME: Cockpit app fix requires clean cache and rebuild rpm db
+dnf clean all
+rpmdb --rebuilddb
+
 #comment out in case of debug
 rm -rf /var/lib/cloud/instance
 rm -f /tmp/user-data.log
