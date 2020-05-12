@@ -29,7 +29,7 @@ rhn_account:
 rhn_password: ""
 
 # These are AMIs for eu-central-1
-rhel_ami_id: ami-0badcc5b522737046
+rhel_ami_id: ami-07dfba995513840b5
 win_ami_id: ami-00274e6cd1a059d42
 win_ad_ami_id: ami-0e0564dc8e882f217
 
