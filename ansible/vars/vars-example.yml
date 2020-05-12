@@ -30,7 +30,7 @@ rhn_password: ""
 
 # These are AMIs for eu-central-1
 rhel_ami_id: ami-0badcc5b522737046
-win_ami_id: ami-023f2b50d6aabf023
+win_ami_id: ami-00274e6cd1a059d42
 win_ad_ami_id: ami-0e0564dc8e882f217
 
 # This is where the user data file should be fetched. This needs to be edited if you have cloned this repo
