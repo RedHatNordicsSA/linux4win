@@ -83,22 +83,22 @@ $ podman search httpd --filter=is-official
 ```
 Downloading (Pulling) an image is easy, too.
 ```
-$ podman pull registry.fedoraproject.org/f29/httpd
+$ podman pull registry.access.redhat.com/rhscl/httpd-24-rhel7
 ```
 After pulling some images, you can list all images, present on your machine.
 ```
 $ podman images
 ```
-:exclamation: Podman searches in different registries. Therefore it is recommend to use the full image name (registry.fedoraproject.org/f29/httpd instead of httpd) to ensure, that you are using the correct image.
+:exclamation: Podman searches in different registries. Therefore it is recommend to use the full image name (registry.access.redhat.com/rhscl/httpd-24-rhel7 instead of php) to ensure, that you are using the correct image.
 
 ## Running a container
 This sample container will run a very basic httpd server that serves only its index page.
 ```
-$ podman run -dt -p 8080:8080/tcp registry.fedoraproject.org/f29/httpd
+$ podman run -dt -p 8080:8080/tcp registry.access.redhat.com/rhscl/httpd-24-rhel7
 ```
 :exclamation: Because the container is being run in detached mode, represented by the -d in the podman run command, Podman will print the container ID after it has executed the command. The -t also adds a pseudo-tty to run arbitrary commands in an interactive shell.
 
-:exclamation: We use port forwarding to be able to access the HTTP server. For successful running at least slirp4netns v0.3.0 is needed.
+:exclamation: We use port forwarding to be able to access the HTTP server.
 
 ## Listing running containers
 The podman ps command is used to list created and running containers.
@@ -134,11 +134,7 @@ You can view the container’s logs with Podman as well:
 $ podman logs -l
 
 127.0.0.1 - - [04/May/2020:08:33:48 +0000] "GET / HTTP/1.1" 200 45
-127.0.0.1 - - [04/May/2020:08:33:50 +0000] "GET / HTTP/1.1" 200 45
-127.0.0.1 - - [04/May/2020:08:33:51 +0000] "GET / HTTP/1.1" 200 45
-127.0.0.1 - - [04/May/2020:08:33:51 +0000] "GET / HTTP/1.1" 200 45
-127.0.0.1 - - [04/May/2020:08:33:52 +0000] "GET / HTTP/1.1" 200 45
-127.0.0.1 - - [04/May/2020:08:33:52 +0000] "GET / HTTP/1.1" 200 45
+...
 ```
 
 ## Viewing the container’s pids
@@ -146,11 +142,10 @@ You can observe the httpd pid in the container with podman top.
 ```
 $ podman top -l
 
-USER     PID   PPID   %CPU    ELAPSED            TTY     TIME   COMMAND
-root     1     0      0.000   22m13.33281018s    pts/0   0s     httpd -DFOREGROUND
-daemon   3     1      0.000   22m13.333132179s   pts/0   0s     httpd -DFOREGROUND
-daemon   4     1      0.000   22m13.333276305s   pts/0   0s     httpd -DFOREGROUND
-daemon   5     1      0.000   22m13.333818476s   pts/0   0s     httpd -DFOREGROUND
+USER      PID   PPID   %CPU    ELAPSED           TTY     TIME   COMMAND
+default   1     0      0.000   3m26.775200608s   pts/0   0s     httpd -D FOREGROUND 
+default   44    1      0.000   3m26.777402402s   pts/0   0s     httpd -D FOREGROUND 
+...
 ```
 ## Stopping the container
 You may stop the container:
@@ -166,8 +161,53 @@ Finally, you can remove the container:
 ```
 $ podman rm -l
 ```
-You can verify the deletion of the container by running podman ps -a.
+:exclamation: You can verify the deletion of the container by running podman ps -a.
 
+## building your own custom image
+
+In the previous example we learned about how to make use of existing container images that someone else has made available. In this section you will build a supersimple but still custom webserver.
+
+## Universal base image
+
+We at Red Hat have made a universal base image ```(UBI)``` available for anyone to use freely. ```No subscription required.``` The real good thing with basing your container builds on these is that when you run on RHEL they are considered as RHEL and hence the entire stack is ```supported```. This for sure includes when running on ```OpenShift```.
+
+So we use now the buildah tooling, the help function is same as previous tool.
+```
+$ buildah --help
+$ buildah <subcommand> --help
+```
+You can for sure pull images but we will go straight to the point and build a simple container serving a custom page using apache.
+```
+cat << 'EOF' >Dockerfile
+#
+# Version 1
+
+# Pull the ubi8 image from Red Hat registry
+FROM registry.access.redhat.com/ubi8
+
+# This should be changed
+MAINTAINER someone@somewhere.pleasechange
+
+# Add the httpd package to the image 
+RUN yum install httpd -y; yum clean all
+
+# Add custom content to default index file
+RUN echo "UBI plus buildha says hello" > /var/www/html/index.html
+
+# run the apache webserver
+EXPOSE 80
+CMD /usr/sbin/httpd -X
+EOF
+```
+And then it is time to build
+```
+buildah build-using-dockerfile --tag myubilocal
+```
+Then run your newly created container image:
+```
+podman run -dt -p 8080:80/tcp localhost/mylocalubi
+```
+Continue to [assignment 6](assign6.md)
 
 Back to [index](thews.md)
 
