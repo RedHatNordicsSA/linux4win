@@ -62,39 +62,39 @@ And that should be that. Now all the container tools are available.
 ## Getting help
 To get some help and find out how Podman is working, you can use the help:
 ```
-$ podman --help
-$ podman <subcommand> --help
+podman --help
+podman <subcommand> --help
 ```
 For more details, you can review the manpages:
 ```
-$ man podman
-$ man podman-<subcommand>
+man podman
+man podman-<subcommand>
 ```
 Please also reference the Podman Troubleshooting Guide to find known issues and tips on how to solve common configuration mistakes.
 
 ## Searching, pulling & listing images
 Podman can search for images on remote registries with some simple keywords.
 ```
-$ podman search <search_term>
+podman search <search_term>
 ```
 You can also enhance your search with filters:
 ```
-$ podman search httpd --filter=is-official
+podman search httpd --filter=is-official
 ```
 Downloading (Pulling) an image is easy, too.
 ```
-$ podman pull registry.access.redhat.com/rhscl/httpd-24-rhel7
+podman pull registry.access.redhat.com/rhscl/httpd-24-rhel7
 ```
 After pulling some images, you can list all images, present on your machine.
 ```
-$ podman images
+podman images
 ```
 :exclamation: Podman searches in different registries. Therefore it is recommend to use the full image name (registry.access.redhat.com/rhscl/httpd-24-rhel7 instead of php) to ensure, that you are using the correct image.
 
 ## Running a container
 This sample container will run a very basic httpd server that serves only its index page.
 ```
-$ podman run -dt -p 8080:8080/tcp registry.access.redhat.com/rhscl/httpd-24-rhel7
+podman run -dt -p 8080:8080/tcp registry.access.redhat.com/rhscl/httpd-24-rhel7
 ```
 :exclamation: Because the container is being run in detached mode, represented by the -d in the podman run command, Podman will print the container ID after it has executed the command. The -t also adds a pseudo-tty to run arbitrary commands in an interactive shell.
 
@@ -103,18 +103,18 @@ $ podman run -dt -p 8080:8080/tcp registry.access.redhat.com/rhscl/httpd-24-rhel
 ## Listing running containers
 The podman ps command is used to list created and running containers.
 ```
-$ podman ps
+podman ps
 ```
 :exclamation: If you add -a to the podman ps command, Podman will show all containers (created, exited, running, etc.).
 
 ## Testing the httpd container
 As you are able to see, the container does not have an IP Address assigned. The container is reachable via it’s published port on your local machine.
 ```
-$ curl http://localhost:8080
+curl http://localhost:8080
 ```
 From another machine, you need to use the IP Address of the host, running the container.
 ```
-$ curl http://<IP_Address>:8080
+curl http://<IP_Address>:8080
 ```
 :exclamation: Instead of using curl, you can also point a browser to http://localhost:8080.
 
@@ -123,7 +123,7 @@ You can “inspect” a running container for metadata and details about itself.
 
 Since, the container is running in rootless mode, no IP Address is assigned to the container.
 ```
-$ podman inspect -l | grep IPAddress
+podman inspect -l | grep IPAddress
             "IPAddress": "",
 ```
 :exclamation: The -l is a convenience argument for latest container. You can also use the container’s ID or name instead of -l or the long argument --latest.
@@ -131,7 +131,7 @@ $ podman inspect -l | grep IPAddress
 ## Viewing the container’s logs
 You can view the container’s logs with Podman as well:
 ```
-$ podman logs -l
+podman logs -l
 
 127.0.0.1 - - [04/May/2020:08:33:48 +0000] "GET / HTTP/1.1" 200 45
 ...
@@ -140,7 +140,7 @@ $ podman logs -l
 ## Viewing the container’s pids
 You can observe the httpd pid in the container with podman top.
 ```
-$ podman top -l
+podman top -l
 
 USER      PID   PPID   %CPU    ELAPSED           TTY     TIME   COMMAND
 default   1     0      0.000   3m26.775200608s   pts/0   0s     httpd -D FOREGROUND 
@@ -150,31 +150,31 @@ default   44    1      0.000   3m26.777402402s   pts/0   0s     httpd -D FOREGRO
 ## Stopping the container
 You may stop the container:
 ```
-$ podman stop -l
+podman stop -l
 ```
 You can check the status of one or more containers using the podman ps command. In this case, you should use the -a argument to list all containers.
 ```
-$ podman ps -a
+podman ps -a
 ```
 ## Removing the container
 Finally, you can remove the container:
 ```
-$ podman rm -l
+podman rm -l
 ```
 :exclamation: You can verify the deletion of the container by running podman ps -a.
 
-## building your own custom image
+## Building your own custom image
 
 In the previous example we learned about how to make use of existing container images that someone else has made available. In this section you will build a supersimple but still custom webserver.
 
 ## Universal base image
 
-We at Red Hat have made a universal base image ```(UBI)``` available for anyone to use freely. ```No subscription required.``` The real good thing with basing your container builds on these is that when you run on RHEL they are considered as RHEL and hence the entire stack is ```supported```. This for sure includes when running on ```OpenShift```.
+We at Red Hat have made a universal base image ```(UBI)``` available for anyone to use freely. ```No subscription required.``` The real good thing with base your container builds on these is that when you run on RHEL they are considered as RHEL and hence the entire stack is ```supported```. This for sure includes when running on ```OpenShift```.
 
 So we use now the buildah tooling, the help function is same as previous tool.
 ```
-$ buildah --help
-$ buildah <subcommand> --help
+buildah --help
+buildah <subcommand> --help
 ```
 You can for sure pull images but we will go straight to the point and build a simple container serving a custom page using apache.
 ```
@@ -207,6 +207,74 @@ Then run your newly created container image:
 ```
 podman run -dt -p 8080:80/tcp localhost/mylocalubi
 ```
+
+## Setting your container to start at boot
+
+As these tools are just tools not a deamon we need to create a systemd definition to use with the container(s) that we want to run at boot. As a serice if you like
+
+We are using the same container as above but will add a name that is known:
+
+```
+podman run -dt --name myubi -p 8080:80/tcp localhost/mylocalubi
+```
+
+:exclamation: Notice the ```--name myubi```
+
+As this container now is named, use the podman ps to see:
+```
+podman ps
+
+CONTAINER ID  IMAGE  COMMAND  ...  NAMES
+59b4...       myubi  httpd -X ...  myubi
+```
+:exclamation: The above output is abbreviated you might need to enlarge your terminal to see it correctly.
+
+So now we have a container running that has a name we can use. So now lets create the needed systemd definition.
+
+```
+podman generate systemd --name myubi
+```
+Will generate this output
+
+```
+# container-myubi.service
+# autogenerated by Podman 2.0.5
+# Mon Jan  4 10:59:05 CET 2021
+
+[Unit]
+Description=Podman container-myubi.service
+Documentation=man:podman-generate-systemd(1)
+Wants=network.target
+After=network-online.target
+
+[Service]
+Environment=PODMAN_SYSTEMD_UNIT=%n
+Restart=on-failure
+ExecStart=/usr/bin/podman start myubi
+ExecStop=/usr/bin/podman stop -t 10 myubi
+ExecStopPost=/usr/bin/podman stop -t 10 myubi
+PIDFile=/run/user/1000/containers/overlay-containers/59b4d3f7e33a3689096ec97f6378ddc1fef4db38d56159dee05ab65fbba50bc5/userdata/conmon.pid
+KillMode=none
+Type=forking
+
+[Install]
+WantedBy=multi-user.target default.target
+```
+
+Copy and place here:
+```
+~/.config/systemd/user/myubi.service
+```
+
+And active with this command
+```
+systemctl --user start myubi.service
+```
+
+Now this container will be running also after reboot as your user, ```not as root!```
+
+
+
 Continue to [assignment 6](assign6.md)
 
 Back to [index](thews.md)
