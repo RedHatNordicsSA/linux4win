@@ -49,7 +49,7 @@ You will now learn how to create a new filesystem in Red Hat Enterprise Linux. W
 
 ![storage user interface](images/storage_overview.png)
 
-In the right hand lower corner of this screen you will see the attached storage devices under ```Other Devices```.
+In the right hand of this screen you will see the attached storage devices under ```Drives```.
 
 :boom: Click on the top, called ```xvda```.  Here you will see information regarding the partitions and filesystems present on this device and what types are used.
 
@@ -57,7 +57,7 @@ In the right hand lower corner of this screen you will see the attached storage 
 
 There are also two more disks attached, called ```xvdb``` and ```xvdc```, both 1 GB in size. We are going to use the ```xvdb``` device for our new filesystem.
 
-:boom: Locate the ```Volume Groups``` on your right side and press the blue **+** sign, as shown below.
+:boom: Locate the ```Devices```  menu on your right side and select Volume Groups, as shown below.
 
 ![storage user interface](images/add_vg.png)
 
@@ -89,25 +89,9 @@ Next up is to create the ```Logical Volume``` on which we will create the actual
 
 ![format logical vol](images/create_fs1.png)
 
-:boom: To create a filesystem, give the filesystem a name and click ```Format```, as shown below. Once you have clicked ```Format``` you will be returned to the main page for your ```Volume Group```. Note that we are choosing the default filesystem format for Red Hat Enterprise Linux 8, which is called XFS. The limits for XFS are a maximum filesystem size of 1 Petabyte and the maximum filesize of 8 Exabyte. A single filesystem scales fairly well.
+:boom: To create a filesystem, give the filesystem a name and click ```Format```, as shown below. Once you have clicked ```Format``` you will be returned to the main page for your ```Volume Group```. Note that we are choosing the default filesystem format for Red Hat Enterprise Linux 8, which is called XFS. The limits for XFS are a maximum filesystem size of 1 Petabyte and the maximum filesize of 8 Exabyte. A single filesystem scales fairly well. We will also tell the system where to mount this filesystem, set directly by inputting Mount Point like in picture below
 
 ![filesystem management](images/create_fs2.png)
-
-Even though we have created the filesystem, it is not yet possible to access the filesystem. To connect a filesystem to a directory is called to ```mount``` a filesystem, that is up next.
-
-:boom: To connect the filesystem to a directory on our server. Click the filesystem tab and the click on ```(default)``` left of the mount button.
-
-![filesystem management](images/create_fs3.png)
-
-:boom: Will will now select to which directory the filesystem is to be connected. Change ```Mounting``` from ```Default``` to ```Custom``` and more options are then presented. Type in a directory to which we will connect the filesystem, such as ```/app1```. Please note that Linux uses forwards slash ```/``` and not backwards slash ```\``` to indicate directory paths. This will cause the filesystem to get connected to the directory ```/app1```. Note that we are keeping the preselected option ```Mount at boot```, which means the filesystem will get connected when the server starts or restarts. Click on ```Apply``` to complete the process, as shown below.
-
-![filesystem management](images/create_fs4.png)
-
-:boom: The final step is to connect the filesystem to our directory, which we defined. Click on the ```mount```button to do that, as shown below.
-
-![filesystem management](images/create_fs5.png)
-
-Now that the filesystem is available on our system, it's possible to start using it and store files on it. Clicking ```Unmount``` disconnects the filesystem, which will be successful as long as no one is using it.
 
 :boom: Next, go back to the ```Storage``` main page by clicking on ```Storage``` on the left side menu as shown below. Note the new entry in the middle of the page under ```Filesystems```.
 
