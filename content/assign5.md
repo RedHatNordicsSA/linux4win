@@ -224,8 +224,8 @@ As this container now is named, use the podman ps to see:
 ```
 podman ps
 
-CONTAINER ID  IMAGE  COMMAND  ...  NAMES
-59b4...       myubi  httpd -X ...  myubi
+CONTAINER ID     IMAGE        COMMAND      ...   NAMES
+59b4d3f7...      mylocalubi   httpd -X     ...   myubi
 ```
 :exclamation: The above output is abbreviated you might need to enlarge your terminal to see it correctly.
 
@@ -273,7 +273,52 @@ systemctl --user start myubi.service
 
 Now this container will be running also after reboot as your user, ```not as root!```
 
+## Migration from localhost to kubernetes
 
+As most peoples today are moving from a single host local setup to using kubernetes for container orchestration there is some help in podman to ease this move.
+
+We will reuse the container from above with a different name:
+```
+podman run -dt --name movetok8s -p 8080:80/tcp localhost/mylocalubi
+```
+:exclamation: Notice the ```--name movetok8s```
+
+Now this container is also running, lets check using podman ps
+```
+podman ps
+
+CONTAINER ID     IMAGE        COMMAND      ...   NAMES
+59b4d3f7...      mylocalubi   httpd -X     ...   movetok8s
+```
+:exclamation: The above output is abbreviated you might need to enlarge your terminal to see it correctly.
+
+So now lets generate the kubernetes yaml.
+```
+podman generate kube movetok8s # > nameof.yaml
+```
+
+Which outputs yaml, abbreviated lots.
+
+```
+# Generation of Kubernetes YAML is still under development!
+#
+# Save the output of this file and use kubectl create -f to import
+# it into Kubernetes.
+#
+# Created with podman-2.0.5
+apiVersion: v1
+kind: Pod
+...
+```
+
+Now in order to use this we need a kubernetes cluster and access.
+```
+kubectl create -f nameof.yaml
+pod/movetok8s-libpod created
+service/movetok8s-libpod created
+```
+
+And thats it...
 
 Continue to [assignment 6](assign6.md)
 
