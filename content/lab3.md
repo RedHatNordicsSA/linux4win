@@ -77,7 +77,7 @@ Selecting ```y``` installs not only the binaries for the Apache web server and t
 
 ![service httpd enable](images/interface_httpddead.png)
 
-:boom: Select **Start** the service and set it to **Enabled** as well - this defines that it should start up at boot time. Verify that Apache started up properly by reviewing log output on the bottom of the page.
+:boom: Click on the ```Start and Enable checkbox``` - this defines that it should start up at boot time. Verify that Apache started up properly by reviewing log output on the bottom of the page.
 
 :exclamation: You will not be able to reach the web server using a browser. This is something we will fix in the next lab.
 
