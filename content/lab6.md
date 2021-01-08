@@ -144,6 +144,17 @@ Red Hat Enterprise Linux comes with a service called ```tuned```, which turns co
 
 Let's have a quick look.
 
+At the overview page you will find this information next to the Join Domain button, please click on ```tuned```.
+![tuned on the cockpit](images/tuned.png)
+
+Now you can select another performance profile that fits the use-case of this instance. Also there is one that is recommended, clearly marked with a blue text frame.
+
+![tuned on the cockpit](images/manage_tuned.png)
+
+In order to change simply select the profile you like and click ```Change Profile```.
+
+Below is the cli based way of doing what we did above
+
 :boom: Click on the ```Terminal``` menu item on the left side menu to verify if the ```tuned``` service really is running. 
 
 ```
