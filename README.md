@@ -43,6 +43,8 @@ Welcome, below is everything you need to know in order to get started.
     - Learn how you can manage serveral servers with less effort, using the Web console
 - **(assignment4) Management of several servers using Ansible**
     - Learn how you can manage hords of servers with little effort, using the worlds most popular automation framework, Ansible.
+- **(assignment5) Container tooling in RHEL8**
+    - Learn the tools we have added to RHEL8 to enable working with containers and container registries.
 
 
 ## Getting started
