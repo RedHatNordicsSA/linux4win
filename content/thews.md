@@ -20,4 +20,5 @@ Extra assignments:
 - [**assign2** *Installing MSSQL*](assign2.md)
 - [**assign3** *Management of several servers using web console*](assign3.md)
 - [**assign4** *Management of several servers using Ansible*](assign4.md)
+- [**assign5** *Container tooling in RHEL8*](assign5.md)
 
