@@ -1,4 +1,4 @@
-# Linux workshop for Windows administrators
+# Linux workshop for Enterprise administrators
 
 This workshop aims to get people with limited or no experience of Linux a good foundation to start. While it does deal with some of the theory, it focuses on hands on experience of common tasks that a system administrator likely will have to do. 
 
