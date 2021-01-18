@@ -221,4 +221,6 @@ This concludes the RHEL System Roles assignment. Here's a few links with more in
 * [Red Hat Knowledgebase article - RHEL System Roles](https://access.redhat.com/articles/3050101)
 * [Linux System Roles upstream project](https://linux-system-roles.github.io/)
 
+Continue to [assignment 7](assign7.md)
+
 Back to [index](thews.md)
