@@ -50,18 +50,20 @@ sudo cp /etc/ansible/hosts /etc/ansible/hosts.backup
 :boom: So now we have a backup file we can lookup if needed. Now it is time to fill the file with simple context. Type below commands to put your Red Hat Enterprise Linux server into the inventory file:
 ```
 sudo su -
-echo "ip.address.of.linuxserver1" >/etc/ansible/hosts
+echo "[linux]" > /etc/ansible/hosts
+echo "ip.address.of.linuxserver1" >>/etc/ansible/hosts
 echo "ip.address.of.linuxserver2" >>/etc/ansible/hosts
+exit
 ```
 
-:exclamation: Please note the double ```>>``` on the last line there.
+:exclamation: Please note the double ```>>``` on the two last lines.
 
 ## Run ad hoc commands against your linux servers
 
 :boom: First we're going to tell SSH that we trust that these servers cryptographic fingerprints are correct. Type the following to do that:
 
 ```
-cat /etc/ansible/hosts|xargs ssh-keyscan -H >> ~/.ssh/known_hosts
+grep -v "^\[" /etc/ansible/hosts|xargs ssh-keyscan -H >> ~/.ssh/known_hosts
 ```
 
 :boom: Now it is possible to do stuff on both (but this can be a looooong list of servers) servers in one go. Let's start by verifying that we can connect by this command
@@ -86,6 +88,8 @@ ansible all -m shell -a 'dnf update -y' --ask-pass --become
 
 Once the command is done you have patched two servers using one command.
 
+#### SSH keys
+
 :star: :boom: Did you get quite tired of typing passwords? You can also use ssh keys.
 
 :star: :boom: Do not enter a password for the key. Type below command (just press enter for all questions):
@@ -95,7 +99,7 @@ ssh-keygen
 
 :star: :boom: Copy the key to your servers by running below command:
 ```
-for item in $(cat /etc/ansible/hosts); do ssh-copy-id rhel@$item; done
+for item in $(grep -v "^\[" /etc/ansible/hosts); do ssh-copy-id rhel@$item; done
 ```
 
 :star: :boom: Now try and redo some of the previous tasks. Nice isn't it?
@@ -157,6 +161,7 @@ ansible win -m win_reboot
 ```
 
 This module are very well documented [here](https://docs.ansible.com/ansible/latest/modules/win_updates_module.html)
+
 
 Continue to [assignment 5](assign5.md)
 
