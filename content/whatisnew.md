@@ -16,3 +16,6 @@ But all previous yum commands still work, yum is an alias pointing to dnf
 
 chrony is an implementation of NTP and replaces the previous tools completely. ntpd is removed from our repositories.
 
+- [**Legacy network scripts are deprecated (ifup/down)**](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/considerations_in_adopting_rhel_8/networking_considerations-in-adopting-rhel-8#network_scripts_networking)
+
+Still possible to use ifcfg scripts in network-scripts
