@@ -102,7 +102,24 @@ Now we will look more deeply at the actual output. Notice the **[d]** in the out
 ```
 yum module install php --assumeno
 ```
-The --assumeno makes this into a dryrun, no packages will be installed.
+The --assumeno makes this into a dryrun, no packages will be installed. But if you look at the output in the terminal you can see that php version 7.2 would be installed.
+
+So lets say you really want the latest available (at this time 7.4). You would then add that to the install command as shown below
+```
+yum module install php:7.4 --assumeno
+```
+
+Again if you look at the output then you can clearly see that now what will be installed is the 7.4 version and all supporting files of php.
+
+If you are looking for more info about what will be installed there is also an info command. You can also add :7.4 to be more exact.
+```
+yum module info php:7.4
+```
+
+And if you want to know what the differences are between the different packagings (common, devel, minimal) in the php example you can add profile to the mix
+```
+yum module info --profile php:7.4
+```
 
 
 Back to [index](thews.md)
