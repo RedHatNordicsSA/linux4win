@@ -28,10 +28,10 @@ ec2_security_group: linux4win
 rhn_account:
 rhn_password: ""
 
-# These are AMIs for eu-central-1
-rhel_ami_id: ami-07dfba995513840b5
-win_ami_id: ami-00274e6cd1a059d42
-win_ad_ami_id: ami-0e0564dc8e882f217
+# These are AMIs for eu-central-1 as of 2021-01-25
+rhel_ami_id: ami-009b16df9fcaac611
+win_ami_id: ami-09a53ec51d0027c28
+win_ad_ami_id: ami-09a53ec51d0027c28
 
 # This is where the user data file should be fetched. This needs to be edited if you have cloned this repo
 cockpit_prep: https://raw.githubusercontent.com/RedHatNordicsSA/linux4win/master/ansible/scripts/cockpit-prep.sh

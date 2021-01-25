@@ -2,7 +2,7 @@
 
 Now we are going to look a little deeper at how package management has changed from RHEL 7 to RHEL 8.
 
-There is a fundamental technology change in RHEL8 where the old ```yum``` system is replaced with ```dnf```. However that is more or less all you need to know. We have worked real hard to make the almost all uses of the old command transparently work with the new. You can continue to use any yum command you regularly use and most likely any script you have will just work.
+There is a fundamental technology change in RHEL8 where the old ```yum``` system is replaced with ```dnf```. However that is more or less all you need to know. We have worked real hard to make almost all uses of the old command transparently work with the new. You can continue to use any yum command you regularly use and most likely any script you have will just work.
 
 **However**
 
