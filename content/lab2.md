@@ -14,7 +14,6 @@ In this view you can overview everything of importance regarding storage, includ
 
 If you are familiar with storage in general, you will recognised a lot of the terms on this page, such as ```RAID Devices```, ```Drives``` and ```NFS mounts```. The less familiar things may be:
 
-* VDO Devices (This is a deduplication technology in Linux)
 * ISCSI Targets (This is SCSI over IP)
 * Volume Groups (This is a Logical Volume Manager concept for a group of disk - which you will learn about in the next part of this lab)
 * Storage logs (All logs collected that are related to storage)
@@ -49,7 +48,7 @@ You will now learn how to create a new filesystem in Red Hat Enterprise Linux. W
 
 ![storage user interface](images/storage_overview.png)
 
-In the right hand of this screen you will see the attached storage devices under ```Drives```.
+In the right hand of this screen you will see the attached storage devices under ```Other Devices```.
 
 :boom: Click on the top, called ```xvda```.  Here you will see information regarding the partitions and filesystems present on this device and what types are used.
 
