@@ -37,7 +37,7 @@ To connect to Active Directory, we first need to install some software on our se
 sudo dnf install realmd
 ```
 
-:boom: Next, click on the ```System``` menu option on the top of the left side menu.  Locate the button on the system where is says **Join Domain** in blue and click on that to proceed to the join domain wizard.
+:boom: Next, click on the ```Overview``` menu option on the top of the left side menu.  Locate the button on the system where is says **Join Domain** in blue and click on that to proceed to the join domain wizard.
 
 ![system user interface of cockpit](images/interface_system.png)
 
