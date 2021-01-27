@@ -156,6 +156,13 @@ cat > metrics-playbook.yml << EOF
     metrics_retention_days: 5
   roles:
     - rhel-system-roles.metrics
+  tasks:
+    - name: Open firewall for pmcd
+      firewalld:
+        service: pmcd
+        permanent: yes
+        immediate: true
+        state: enabled
 EOF
 ```
 
