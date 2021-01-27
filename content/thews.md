@@ -22,4 +22,5 @@ Extra assignments:
 - [**assign4** *Management of several servers using Ansible*](assign4.md)
 - [**assign5** *Container tooling in RHEL8*](assign5.md)
 - [**assign6** *Management of servers using RHEL System Roles*](assign6.md)
+- [**assign7** *Package Management RHEL8*](assign7.md)
 
