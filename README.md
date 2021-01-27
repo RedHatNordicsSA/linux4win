@@ -45,6 +45,10 @@ Welcome, below is everything you need to know in order to get started.
     - Learn how you can manage hords of servers with little effort, using the worlds most popular automation framework, Ansible.
 - **(assignment5) Container tooling in RHEL8**
     - Learn the tools we have added to RHEL8 to enable working with containers and container registries.
+- **(assignment6) Management of servers using RHEL System Roles**
+    - Learn how to use RHEL System Roles to manage configuration across major versions of RHEL
+- **(assignment7) Package Management RHEL8**
+    - Learn what's new in RHEL8 and how to use AppStreams
 
 
 ## Getting started
