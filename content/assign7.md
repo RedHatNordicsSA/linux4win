@@ -121,5 +121,11 @@ And if you want to know what the differences are between the different packaging
 yum module info --profile php:7.4
 ```
 
+So now you want to install the latest version of the php and use another profile, the devel one.
+```
+yum module install php:7.4/devel
+```
+
+If you need more information please look [here](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html-single/installing_managing_and_removing_user-space_components/index). 
 
 Back to [index](thews.md)
