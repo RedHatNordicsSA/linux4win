@@ -266,6 +266,16 @@ Copy and place here:
 ~/.config/systemd/user/myubi.service
 ```
 
+You might need to create the folder first, use this command:
+```
+mkdir -p ~/.config/systemd/user
+```
+
+Notify the daemon that there is a new service definition using this command:
+```
+systemctl --user daemon-reload
+```
+
 And active with this command
 ```
 systemctl --user start myubi.service
