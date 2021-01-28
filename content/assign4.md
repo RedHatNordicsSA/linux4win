@@ -7,7 +7,7 @@ In the previous assignment you added an additional server to the ```Web console`
 We did some changes to the sshd_config in a prevoius lab (lab5) that needs to be reverted before doing this assignement. Please run the following command:
 
 ```
-rm -rf /etc/ssh/sshd_config && cp /etc/ssh/sshd_config.redhat /etc/ssh/sshd_config && systemctl restart sshd.service
+sudo /bin/restoremyssh
 ```
 
 

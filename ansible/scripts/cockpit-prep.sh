@@ -45,6 +45,12 @@ dnf install realmd oddjob oddjob-mkhomedir sssd adcli samba-common-tools -y
 sed -i  -e 's/PasswordAuthentication no/PasswordAuthentication yes/1' /etc/ssh/sshd_config
 cp /etc/ssh/sshd_config /etc/ssh/sshd_config.redhat
 systemctl restart sshd
+cat << 'EOF' >/bin/restoremyssh
+rm -rf /etc/ssh/sshd_config
+cp /etc/ssh/sshd_config.redhat /etc/ssh/sshd_config
+systemctl restart sshd.service
+EOF
+chmod +x /bin/restoremyssh
 
 #fix for ansible broken winrm
 dnf install python3-pip -y
