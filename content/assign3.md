@@ -2,6 +2,13 @@
 
 As your fleet of Red Hat Enterprise Linux grows you will want to manage all of those servers from a central point. This can also be done using the same web-console. Perhaps at a point there will be way too many servers to manage and oversee. But still it's nice to get an overview of all the servers you manage, especially from troubleshooting purposes.
 
+## Before you start
+
+We did some changes to the sshd_config in a prevoius lab (lab5) that needs to be reverted before doing this assignement. Please run the following command:
+
+```
+rm -rf /etc/ssh/sshd_config && cp /etc/ssh/sshd_config.redhat /etc/ssh/sshd_config && systemctl restart sshd.service
+```
 ## Create a ssh key to use for authentication
 
 So we want to be able to manage those other servers without entering passwords and such. So we are going to generate a ssh key-pair to use for the authentication. This needs to be done from the terminal. So lets go there. Locate terminal in the menu on your left.

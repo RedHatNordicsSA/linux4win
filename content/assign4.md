@@ -2,6 +2,15 @@
 
 In the previous assignment you added an additional server to the ```Web console```. This enabled you to manage two servers using the web console. In this chapter, you will get introduced to the world's currently most popular automation framework, Ansible.
 
+## Before you start
+
+We did some changes to the sshd_config in a prevoius lab (lab5) that needs to be reverted before doing this assignement. Please run the following command:
+
+```
+rm -rf /etc/ssh/sshd_config && cp /etc/ssh/sshd_config.redhat /etc/ssh/sshd_config && systemctl restart sshd.service
+```
+
+
 ## Intro to Ansible
 
 If you are handling dussins of servers, doing things such as installing software and changing configuration quickly becomes a cumbersome task which will require more people to manage the systems while also affecting time-to-deliver for the various tasks.

@@ -130,7 +130,7 @@
         - proto: tcp
           from_port: 22
           to_port: 22
-          cidr_ip: 0.0.0.0/0
+          cidr_ip: "{{ ec2_vpc_cidr }}"
         - proto: tcp
           from_port: 42
           to_port: 42
@@ -242,6 +242,10 @@
         - proto: tcp
           from_port: 443
           to_port: 443
+          cidr_ip: 0.0.0.0/0
+        - proto: tcp
+          from_port: 8080
+          to_port: 8080
           cidr_ip: 0.0.0.0/0
         - proto: tcp
           from_port: 9090

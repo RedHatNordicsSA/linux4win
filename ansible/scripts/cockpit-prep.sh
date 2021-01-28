@@ -36,13 +36,14 @@ mkdir /mnt/myvol
 chmod 0755 /mnt/myvol
 
 #prep for lab 4
-dnf install https://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/p/python2-html2text-2019.8.11-1.el7.noarch.rpm -y
+#dnf install https://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/p/python2-html2text-2019.8.11-1.el7.noarch.rpm -y
 
 #prep for lab 5
 dnf install realmd oddjob oddjob-mkhomedir sssd adcli samba-common-tools -y
 
 #prep for assign3,4
 sed -i  -e 's/PasswordAuthentication no/PasswordAuthentication yes/1' /etc/ssh/sshd_config
+cp /etc/ssh/sshd_config /etc/ssh/sshd_config.redhat
 systemctl restart sshd
 
 #fix for ansible broken winrm
