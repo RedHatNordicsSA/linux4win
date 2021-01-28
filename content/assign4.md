@@ -73,7 +73,7 @@ ansible all -m ping --ask-pass
 
 :boom: Next up lets run a command on the servers, and check what version of Red Hat Enterprint Linux they are running:
 ```
-ansible all -m shell -a 'cat /etc/redhat-release'
+ansible all -m shell -a 'cat /etc/redhat-release' --ask-pass
 ```
 
 :boom: With this command we find out what release of Red Hat Enterprise Linux these servers are running. Imagine this being a loooooong list of servers. You now have some insights into you entire fleet just using one command that you can alter indefinite. So let's just update stuff.

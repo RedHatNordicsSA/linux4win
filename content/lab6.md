@@ -144,7 +144,7 @@ Red Hat Enterprise Linux comes with a service called ```tuned```, which turns co
 
 Let's have a quick look.
 
-At the overview page you will find this information next to the Join Domain button, please click on ```tuned```.
+At the overview page you will find this information next to the Join Domain button, please click on ```virtual-guest```.
 ![tuned on the cockpit](images/tuned.png)
 
 Now you can select another performance profile that fits the use-case of this instance. Also there is one that is recommended, clearly marked with a blue text frame.

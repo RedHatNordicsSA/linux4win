@@ -18,11 +18,11 @@ To start this out we need to add the image builder application. This is done at 
 
 :boom: Once you access the interface, you may be asked to enable the Lorax service, do so if asked.
 
-Once here you see the interface, there is already a few examples installed.
+
 
 ![interface of imagebuilder](images/interface_imagebuilder.png)
 
-:boom: Now it's time to make a new image, this is done by creating a new **Blueprint**. See the button in the top right corner which reads  ```Create Blueprint```? Click it.
+:boom: Now it's time to make a new image, this is done by creating a new **Blueprint**. See the button in the center which reads  ```Create Blueprint```? Click it.
 
 ![make new blueprint](images/interface_newblueprint.png)
 
