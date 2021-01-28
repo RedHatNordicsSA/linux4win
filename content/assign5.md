@@ -201,7 +201,7 @@ EOF
 ```
 And then it is time to build
 ```
-buildah build-using-dockerfile --tag myubilocal
+buildah build-using-dockerfile --tag mylocalubi
 ```
 Then run your newly created container image:
 ```
