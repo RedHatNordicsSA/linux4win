@@ -9,7 +9,7 @@ RHN_PASSWORD=THEPASSWORD
 
 #preps the first cockpit server
 useradd rhel
-echo "linux4winPass2020" | passwd rhel --stdin
+echo "linux4winPass2022" | passwd rhel --stdin
 usermod -aG wheel rhel
 echo "rhel ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/rhel
 chmod 0440 /etc/sudoers.d/rhel
