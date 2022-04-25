@@ -86,25 +86,25 @@ while true; do
         fi
 done
 
-subscription-manager register --username=$RHN_ACCOUNT --password=$RHN_PASSWORD --force --auto-attach
-if [ "$?" -ne 0 ]; then
-        sleep 5
-        subscription-manager register --username=$RHN_ACCOUNT --password=$RHN_PASSWORD --force --auto-attach
-        if [ "$?" -ne 0 ]; then
-                sleep 5
-                subscription-manager register --username=$RHN_ACCOUNT --password=$RHN_PASSWORD --force --auto-attach
-                if [ "$?" -eq 0 ]; then
-                        rm -f /etc/yum.repos.d/*rhui*
-                else
-                        echo "I tried 3 times, I'm giving up."
-                        exit 1
-                fi
-        else
-                rm -f /etc/yum.repos.d/*rhui*
-        fi
-else
-        rm -f /etc/yum.repos.d/*rhui*
-fi
+#subscription-manager register --username=$RHN_ACCOUNT --password=$RHN_PASSWORD --force --auto-attach
+#if [ "$?" -ne 0 ]; then
+#        sleep 5
+#        subscription-manager register --username=$RHN_ACCOUNT --password=$RHN_PASSWORD --force --auto-attach
+#        if [ "$?" -ne 0 ]; then
+#                sleep 5
+#                subscription-manager register --username=$RHN_ACCOUNT --password=$RHN_PASSWORD --force --auto-attach
+#                if [ "$?" -eq 0 ]; then
+#                        rm -f /etc/yum.repos.d/*rhui*
+#                else
+#                        echo "I tried 3 times, I'm giving up."
+#                        exit 1
+#                fi
+#        else
+#                rm -f /etc/yum.repos.d/*rhui*
+#        fi
+#else
+#        rm -f /etc/yum.repos.d/*rhui*
+#fi
 
 ) >/tmp/user-data.log 2>&1
 subscription-manager repos --enable ansible-2-for-rhel-8-x86_64-rpms

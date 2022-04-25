@@ -257,6 +257,7 @@
 
   - name: Provision Active Directory host
     amazon.aws.ec2_instance:
+      name: "The AD"
       aws_access_key: "{{ ec2_access_key | default(omit) }}"
       aws_secret_key: "{{ ec2_secret_key | default(omit) }}"
       key_name: "{{ec2_key}}"
@@ -269,7 +270,7 @@
       image_id: "{{ win_ad_ami_id }}"
       user_data: "{{ lookup('file', aduserdata['dest']) }}"
       wait: true
-      exact_count: "{{ number_of_ad_systems }}"
+      count: "{{ number_of_ad_systems }}"
       tags:
         identity: ad
     register: ad_status
@@ -327,6 +328,7 @@
 
   - name: Provision Cockpit servers
     amazon.aws.ec2_instance:
+      name: cockpit
       aws_access_key: "{{ ec2_access_key | default(omit) }}"
       aws_secret_key: "{{ ec2_secret_key | default(omit) }}"
       key_name: "{{ec2_key}}"
@@ -348,7 +350,7 @@
             volume_size: 1
             delete_on_termination: true
       wait: true
-      exact_count: "{{ number_of_students }}"
+      count: "{{ number_of_students }}"
       tags:
         identity: cockpit
 #    register: cockpit_status
@@ -357,6 +359,7 @@
 
   - name: Provision RHEL hosts
     amazon.aws.ec2_instance:
+      name: rhel
       aws_access_key: "{{ ec2_access_key | default(omit) }}"
       aws_secret_key: "{{ ec2_secret_key | default(omit) }}"
       key_name: "{{ec2_key}}"
@@ -369,13 +372,14 @@
       image_id: "{{ rhel_ami_id }}"
       user_data: "{{ lookup('file', rhelhostuserdata['dest']) }}"
       wait: true
-      exact_count: "{{ number_of_students }}"
+      count: "{{ number_of_students }}"
       tags:
         identity: rhelhost
 #    register: rhelhost_status
 
   - name: Provision Windows hosts
     amazon.aws.ec2_instance:
+      name: winguest
       aws_access_key: "{{ ec2_access_key | default(omit) }}"
       aws_secret_key: "{{ ec2_secret_key | default(omit) }}"
       key_name: "{{ec2_key}}"
@@ -388,7 +392,7 @@
       image_id: "{{ win_ami_id }}"
       user_data: "{{ lookup('file', winhostuserdata['dest']) }}"
       wait: true
-      exact_count: "{{ number_of_students }}"
+      count: "{{ number_of_students }}"
       tags:
         identity: winhost
 #    register: winhost_status
@@ -401,6 +405,7 @@
       filters:
         image-id: "{{ rhel_ami_id }}"
         instance-state-name: [ "pending", "running" ]
+        "tag:Name": cockpit
     register: lin4win_status
 
 #  - name: All the data in cockpit_status
