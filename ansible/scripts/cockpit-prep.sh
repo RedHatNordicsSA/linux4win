@@ -107,19 +107,19 @@ done
 #fi
 
 ) >/tmp/user-data.log 2>&1
-subscription-manager repos --enable ansible-2-for-rhel-8-x86_64-rpms
+#subscription-manager repos --enable ansible-2-for-rhel-8-x86_64-rpms
 
 # fix for corrupt rpm db
-rpmdb --rebuilddb
+#rpmdb --rebuilddb
 
 # Install and register Red Hat Insight
-dnf install -y insights-client
-insights-client --register
+#dnf install -y insights-client
+#insights-client --register
 
 # FIXME: Cockpit app fix requires clean cache and rebuild rpm db
-dnf clean all
-rpmdb --rebuilddb
+#dnf clean all
+#rpmdb --rebuilddb
 
 #comment out in case of debug
-rm -rf /var/lib/cloud/instance
-rm -f /tmp/user-data.log
+#rm -rf /var/lib/cloud/instance
+#rm -f /tmp/user-data.log

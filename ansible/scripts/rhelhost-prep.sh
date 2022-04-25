@@ -76,16 +76,16 @@ done
 ) >/tmp/user-data.log 2>&1
 
 # fix for corrupt rpmdb
-rpmdb --rebuilddb
+#rpmdb --rebuilddb
 
 # Install and register Red Hat Insight
-dnf install -y insights-client
-insights-client --register
+#dnf install -y insights-client
+#insights-client --register
 
 # FIXME: Cockpit app fix requires clean cache and rebuild rpm db
-dnf clean all
-rpmdb --rebuilddb
+#dnf clean all
+#rpmdb --rebuilddb
 
 #comment out for debug
-rm -rf /var/lib/cloud/instance
-rm -f /tmp/user-data.log
+#rm -rf /var/lib/cloud/instance
+#rm -f /tmp/user-data.log
