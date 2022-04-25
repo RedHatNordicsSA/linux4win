@@ -4,143 +4,213 @@
   vars_files:
     - vars/vars.yml
   tasks:
+  - name: create temporary build directory
+    tempfile:
+      state: directory
+      prefix: "linux4win_"
+      path: /tmp/
+    register: mytempdir
+
   - name: Download Cockpit user data file
     get_url:
       url: "{{ cockpit_prep }}"
-      dest: /tmp/cockpit-prep.sh
+      dest: "{{ mytempdir['path'] }}/cockpit-prep.sh"
       validate_certs: no
       force: yes
+    register: cockpituserdata
 
   - name: Download RHEL host user data file
     get_url:
       url: "{{ rhelhost_prep }}"
-      dest: /tmp/rhelhost-prep.sh
+      dest: "{{ mytempdir['path'] }}/rhelhost-prep.sh"
       validate_certs: no
       force: yes
+    register: rhelhostuserdata
       
   - name: Download Windows host user data file
     get_url:
       url: "{{ winhost_prep }}"
-      dest: /tmp/winhost-prep.ps1
+      dest: "{{ mytempdir['path'] }}/winhost-prep.ps1"
       validate_certs: no
       force: yes
+    register: winhostuserdata
  
   - name: Download Active Directory user data file
     get_url:
       url: "{{ ad_prep }}"
-      dest: /tmp/ad-prep.ps1
+      dest: "{{ mytempdir['path'] }}/ad-prep.ps1"
       validate_certs: no
       force: yes
+    register: aduserdata
 
   - name: Create empty file to store Cockpit public IPs
     file:
-      path: "./cockpit_instances.out"
+      path: "{{ mytempdir['path'] }}/cockpit_instances.out"
       state: touch
 
   - name: Create empty file to store RHEL host public IPs
     file:
-      path: "./rhelhost_instances.out"
+      path: "{{ mytempdir['path'] }}/rhelhost_instances.out"
       state: touch
 
   - name: Create empty file to store Windows host public IPs
     file:
-      path: "./winhost_instances.out"
+      path: "{{ mytempdir['path'] }}/winhost_instances.out"
       state: touch
 
   - name: Create empty file to store Active Directory host public IPs
     file:
-      path: "./ad_instances.out"
+      path: "{{ mytempdir['path'] }}/ad_instances.out"
       state: touch
 
+  - name: create the VPC for the linux4win
+    amazon.aws.ec2_vpc_net:
+      aws_access_key: "{{ec2_access_key}}"
+      aws_secret_key: "{{ec2_secret_key}}"
+      name: "{{ ec2_vpc }}"
+      state: "present"
+      cidr_block: "{{ ec2_vpc_cidr }}"
+      region: "{{ ec2_region }}"
+      tags:
+        identity: "{{ ec2_vpc }}"
+    register: linux4win_vpc
+  - name: Set VPC ID in variable
+    set_fact:
+      linux4win_vpc_id: "{{ linux4win_vpc.vpc.id }}"
+
+  - name: create the subnet for the linux4win
+    amazon.aws.ec2_vpc_subnet:
+      aws_access_key: "{{ec2_access_key}}"
+      aws_secret_key: "{{ec2_secret_key}}"
+      state: "present"
+      vpc_id: "{{ linux4win_vpc_id }}"
+      cidr: "{{ ec2_vpc_cidr }}"
+      az: "{{ ec2_region }}a"
+      region: "{{ ec2_region }}"
+      resource_tags:
+        identity: "Public Subnet"
+    register: linux4win_subnet
+  - name: Set subnet ID in variable
+    set_fact:
+        linux4win_subnet_id: "{{ linux4win_subnet.subnet.id }}"
+
+  - name: create internet gateway for linux4win
+    amazon.aws.ec2_vpc_igw:
+      aws_access_key: "{{ec2_access_key}}"
+      aws_secret_key: "{{ec2_secret_key}}"
+      vpc_id: "{{ linux4win_vpc_id }}"
+      region: "{{ ec2_region }}"
+      state: "present"
+    register: linux4win_igw
+  - name: Set Internet Gateway ID in variable
+    set_fact:
+        linux4win_igw_id: "{{ linux4win_igw.gateway_id }}"
+
+  - name: Set up public subnet route table
+    amazon.aws.ec2_vpc_route_table:
+        aws_access_key: "{{ec2_access_key}}"
+        aws_secret_key: "{{ec2_secret_key}}"  
+        vpc_id: "{{ linux4win_vpc_id }}"
+        region: "{{ ec2_region }}"
+        subnets:
+          - "{{ linux4win_subnet_id }}"
+        routes:
+          - dest:         "0.0.0.0/0"
+            gateway_id:   "{{ linux4win_igw_id }}"
+
   - name: Ensure a security group is in place
-    ec2_group:
+    amazon.aws.ec2_group:
       name: "{{ ec2_security_group }}"
       description: Security Group for linux4win workshop
+      vpc_id: "{{ linux4win_vpc_id }}"
       region: "{{ ec2_region }}"
       aws_access_key: "{{ec2_access_key}}"
       aws_secret_key: "{{ec2_secret_key}}"
-
       rules:
         - proto: tcp
           from_port: 22
           to_port: 22
-          cidr_ip: 0.0.0.0/0
+          cidr_ip: "{{ ec2_vpc_cidr }}"
         - proto: tcp
           from_port: 42
           to_port: 42
-          cidr_ip: 0.0.0.0/0
-        - proto: tcp
-          from_port: 464
-          to_port: 464
-          cidr_ip: 0.0.0.0/0
+          cidr_ip: "{{ ec2_vpc_cidr }}"
         - proto: udp
           from_port: 42
           to_port: 42
-          cidr_ip: 0.0.0.0/0
+          cidr_ip: "{{ ec2_vpc_cidr }}"
         - proto: udp
           from_port: 88
           to_port: 88
-          cidr_ip: 0.0.0.0/0
+          cidr_ip: "{{ ec2_vpc_cidr }}"
         - proto: tcp
           from_port: 88
           to_port: 88
-          cidr_ip: 0.0.0.0/0
+          cidr_ip: "{{ ec2_vpc_cidr }}"
         - proto: udp
           from_port: 135
           to_port: 135
-          cidr_ip: 0.0.0.0/0
+          cidr_ip: "{{ ec2_vpc_cidr }}"
         - proto: tcp
           from_port: 135
           to_port: 135
-          cidr_ip: 0.0.0.0/0
+          cidr_ip: "{{ ec2_vpc_cidr }}"
         - proto: tcp
           from_port: 137
           to_port: 137
-          cidr_ip: 0.0.0.0/0
+          cidr_ip: "{{ ec2_vpc_cidr }}"
         - proto: udp
           from_port: 137
           to_port: 137
-          cidr_ip: 0.0.0.0/0
+          cidr_ip: "{{ ec2_vpc_cidr }}"
         - proto: tcp
           from_port: 139
           to_port: 139
-          cidr_ip: 0.0.0.0/0
+          cidr_ip: "{{ ec2_vpc_cidr }}"
         - proto: tcp
           from_port: 445
           to_port: 445
-          cidr_ip: 0.0.0.0/0
+          cidr_ip: "{{ ec2_vpc_cidr }}"
         - proto: udp
           from_port: 445
           to_port: 445
-          cidr_ip: 0.0.0.0/0
+          cidr_ip: "{{ ec2_vpc_cidr }}"
+        - proto: tcp
+          from_port: 464
+          to_port: 464
+          cidr_ip: "{{ ec2_vpc_cidr }}"
         - proto: tcp
           from_port: 389
           to_port: 389
-          cidr_ip: 0.0.0.0/0
+          cidr_ip: "{{ ec2_vpc_cidr }}"
         - proto: udp
           from_port: 389
           to_port: 389
-          cidr_ip: 0.0.0.0/0
+          cidr_ip: "{{ ec2_vpc_cidr }}"
         - proto: tcp
           from_port: 636
           to_port: 636
+          cidr_ip: "{{ ec2_vpc_cidr }}"
+        - proto: tcp
+          from_port: 1433
+          to_port: 1433
           cidr_ip: 0.0.0.0/0
         - proto: tcp
           from_port: 1512
           to_port: 1512
-          cidr_ip: 0.0.0.0/0
+          cidr_ip: "{{ ec2_vpc_cidr }}"
         - proto: udp
           from_port: 1512
           to_port: 1512
-          cidr_ip: 0.0.0.0/0
+          cidr_ip: "{{ ec2_vpc_cidr }}"
         - proto: tcp
           from_port: 3268
           to_port: 3268
-          cidr_ip: 0.0.0.0/0
+          cidr_ip: "{{ ec2_vpc_cidr }}"
         - proto: tcp
           from_port: 3269
           to_port: 3269
-          cidr_ip: 0.0.0.0/0
+          cidr_ip: "{{ ec2_vpc_cidr }}"
         - proto: tcp
           from_port: 45152
           to_port: 65535
@@ -148,15 +218,15 @@
         - proto: tcp
           from_port: 3389
           to_port: 3389
-          cidr_ip: 0.0.0.0/0
+          cidr_ip: "{{ ec2_vpc_cidr }}"
         - proto: tcp
           from_port: 5985
           to_port: 5985
-          cidr_ip: 0.0.0.0/0
+          cidr_ip: "{{ ec2_vpc_cidr }}"
         - proto: tcp
           from_port: 5986
           to_port: 5986
-          cidr_ip: 0.0.0.0/0
+          cidr_ip: "{{ ec2_vpc_cidr }}"
         - proto: tcp
           from_port: 80
           to_port: 80
@@ -164,14 +234,18 @@
         - proto: tcp
           from_port: 53
           to_port: 53
-          cidr_ip: 0.0.0.0/0
+          cidr_ip: "{{ ec2_vpc_cidr }}"
         - proto: udp
           from_port: 53
           to_port: 53
-          cidr_ip: 0.0.0.0/0
+          cidr_ip: "{{ ec2_vpc_cidr }}"
         - proto: tcp
           from_port: 443
           to_port: 443
+          cidr_ip: 0.0.0.0/0
+        - proto: tcp
+          from_port: 8080
+          to_port: 8080
           cidr_ip: 0.0.0.0/0
         - proto: tcp
           from_port: 9090
@@ -182,200 +256,193 @@
           cidr_ip: 0.0.0.0/0
 
   - name: Provision Active Directory host
-    ec2:
-      aws_access_key: "{{ec2_access_key}}"
-      aws_secret_key: "{{ec2_secret_key}}"
+    amazon.aws.ec2_instance:
+      name: "The AD"
+      aws_access_key: "{{ ec2_access_key | default(omit) }}"
+      aws_secret_key: "{{ ec2_secret_key | default(omit) }}"
       key_name: "{{ec2_key}}"
       region: "{{ ec2_region }}"
-      group: "{{ ec2_security_group }}"
+      security_group: "{{ ec2_security_group }}"
+      network:
+        assign_public_ip: no
+      vpc_subnet_id: "{{ linux4win_subnet_id }}"
       instance_type: t2.medium
-      image: "{{ win_ad_ami_id }}"
-      user_data: "{{ lookup('file', '/tmp/ad-prep.ps1') }}"
+      image_id: "{{ win_ad_ami_id }}"
+      user_data: "{{ lookup('file', aduserdata['dest']) }}"
       wait: true
-      exact_count: "{{ number_of_ad_systems }}"
-      count_tag:
+      count: "{{ number_of_ad_systems }}"
+      tags:
         identity: ad
-      instance_tags:
-        identity: ad
-    register: ad
-    
-  - name: Add Active Directory host instance public IPs to host group
-    add_host: hostname={{ item.public_ip }} groups=ad
-    with_items: "{{ ad.tagged_instances }}"
+    register: ad_status
 
-  - name: Print IP addresses of Windows hosts to ./ad_instances.out
+  - name: Print IP addresses of Active Directory to ad_instances.out
     lineinfile:
-      path: ./ad_instances.out
-      line: "{{ item.public_ip }}"
+      path: "{{ mytempdir['path'] }}/ad_instances.out"
+      line: "{{ad_status.instances[0].network_interfaces[0]['private_ip_address']}}"
       create: yes
-    with_items: "{{ ad.tagged_instances }}"
+    #with_items: "{{ ad.tagged_instances }}"
   
   - name: Replace AD variable placeholder in Cockpit prep files
     lineinfile:
-      path: /tmp/cockpit-prep.sh
+      path: "{{ mytempdir['path'] }}/cockpit-prep.sh"
       regexp: '^DNSIP=ADIPADDRESS'
-      line: "DNSIP={{ item.private_ip }}"
+      line: "DNSIP={{ad_status.instances[0].network_interfaces[0]['private_ip_address']}}"
       create: yes
-    with_items: "{{ ad.tagged_instances }}"
+    #with_items: "{{ ad.tagged_instances }}"
 
   - name: Replace RHN_ACCOUNT variable placeholder in Cockpit prep files
     lineinfile:
-      path: /tmp/cockpit-prep.sh
+      path: "{{ mytempdir['path'] }}/cockpit-prep.sh"
       regexp: '^RHN_ACCOUNT=THEACCOUNT'
       line: "RHN_ACCOUNT={{ rhn_account }}"
       create: yes
 
   - name: Replace RHN_PASSWORD variable placeholder in Cockpit prep files
     lineinfile:
-      path: /tmp/cockpit-prep.sh
+      path: "{{ mytempdir['path'] }}/cockpit-prep.sh"
       regexp: '^RHN_PASSWORD=THEPASSWORD'
       line: "RHN_PASSWORD=\"{{ rhn_password }}\""
       create: yes
 
   - name: Replace AD variable placeholder in rhelhost prep files
-      lineinfile:
-        path: /tmp/rhelhost-prep.sh
-        regexp: '^DNSIP=ADIPADDRESS'
-        line: "DNSIP={{ item.private_ip }}"
-        create: yes
-      with_items: "{{ ad.tagged_instances }}"
+    lineinfile:
+      path: "{{ mytempdir['path'] }}/rhelhost-prep.sh"
+      regexp: '^DNSIP=ADIPADDRESS'
+      line: "DNSIP={{ad_status.instances[0].network_interfaces[0]['private_ip_address']}}"
+      create: yes
+    #with_items: "{{ ad.tagged_instances }}"
   
-
   - name: Replace RHN_ACCOUNT variable placeholder in rhelhost prep files
     lineinfile:
-      path: /tmp/rhelhost-prep.sh
+      path: "{{ mytempdir['path'] }}/rhelhost-prep.sh"
       regexp: '^RHN_ACCOUNT=THEACCOUNT'
       line: "RHN_ACCOUNT={{ rhn_account }}"
       create: yes
 
   - name: Replace RHN_PASSWORD variable placeholder in rhelhost prep files
     lineinfile:
-      path: /tmp/rhelhost-prep.sh
+      path: "{{ mytempdir['path'] }}/rhelhost-prep.sh"
       regexp: '^RHN_PASSWORD=THEPASSWORD'
       line: "RHN_PASSWORD=\"{{ rhn_password }}\""
       create: yes
 
   - name: Provision Cockpit servers
-    ec2:
-      aws_access_key: "{{ec2_access_key}}"
-      aws_secret_key: "{{ec2_secret_key}}"
+    amazon.aws.ec2_instance:
+      name: cockpit
+      aws_access_key: "{{ ec2_access_key | default(omit) }}"
+      aws_secret_key: "{{ ec2_secret_key | default(omit) }}"
       key_name: "{{ec2_key}}"
       region: "{{ ec2_region }}"
-      group: "{{ ec2_security_group }}"
+      security_group: "{{ ec2_security_group }}"
+      network:
+        assign_public_ip: yes
+      vpc_subnet_id: "{{ linux4win_subnet_id }}"
       instance_type: t2.medium
-      user_data: "{{ lookup('file', '/tmp/cockpit-prep.sh') }}"
-      image: "{{ rhel_ami_id }}"
+      user_data: "{{ lookup('file', cockpituserdata['dest']) }}"
+      image_id: "{{ rhel_ami_id }}"
       volumes:
         - device_name: /dev/sdb
-          volume_size: 1
-          delete_on_termination: true
+          ebs:
+            volume_size: 1
+            delete_on_termination: true
         - device_name: /dev/sdc
-          volume_size: 1
-          delete_on_termination: true
+          ebs:
+            volume_size: 1
+            delete_on_termination: true
       wait: true
-      exact_count: "{{ number_of_cockpit_systems }}"
-      count_tag:
+      count: "{{ number_of_students }}"
+      tags:
         identity: cockpit
-      instance_tags:
-        identity: cockpit
-    register: cockpit
+#    register: cockpit_status
+
+#  - meta: end_play
 
   - name: Provision RHEL hosts
-    ec2:
-      aws_access_key: "{{ec2_access_key}}"
-      aws_secret_key: "{{ec2_secret_key}}"
+    amazon.aws.ec2_instance:
+      name: rhel
+      aws_access_key: "{{ ec2_access_key | default(omit) }}"
+      aws_secret_key: "{{ ec2_secret_key | default(omit) }}"
       key_name: "{{ec2_key}}"
       region: "{{ ec2_region }}"
-      group: "{{ ec2_security_group }}"
+      security_group: "{{ ec2_security_group }}"
+      network:
+        assign_public_ip: no
+      vpc_subnet_id: "{{ linux4win_subnet_id }}"
       instance_type: t2.micro
-      image: "{{ rhel_ami_id }}"
-      user_data: "{{ lookup('file', '/tmp/rhelhost-prep.sh') }}"
+      image_id: "{{ rhel_ami_id }}"
+      user_data: "{{ lookup('file', rhelhostuserdata['dest']) }}"
       wait: true
-      exact_count: "{{ number_of_rhelhost_systems }}"
-      count_tag:
+      count: "{{ number_of_students }}"
+      tags:
         identity: rhelhost
-      instance_tags:
-        identity: rhelhost
-    register: rhelhost
+#    register: rhelhost_status
 
   - name: Provision Windows hosts
-    ec2:
-      aws_access_key: "{{ec2_access_key}}"
-      aws_secret_key: "{{ec2_secret_key}}"
+    amazon.aws.ec2_instance:
+      name: winguest
+      aws_access_key: "{{ ec2_access_key | default(omit) }}"
+      aws_secret_key: "{{ ec2_secret_key | default(omit) }}"
       key_name: "{{ec2_key}}"
       region: "{{ ec2_region }}"
-      group: "{{ ec2_security_group }}"
+      security_group: "{{ ec2_security_group }}"
+      network:
+        assign_public_ip: no
+      vpc_subnet_id: "{{ linux4win_subnet_id }}"
       instance_type: t2.micro
-      image: "{{ win_ami_id }}"
-      user_data: "{{ lookup('file', '/tmp/winhost-prep.ps1') }}"
+      image_id: "{{ win_ami_id }}"
+      user_data: "{{ lookup('file', winhostuserdata['dest']) }}"
       wait: true
-      exact_count: "{{ number_of_winhost_systems }}"
-      count_tag:
+      count: "{{ number_of_students }}"
+      tags:
         identity: winhost
-      instance_tags:
-        identity: winhost
-    register: winhost
+#    register: winhost_status
 
-  - name: Add Cockpit instance public IPs to host group
-    add_host: hostname={{ item.public_ip }} groups=cockpit
-    with_items: "{{ cockpit.tagged_instances }}"
+  - name: Get the public ips of the cockpit server
+    amazon.aws.ec2_instance_info:
+      aws_access_key: "{{ ec2_access_key | default(omit) }}"
+      aws_secret_key: "{{ ec2_secret_key | default(omit) }}"
+      region: "{{ ec2_region }}"
+      filters:
+        image-id: "{{ rhel_ami_id }}"
+        instance-state-name: [ "pending", "running" ]
+        "tag:Name": cockpit
+    register: lin4win_status
 
-  - name: Print IP addresses of Cockpit systems
+#  - name: All the data in cockpit_status
+#    debug:
+#      var: lin4win_status
+
+  - name: Print the public ip of cockpit
     debug:
-      msg: "{{ groups['cockpit'] }}"
-
-  - name: Print Public IP addresses of Cockpit systems to ./cockpit_instances.out
-    blockinfile:
-      path: ./cockpit_instances.out
-      block: |
-        "{{ item.public_ip }}"
-        "{{ item.private_ip }}"
-      create: yes
-      marker: "# {mark} cockpit host"
-    with_items: "{{ cockpit.tagged_instances }}"
+      msg: "{{lin4win_status.instances[0]['public_ip_address']}}"
 
 
-  - name: Add RHEL host instance public IPs to host group
-    add_host: hostname={{ item.public_ip }} groups=rhelhost
-    with_items: "{{ rhelhost.tagged_instances }}"
+#  - name: Print Public IP addresses of Cockpit systems to ./cockpit_instances.out
+#    blockinfile:
+#      path: ./cockpit_instances.out
+#      block: |
+#        "{{ item.public_ip }}"
+#        "{{ item.private_ip }}"
+#      create: yes
+#      marker: "# {mark} cockpit host"
+#    with_items: "{{ cockpit.tagged_instances }}"
 
-  - name: Print IP addresses of RHEL hosts
-    debug:
-      msg: "{{ groups['rhelhost'] }}"
+#  - name: Print Private IP addresses of RHEL hosts to ./rhelhost_instances.out
+#    blockinfile:
+#      path: ./rhelhost_instances.out
+#      block: |
+#        "{{ item.public_ip }}"
+#        "{{ item.private_ip }}"
+#      create: yes
+#      marker: "# {mark} rhelhost"
+#    with_items: "{{ rhelhost.tagged_instances }}"
 
-  - name: Print Private IP addresses of RHEL hosts to ./rhelhost_instances.out
-    blockinfile:
-      path: ./rhelhost_instances.out
-      block: |
-        "{{ item.public_ip }}"
-        "{{ item.private_ip }}"
-      create: yes
-      marker: "# {mark} rhelhost"
-    with_items: "{{ rhelhost.tagged_instances }}"
-
-  - name: Add Windows host instance public IPs to host group
-    add_host: hostname={{ item.public_ip }} groups=winhost
-    with_items: "{{ winhost.tagged_instances }}"
-
-  - name: Print IP addresses of Windows hosts
-    debug:
-      msg: "{{ groups['winhost'] }}"
-
-  - name: Print IP addresses of Windows hosts to ./winhost_instances.out
-    blockinfile:
-      path: ./winhost_instances.out
-      block: |
-        "{{ item.public_ip }}"
-        "{{ item.private_ip }}"
-      create: yes
-      marker: "# {mark} windows host"
-    with_items: "{{ winhost.tagged_instances }}"
-    
- 
-  - name: Print IP addresses of Cockpit hosts
-    debug:
-      msg: "{{ groups['cockpit'] }}"
-
-  - name: IMPORTANT REMINDER
-    debug:
-      msg: "If this is on AWS, run the remove_userdata.yml playbook or risk leaking passwords!"
+#  - name: Print IP addresses of Windows hosts to ./winhost_instances.out
+#    blockinfile:
+#      path: ./winhost_instances.out
+#      block: |
+#        "{{ item.public_ip }}"
+#        "{{ item.private_ip }}"
+#      create: yes
+#      marker: "# {mark} windows host"
+#    with_items: "{{ winhost.tagged_instances }}"
