@@ -408,13 +408,13 @@
         "tag:Name": cockpit
     register: lin4win_status
 
-#  - name: All the data in cockpit_status
-#    debug:
-#      var: lin4win_status
-
-  - name: Print the public ip of cockpit
+  - name: All the data in cockpit_status
     debug:
-      msg: "{{lin4win_status.instances[0]['public_ip_address']}}"
+      var: lin4win_status
+
+#  - name: Print the public ip of cockpit
+#    debug:
+#      msg: "{{lin4win_status.instances[0]['public_ip_address']}}"
 
 
 #  - name: Print Public IP addresses of Cockpit systems to ./cockpit_instances.out
