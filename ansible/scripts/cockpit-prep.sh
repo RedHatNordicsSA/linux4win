@@ -20,10 +20,8 @@ dnf install tcpdump traceroute mtr firewalld cockpit-composer cockpit cockpit-da
 #cockpit update / firewalld fix
 dnf update dnf subscription-manager polkit -y
 
-systemctl enable cockpit.socket
-systemctl start cockpit.socket
-systemctl enable firewalld
-systemctl start firewalld
+systemctl enable --now cockpit.socket
+systemctl enable --now firewalld
 sleep 2
 echo "adding cockpit rule to firewalld"
 setenforce 0
@@ -86,28 +84,29 @@ while true; do
         fi
 done
 
-#subscription-manager register --username=$RHN_ACCOUNT --password=$RHN_PASSWORD --force --auto-attach
-#if [ "$?" -ne 0 ]; then
-#        sleep 5
-#        subscription-manager register --username=$RHN_ACCOUNT --password=$RHN_PASSWORD --force --auto-attach
-#        if [ "$?" -ne 0 ]; then
-#                sleep 5
-#                subscription-manager register --username=$RHN_ACCOUNT --password=$RHN_PASSWORD --force --auto-attach
-#                if [ "$?" -eq 0 ]; then
-#                        rm -f /etc/yum.repos.d/*rhui*
-#                else
-#                        echo "I tried 3 times, I'm giving up."
-#                        exit 1
-#                fi
-#        else
-#                rm -f /etc/yum.repos.d/*rhui*
-#        fi
-#else
-#        rm -f /etc/yum.repos.d/*rhui*
-#fi
+subscription-manager register --username=$RHN_ACCOUNT --password=$RHN_PASSWORD --force --auto-attach
+if [ "$?" -ne 0 ]; then
+        sleep 5
+        subscription-manager register --username=$RHN_ACCOUNT --password=$RHN_PASSWORD --force --auto-attach
+       if [ "$?" -ne 0 ]; then
+                sleep 5
+                subscription-manager register --username=$RHN_ACCOUNT --password=$RHN_PASSWORD --force --auto-attach
+                if [ "$?" -eq 0 ]; then
+                        rm -f /etc/yum.repos.d/*rhui*
+                else
+                        echo "I tried 3 times, I'm giving up."
+                        exit 1
+                fi
+        else
+                rm -f /etc/yum.repos.d/*rhui*
+        fi
+else
+        rm -f /etc/yum.repos.d/*rhui*
+fi
 
 ) >/tmp/user-data.log 2>&1
-#subscription-manager repos --enable ansible-2-for-rhel-8-x86_64-rpms
+subscription-manager config --rhsm.manage_repos=1
+subscription-manager repos --enable ansible-2-for-rhel-8-x86_64-rpms
 
 # fix for corrupt rpm db
 #rpmdb --rebuilddb
