@@ -103,9 +103,9 @@ if [ "$?" -ne 0 ]; then
 else
         rm -f /etc/yum.repos.d/*rhui*
 fi
-
-) >/tmp/user-data.log 2>&1
 subscription-manager config --rhsm.manage_repos=1
+) >/tmp/user-data.log 2>&1
+
 subscription-manager repos --enable ansible-2-for-rhel-8-x86_64-rpms
 
 # fix for corrupt rpm db

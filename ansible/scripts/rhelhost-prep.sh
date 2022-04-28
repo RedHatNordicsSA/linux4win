@@ -14,27 +14,6 @@ usermod -aG wheel rhel
 echo "rhel ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/rhel
 chmod 0440 /etc/sudoers.d/rhel
 
-subscription-manager register --username=$RHN_ACCOUNT --password=$RHN_PASSWORD --force --auto-attach
-if [ "$?" -ne 0 ]; then
-        sleep 5
-        subscription-manager register --username=$RHN_ACCOUNT --password=$RHN_PASSWORD --force --auto-attach
-       if [ "$?" -ne 0 ]; then
-                sleep 5
-                subscription-manager register --username=$RHN_ACCOUNT --password=$RHN_PASSWORD --force --auto-attach
-                if [ "$?" -eq 0 ]; then
-                        rm -f /etc/yum.repos.d/*rhui*
-                else
-                        echo "I tried 3 times, I'm giving up."
-                        exit 1
-                fi
-        else
-                rm -f /etc/yum.repos.d/*rhui*
-        fi
-else
-        rm -f /etc/yum.repos.d/*rhui*
-fi
-subscription-manager config --rhsm.manage_repos=1
-
 #install enable and open firewall for cockpit
 dnf install firewalld cockpit-composer cockpit bash-completion -y
 systemctl enable --now firewalld
@@ -75,7 +54,26 @@ sed -i -e "s/nameserver/nameserver $DNSIP\\nnameserver/1" /etc/resolv.conf
 #                fi
 #        fi
 #done
-
+subscription-manager register --username=$RHN_ACCOUNT --password=$RHN_PASSWORD --force --auto-attach
+if [ "$?" -ne 0 ]; then
+        sleep 5
+        subscription-manager register --username=$RHN_ACCOUNT --password=$RHN_PASSWORD --force --auto-attach
+       if [ "$?" -ne 0 ]; then
+                sleep 5
+                subscription-manager register --username=$RHN_ACCOUNT --password=$RHN_PASSWORD --force --auto-attach
+                if [ "$?" -eq 0 ]; then
+                        rm -f /etc/yum.repos.d/*rhui*
+                else
+                        echo "I tried 3 times, I'm giving up."
+                        exit 1
+                fi
+        else
+                rm -f /etc/yum.repos.d/*rhui*
+        fi
+else
+        rm -f /etc/yum.repos.d/*rhui*
+fi
+subscription-manager config --rhsm.manage_repos=1
 ) >/tmp/user-data.log 2>&1
 
 
