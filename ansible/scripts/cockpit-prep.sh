@@ -1,5 +1,7 @@
 #!/bin/bash
 
+sleep 30
+
 (
 
 set -x
@@ -40,7 +42,7 @@ chmod 0755 /mnt/myvol
 dnf install realmd oddjob oddjob-mkhomedir sssd adcli samba-common-tools -y
 
 #prep for assign3,4
-sed -i  -e 's/PasswordAuthentication no/PasswordAuthentication yes/1' /etc/ssh/sshd_config
+sed -i -e 's/PasswordAuthentication no/PasswordAuthentication yes/1' /etc/ssh/sshd_config
 cp /etc/ssh/sshd_config /etc/ssh/sshd_config.redhat
 systemctl restart sshd
 cat << 'EOF' >/bin/restoremyssh

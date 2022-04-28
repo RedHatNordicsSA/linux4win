@@ -1,4 +1,7 @@
 #!/bin/bash
+
+sleep 30
+
 (
 
 set -x
