@@ -18,7 +18,7 @@ chmod 0440 /etc/sudoers.d/rhel
 dnf install tcpdump traceroute mtr firewalld cockpit-composer cockpit cockpit-dashboard bash-completion -y
 
 #cockpit update / firewalld fix
-dnf update dnf subscription-manager polkit -y
+#dnf update dnf subscription-manager polkit -y
 
 systemctl enable --now cockpit.socket
 systemctl enable --now firewalld
