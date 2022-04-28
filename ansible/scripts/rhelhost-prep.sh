@@ -1,7 +1,5 @@
 #!/bin/bash
 
-sleep 30
-
 (
 
 set -x
@@ -16,17 +14,17 @@ usermod -aG wheel rhel
 echo "rhel ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/rhel
 chmod 0440 /etc/sudoers.d/rhel
 
-#cockpit update / firewalld fix
-dnf update dnf subscription-manager polkit -y
-
 #install enable and open firewall for cockpit
-yum install firewalld cockpit-composer cockpit bash-completion -y
+dnf install firewalld cockpit-composer cockpit bash-completion -y
 systemctl enable --now firewalld
 systemctl enable --now cockpit.socket
 setenforce 0
 firewall-cmd --add-service=cockpit
 firewall-cmd --add-service=cockpit --permanent
 setenforce 1
+
+#cockpit update / firewalld fix
+dnf update dnf subscription-manager polkit -y
 
 #prep for assign3,4
 sed -i  -e 's/PasswordAuthentication no/PasswordAuthentication yes/1' /etc/ssh/sshd_config
