@@ -106,6 +106,18 @@
     set_fact:
         linux4win_igw_id: "{{ linux4win_igw.gateway_id }}"
 
+  - name: Create new nat gateway for linux4win subnet
+    amazon.aws.ec2_vpc_nat_gateway:
+      aws_access_key: "{{ec2_access_key}}"
+      aws_secret_key: "{{ec2_secret_key}}"
+      state: present
+      subnet_id: "{{ linux4win_subnet_id }}"
+      wait: true
+      region: "{{ ec2_region }}"
+      if_exist_do_not_create: true
+    register: new_nat_gateway
+
+
   - name: Set up public subnet route table
     amazon.aws.ec2_vpc_route_table:
         aws_access_key: "{{ec2_access_key}}"
