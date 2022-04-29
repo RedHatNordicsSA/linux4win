@@ -172,7 +172,7 @@ Red Hat Enterprise Linux comes with a PAM moduled called pam_listfile, which all
 
 To create a whitelist for which group can access the ```Web console```, we need to modify its ```PAM``` ruleset and before we do this you will check with one of the users from Active Directory.
 
-:boom: Choose ```Log Out``` from the ```Session``` meny in the top right corner. Then use vsda@linux4win.oin with password Password1 to verify that this user can log in.
+:boom: Choose ```Log Out``` from the ```Session``` meny in the top right corner. Then use ```vsda@linux4win.oin``` with password ```Password1``` to verify that this user can log in.
 
 :boom: Choose ```Log Out``` from the ```Session``` meny in the top right corner and log back in with the ```rhel``` user
 
