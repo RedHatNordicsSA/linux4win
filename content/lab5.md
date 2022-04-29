@@ -90,23 +90,23 @@ As you may have noticed, in the ```Accounts``` menu, there were only locale acco
 :boom: Type below command into the terminal to get information regarding two accounts in the Active Directory.
 
 ```
-id vsda@linux4win.local
-id hger@linux4win.local
+id vsda@linux4win.oin
+id hger@linux4win.oin
 ```
 This provides information about what user ID the users has and also what groups they are a member of (including group IDs of the groups).
 ```
-uid=579601105(vsda@linux4win.local) gid=579600513(domain users@linux4win.local) groups=579600513(domain users@linux4win.local),579601110(minions@linux4win.local)
+uid=579601105(vsda@linux4win.oin) gid=579600513(domain users@linux4win.oin) groups=579600513(domain users@linux4win.oin),579601110(minions@linux4win.oin)
 ```
 In order for this account to become administrator with full priviledges on this computer we will need to add it to the local administrator group, called ```wheel```.
 
 :boom: Add the Active Directory user to the admin group by typing in below command in the terminal.
 ```
-sudo usermod --append -G wheel hger@linux4win.local
+sudo usermod --append -G wheel hger@linux4win.oin
 ```
 
 This ofcourse only works on smaller scale. Not so much on larger scale where you more likely use Groupmembership to govern what you are allowed to do. This is what we will do next, to connect a specific group in Active Directory with specific priviledges on a system.
 
-In order to set this up we are going to use ```sudo``` and configure ```sudo``` to allow Administrator priviledges for members of one of the groups that the user vsda@linux4win.local is a member of.
+In order to set this up we are going to use ```sudo``` and configure ```sudo``` to allow Administrator priviledges for members of one of the groups that the user vsda@linux4win.oin is a member of.
 
 ```Sudo``` automatically reads rules files, which defines who can do what, out of below directory
 ```
@@ -121,7 +121,7 @@ sudo su -
 ```
 :boom: Now, let's create the file. We will use echo and redirect the output to the file. Copy and paste below line, to reduce risk of errors.
 ```
-echo "%minions@linux4win.local ALL=(ALL) NOPASSWD: ALL" >/etc/sudoers.d/minions
+echo "%minions@linux4win.oin ALL=(ALL) NOPASSWD: ALL" >/etc/sudoers.d/minions
 ```
 :boom: Next, verify the content of the file, using another useful little terminal tool ```cat```, which prints the content of files to the terminal. Use below command to show the content of the file:
 
@@ -129,9 +129,9 @@ echo "%minions@linux4win.local ALL=(ALL) NOPASSWD: ALL" >/etc/sudoers.d/minions
 cat /etc/sudoers.d/minions
 ```
 
-Next, let's see if the vsda@linux4win.local user also has gained Administrator priviledges. As administrator, we can become other users by using the ```su``` command. Type in below commands into the terminal. 
+Next, let's see if the vsda@linux4win.oin user also has gained Administrator priviledges. As administrator, we can become other users by using the ```su``` command. Type in below commands into the terminal. 
 ```
-sudo su - vsda@linux4win.local
+sudo su - vsda@linux4win.oin
 ```
 
 :exclamation: If above command fails, it means that we screwed up the ```sudo``` configuration. Run below command to remove the failty configuration file and try again.
@@ -141,16 +141,16 @@ rm /etc/sudoers.d/minions
 ```
 
 
-If everything went well. Try a to run the sudo command as the vsda@linux4win.local by typing in:
+If everything went well. Try a to run the sudo command as the vsda@linux4win.oin by typing in:
 ```
 sudo whoami
 ```
 You should get the output as shown below.
 
 ```
-[vsda@linux4win.local@ip.. ~]$ sudo whoami
+[vsda@linux4win.oin@ip.. ~]$ sudo whoami
 root
-[vsda@linux4win.local@ip.. ~]$ 
+[vsda@linux4win.oin@ip.. ~]$ 
 ```
 
 ## Intro to access controls
@@ -170,7 +170,11 @@ If an application do not have specific functions that allows for access restrict
 
 Red Hat Enterprise Linux comes with a PAM moduled called pam_listfile, which allows us to define a textfile which contains users or groups which should be granted access in a whitelist manner, or which would be denied access in a blacklist manner.
 
-To create a whitelist for which group can access the ```Web console```, we need to modify its ```PAM``` ruleset.
+To create a whitelist for which group can access the ```Web console```, we need to modify its ```PAM``` ruleset and before we do this you will check with one of the users from Active Directory.
+
+:boom: Choose ```Log Out``` from the ```Session``` meny in the top right corner. Then use vsda@linux4win.oin with password Password1 to verify that this user can log in.
+
+:boom: Choose ```Log Out``` from the ```Session``` meny in the top right corner and log back in with the ```rhel``` user
 
 :boom: Go to the ```Terminal``` menu option on the left side menu and run below commands to enter into an administrator session:
 
@@ -219,7 +223,7 @@ EOF
 
 :exclamation: Do not miss that last line above, stating ```EOF```
 
-:boom: Now, try to login using the new local user you created in the previous lab. It will be unsuccessful, while you can still login as the ```rhel``` user.
+:boom: Now, try to login using the other AD (hger@linux4win.oin) or any user you created in the previous lab. It will be unsuccessful, while you can still login as the ```rhel``` user.
 
 ## Securing SSH by configuring the service itself
 
@@ -235,7 +239,7 @@ sudo su -
 
 To configure ```SSH``` to only allow one single group access and deny all other groups, run below command
 ```
-echo "AllowGroups minions@linux4win.local" >>/etc/ssh/sshd_config
+echo "AllowGroups minions@linux4win.oin" >>/etc/ssh/sshd_config
 ```
 
 We are further going to deny a user access (even if it is a part of the group we allowed access). That user is the generic administrator user in Active Directory.
@@ -243,10 +247,10 @@ We are further going to deny a user access (even if it is a part of the group we
 :boom: Run below command to add the additional line which limits the user access.
 
 ```
-echo "DenyUsers administrator administrator@linux4win.local" >>/etc/ssh/sshd_config
+echo "DenyUsers administrator administrator@linux4win.oin" >>/etc/ssh/sshd_config
 ```
 
-Now you have to be a member of the minions@linux4win.local Security Group in Active Directory to be allowed to login using ssh. Also we blocked access to the generic Administrator account which can pose a security issue if used.
+Now you have to be a member of the minions@linux4win.oin Security Group in Active Directory to be allowed to login using ssh. Also we blocked access to the generic Administrator account which can pose a security issue if used.
 
 :boom: Now we need to restart the sshd service for these settings to get applied. Click on the ```Services``` menu option to your left and filter for the sshd service as shown below.
 

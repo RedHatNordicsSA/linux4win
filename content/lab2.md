@@ -64,7 +64,7 @@ There are also two more disks attached, called ```xvdb``` and ```xvdc```, both 1
 
 ![create volgroup ](images/interface_createvg.png)
 
-We have now created a volume group, to wich we in the future can add more disk to, this will prove to be useful in later labs.
+We have now created a volume group, to which we in the future can add more disk to, this will prove to be useful in later labs.
 
 Next up is to create the ```Logical Volume``` on which we will create the actual filesystem.
 

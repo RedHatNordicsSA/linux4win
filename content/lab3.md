@@ -35,6 +35,8 @@ At the main ```Services``` page there's a list of all installed services on this
 
 Key information on this page includes: What's the status of this service? Will it automatically start at boot? When will it start? And logs for this specific service.
 
+Fold down the entry named ```Show relationships``` to see all information dispayed in the picture below.
+
 ![services user interface](images/manage_services2.png)
 
 Now we are going to install a new service that we will need to set to start up automatically when the server boots up. For this, we will need the terminal.
@@ -74,6 +76,8 @@ Is this ok [y/N]: y
 Selecting ```y``` installs not only the binaries for the Apache web server and the dependencies it needs to work, but also a services definition for it. This allows us to manage the state of Apache using the ```Services``` interface in the ```Web console```.
 
 :boom: Click on services and filter for ```httpd```, just as you did previously with ssh. You should see an entry called ```httpd.service```. Click on that entry, which will take you to the below shown page.
+
+:exclamation: If the page is missing buttons please reload the page.
 
 ![service httpd enable](images/interface_httpddead.png)
 

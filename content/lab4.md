@@ -77,15 +77,15 @@ curl localhost
 
 Next, we're going to open up external communication to our web server.
 
-:boom: Go to the ```Networking``` main page and locate where it says ```Firewall``` and click there or where it says ```3 Active rules```. The detailed firewall page will now appear, as shown below.
+:boom: Go to the ```Networking``` main page and locate where it says ```Firewall``` and click on the button ```Edit rules and zones```. The detailed firewall page will now appear, as shown below.
 
 ![firewall setup details](images/interface_firewalld.png)
 
 Let's explain what you are seeing. On the top, where it reads ```Firewall``` you can enable and disable the firewall on this server.
 
-Below there, it says ```Active zones```. Zones are basically collections of rules, which we can connected to different networks that a system is connected to. By default, there is only one zone, called ```Public```, but we can pratically have unlimted number of zones, if needed.
+Below there, it says ```public zone```. Zones are basically collections of rules, which we can connected to different networks that a system is connected to. By default, there is only one zone, called ```Public```, but we can pratically have unlimted number of zones, if needed.
 
-Below ```Active zones``` it says ```Allowed Services```. As we are using ```firewalld``` to manage the firewall on this system, firewall rules can be abstracted away from and defined as services, where each service lists what ports needs to be opened up. This reduces the risk of administrators forgetting to open up specific ports, for services which requires many different ports to be open to function.
+In the ```public zone``` it says ```Service```. As we are using ```firewalld``` to manage the firewall on this system, firewall rules can be abstracted away from and defined as services, where each service lists what ports needs to be opened up. This reduces the risk of administrators forgetting to open up specific ports, for services which requires many different ports to be open to function.
 
 Next we will allow communication for our web server.
 

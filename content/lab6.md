@@ -54,7 +54,7 @@ The failed service is the chronyd service. Chronyd is the default NTP service on
 
 Here you can filter on severity of the log messages. 
 
-:boom: Click the menu item where it says ```Severity```
+:boom: Click the menu item where it says ```Priority```
 ![severity details](images/severity_menu.png)
 
 :boom: Select a level below Error like ```Info and above```. Compare this with the other options for log-level.
