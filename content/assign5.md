@@ -207,6 +207,11 @@ Then run your newly created container image:
 ```
 podman run -dt -p 8080:80/tcp localhost/mylocalubi
 ```
+Also remeber to stop and remove this latest container
+```
+podman stop -l
+podman rm -l
+```
 
 ## Setting your container to start at boot
 

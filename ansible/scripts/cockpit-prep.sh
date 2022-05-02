@@ -15,7 +15,7 @@ echo "rhel ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/rhel
 chmod 0440 /etc/sudoers.d/rhel
 
 #install enable and open firewall for cockpit
-dnf install tcpdump traceroute mtr firewalld cockpit-composer cockpit cockpit-dashboard bash-completion -y
+dnf install tcpdump traceroute mtr firewalld cockpit-composer cockpit cockpit-dashboard cockpit-pcp bash-completion -y
 
 #cockpit update / firewalld fix
 #dnf update dnf subscription-manager polkit -y

@@ -15,7 +15,7 @@ echo "rhel ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/rhel
 chmod 0440 /etc/sudoers.d/rhel
 
 #install enable and open firewall for cockpit
-dnf install firewalld cockpit-composer cockpit bash-completion -y
+dnf install firewalld cockpit-composer cockpit cockpit-pcp bash-completion -y
 systemctl enable --now firewalld
 systemctl enable --now cockpit.socket
 setenforce 0

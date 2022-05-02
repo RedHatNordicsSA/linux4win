@@ -164,7 +164,7 @@ If that is successful then perhaps let's make some very common tasks like instal
 ansible win -m win_updates -e category_names=SecurityUpdates -e reboot=yes
 ```
 
-:boom: If you need to reboot the win server use this command
+:boom: If you need to reboot the win server use this command, however please do not do it!
 ```
 ansible win -m win_reboot
 ```
