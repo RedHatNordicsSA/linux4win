@@ -14,7 +14,7 @@ To start this out we need to add the image builder application. This is done at 
 
 :boom: To access the ```image builder```, you need to go the the furthest left on the left side menu and select ```Image Builder``` as shown below.
 
-![button of imagebuilder](images/lorax.png)
+![button of imagebuilder](images/start_imagebuilder.png)
 
 :boom: Once you access the interface, you may be asked to enable the Lorax service, do so if asked.
 

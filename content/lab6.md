@@ -36,7 +36,7 @@ We have installed a service that is failing. A service, as explained before, is 
 ```Disabled``` means services that are installed but not set to start at boot.
 ```Static``` services are started on-demand when they are needed by other services or when new hardware is plugged into the system.
 
-![services filter](images/services_filter.png) 
+![services filter](images/services_filter.png)
 
 :boom: Locate the service with a ```Failed``` state. 
 
