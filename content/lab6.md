@@ -31,7 +31,7 @@ We have installed a service that is failing. A service, as explained before, is 
 
 ![services user interface of cockpit](images/services_interface.png)
 
-:boom: You can filter services by their status. Click where it says **All** and select ```Enabled``` to view services that are set to start at boot.
+:boom: You can filter services by their status. Click where it says **File state** and select ```Enabled``` to view services that are set to start at boot.
 
 ```Disabled``` means services that are installed but not set to start at boot.
 ```Static``` services are started on-demand when they are needed by other services or when new hardware is plugged into the system.
@@ -48,7 +48,7 @@ The failed service is the chronyd service. Chronyd is the default NTP service on
 
 ![services details](images/failed_chronyd.png)
 
-:boom: To look at any logs collected on this system - click on the  ```Logs``` menu option in the menu on your left.
+:boom: To look at any logs collected on this system - click on the  ```Logs``` menu option in the menu on your left. Or you can use the ```View all logs``` button on the details page.
 
 ![logs user interface of cockpit](images/interface_logs.png)
 
