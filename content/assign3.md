@@ -62,7 +62,7 @@ In the end the list should look something like this:
 
 Now it is time to do some stuff on the other machine. And it is as simple as clicking the new server in the interface to go there. Now you need to click around to fix stuff.
 
-boom: Notice the thin line at the top, red in these images. When you change to the newly added server that line is green, like the colour you set in the **Add new host** view above
+:boom: Notice the thin line at the top, red in these images. When you change to the newly added server that line is green, like the colour you set in the **Add new host** view above
 
 You can always go between the servers by clicking in the top left corner
 
