@@ -43,25 +43,25 @@
       force: yes
     register: aduserdata
 
-  - name: Create empty file to store Cockpit public IPs
-    file:
-      path: "{{ mytempdir['path'] }}/cockpit_instances.out"
-      state: touch
+#  - name: Create empty file to store Cockpit public IPs
+#    file:
+#      path: "{{ mytempdir['path'] }}/cockpit_instances.out"
+#      state: touch
 
-  - name: Create empty file to store RHEL host public IPs
-    file:
-      path: "{{ mytempdir['path'] }}/rhelhost_instances.out"
-      state: touch
+#  - name: Create empty file to store RHEL host public IPs
+#    file:
+#      path: "{{ mytempdir['path'] }}/rhelhost_instances.out"
+#      state: touch
 
-  - name: Create empty file to store Windows host public IPs
-    file:
-      path: "{{ mytempdir['path'] }}/winhost_instances.out"
-      state: touch
+#  - name: Create empty file to store Windows host public IPs
+#    file:
+#      path: "{{ mytempdir['path'] }}/winhost_instances.out"
+#      state: touch
 
-  - name: Create empty file to store Active Directory host public IPs
-    file:
-      path: "{{ mytempdir['path'] }}/ad_instances.out"
-      state: touch
+#  - name: Create empty file to store Active Directory host public IPs
+#    file:
+#      path: "{{ mytempdir['path'] }}/ad_instances.out"
+#      state: touch
 
   - name: create the VPC for the linux4win
     amazon.aws.ec2_vpc_net:
@@ -397,20 +397,20 @@
         identity: winhost
 #    register: winhost_status
 
-  - name: Get the public ips of the cockpit server
-    amazon.aws.ec2_instance_info:
-      aws_access_key: "{{ ec2_access_key | default(omit) }}"
-      aws_secret_key: "{{ ec2_secret_key | default(omit) }}"
-      region: "{{ ec2_region }}"
-      filters:
-        image-id: "{{ rhel_ami_id }}"
-        instance-state-name: [ "pending", "running" ]
-        "tag:Name": cockpit
-    register: lin4win_status
+#  - name: Get the public ips of the cockpit server
+#    amazon.aws.ec2_instance_info:
+#      aws_access_key: "{{ ec2_access_key | default(omit) }}"
+#      aws_secret_key: "{{ ec2_secret_key | default(omit) }}"
+#      region: "{{ ec2_region }}"
+#      filters:
+#        image-id: "{{ rhel_ami_id }}"
+#        instance-state-name: [ "pending", "running" ]
+#        "tag:Name": cockpit
+#    register: lin4win_status
 
-  - name: All the data in cockpit_status
-    debug:
-      var: lin4win_status
+#  - name: All the data in cockpit_status
+#    debug:
+#      var: lin4win_status
 
 #  - name: Print the public ip of cockpit
 #    debug:
