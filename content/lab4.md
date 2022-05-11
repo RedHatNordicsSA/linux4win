@@ -42,7 +42,7 @@ Here you can see details regrading the network interface, including things like 
 
 :exclamation: We will now see how we can manage the IP settings for this network card. **DO NOT CLICK APPLY / SAVE ANY SETTINGS AS THAT WILL BREAK NETWORKING FOR YOUR SERVER, RENDERING IT USELESS**
 
-:boom: To see how we can configure static IP settings, click on the blue text which reads ```(Automatic DHCP)```. A new window as shown below will then appear. 
+:boom: To see how we can configure static IP settings, click on the blue **Edit** text after ```(Automatic DHCP)```. A new window as shown below will then appear. 
 
 ![network setup details](images/interface_changedhcp.png)
 
@@ -109,7 +109,7 @@ You should now see the Apache Web server test page, as shown below.
 
 :boom: If you are not still on the main ```Firewall``` page in the ```Web console```, navigate there by clicking on ```Networking``` on the left side menu and then clicking on ```Firewall``` or the rules below.
 
-:boom: Once again, locate the blue button called **Add Services** and click on it, but this time, select ```Custom Ports``` and try adding a custom port or port range. Don't forget to give it a name as well.
+:boom: Once again, locate the blue button called **Add Services** and click on it, but this time, select ```Custom Ports``` and try adding a custom port or port range. Don't forget to give it a **Description** as well.
 
 ![firewall add custom](images/interface_fwcustom.png)
 
