@@ -99,7 +99,7 @@ After you you have connected to your server it is time to log into the web conso
 
 This is the first page of the user interface will look something like below.
 
-![system user interface of cockpit](images/interface_system.png)
+![system user interface of cockpit](images/interface_latest.png)
 
 You are now ready to start.
 
