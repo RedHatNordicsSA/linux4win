@@ -73,11 +73,11 @@ This is where you manage local users on the system. Things you can do here inclu
 
 And more. We will now create a new local account.
 
-:boom: Click on ```Create New Account button``` and fill in some information about your imaginary new user. To remove the risk of someone accessing this account remotely, do not check the ```Access``` check box and then click ```Create```
+:boom: Click on ```Create New Account``` button and fill in some information about your imaginary new user. When you are reday then click ```Create```
 
 ![rhel account options](images/createaccount.png)
 
-:boom: Once returned to the main ```Accounts``` page, click on your newly created account check the box of ```Server Administrator``` as shown below. Once you have checked the box - the setting is applied and you can return to the main ```Accounts``` page.
+:boom: Once returned to the main ```Accounts``` page, click on your newly created account and find the the box of ```Server Administrator``` as shown below. This is where you can give superuser powers.
 
 ![rhel account options](images/accountrhel.png)
 
