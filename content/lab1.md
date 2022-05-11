@@ -45,17 +45,21 @@ You will now see something like this:
 
 Here you can patch all available software updates and security patches. As you can see there are two different buttons. On which installs security updates only and one that updates everything
 
-:boom: Click the arrow before the sudo package to get below information. Note that security fixes are coloured differently.
+:boom: Click the arrow before any of the red marked packages to get below information. Note that security fixes are coloured differently.
 
 ![sudo package patch info](images/package_sudo.png)
 
 :boom: When you are ready press the blue **Install All Updates** button and have some patience.
 
-:exclamation: If you installed patches that requires a reboot you will be presented with below dialog. Note: **DO NOT RESTART YOUR SYSTEM, PRESS IGNORE**
+:exclamation: If you updated some components of the web interface you might get this button:
+
+![yum update restart](images/interface_wsreconnect.png)
+
+:exclamation: If you installed patches that requires a reboot you will be presented with below dialog. Note: **DO NOT RESTART YOUR SYSTEM, PRESS RESTART SERVICES**
 
 ![yum update restart](images/interface_yumrestart.png)
 
-:boom: Press Ignore.
+:boom: Press Restart Services.
 
 :thumbsup: If you have updated a system, the easiest way to ensure that all software running is using the updated versions is to restart your system, just as in Windows. However since this lab is running in AWS you will loose the connection to the host and your system may get a new address so please do not restart the server.
 
@@ -76,6 +80,12 @@ Just keeping your system updated may not be enough. Sometimes people will ask yo
 :exclamation: If you find yourself disconnected from the terminal then all you need to do is press the ```Reset``` button in the top right corner
 
 First off, we will use the ```rpm``` command line tool, to query about the status of packages. We will query a familiar piece of software, the ```Web console``` we are using right now. Try below tricks and see if you find them useful.
+
+:boom: If you get an error regarding rpmdb, fix it with this command.
+
+```
+sudo rpmdb --rebuilddb
+```
 
 :boom: Run below command to query if a package exists.
 
@@ -120,11 +130,7 @@ Now we'll try to install and remove a piece of software, to do that, we'll use t
 :boom: Run below command to run the ```dnf``` command to search for a piece of software called nmap. Please note the prefixing of the ```dnf``` command with ```sudo```. This is what makes the command run as an administrator. This is less dangerous than using administrator powers all the time.
 
 ```
-sudo rpmdb --rebuilddb
-```
-
-```
-dnf search nmap
+sudo dnf search nmap
 ```
 
 :boom: Let's install this software, which is a security scanner. We'll again escalate our priviledges using ```sudo```.
