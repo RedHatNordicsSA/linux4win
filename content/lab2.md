@@ -122,7 +122,7 @@ After having added the disk, please note that the available space in our Volume 
 
 ![extending filesystems](images/extend_fs5.png)
 
-If you now check the filesystem, notice that it's now approximately 2 GB in size, instead of 1 GB. Extending the filesystem itself has been done automatically be the ```Web console``` so that we do not have to do that seperately.
+If you now check the filesystem, notice that it's now approximately 2 GB in size, instead of 1 GB. Extending the filesystem itself has been done automatically in the ```Web console``` so that we do not have to do that seperately.
 
 Continue to [lab 3](lab3.md)
 

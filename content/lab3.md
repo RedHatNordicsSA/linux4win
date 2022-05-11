@@ -1,6 +1,6 @@
 # Lab 3 Service management
 
-Now we are going to look at services running in the linux system. In Red Hat Enterprise Linux (6, 7, 8) the system which handles services is called ```systemd```. 
+Now we are going to look at services running in the linux system. In Red Hat Enterprise Linux (7, 8) the system which handles services is called ```systemd```. 
 
 :boom: Locate the menu entry called ```Services``` and click on that to get to the main page for managing services. Click around and explore the different services running on your system.
 
@@ -10,7 +10,7 @@ Now we are going to look at services running in the linux system. In Red Hat Ent
 
 ## An intro to Service management in Linux
 
-During the development of Linux as an operating systems, there has been several different systems which has provided service management. Today, the most widely adapted system is called ```systemd``` which is what also is used in Red Hat Enterprise Linux (6, 7, 8). ```Systemd``` was originally developed by ```Red Hatters Lennart Poettering and Kay Sievers``` to solve issues that the previously used system, ```System V init``` failed to handle.
+During the development of Linux as an operating systems, there has been several different systems which has provided service management. Today, the most widely adapted system is called ```systemd``` which is what also is used in Red Hat Enterprise Linux (7, 8). ```Systemd``` was originally developed by ```Red Hatters Lennart Poettering and Kay Sievers``` to solve issues that the previously used system, ```System V init``` failed to handle.
 
 ```Systemd``` does do a number of other jobs as well, futher unifying the management of services across different Linux operating systems. A majority of Linux operating systems uses ```systemd```.
 
