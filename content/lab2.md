@@ -72,7 +72,7 @@ Next up is to create the ```Logical Volume``` on which we will create the actual
 
 ![create logical vol](images/create_lv1.png)
 
-:boom: Press the blue text ```Create new Logical Volume```, as shown below.
+:boom: Press the blue button ```Create new logical Volume```, as shown below.
 
 ![create logical vol](images/create_lv2.png)
 
@@ -84,9 +84,7 @@ Next up is to create the ```Logical Volume``` on which we will create the actual
 
 ![create logical vol details ](images/create_lv4.png)
 
-:boom: Now we are going to create the actual filesystem and mount it to our system. Click the **Format** button, as shown below.
-
-![format logical vol](images/create_fs1.png)
+:boom: Now we are going to create the actual filesystem and mount it to our system. Click the **Format** button, shown in the picture above.
 
 :boom: To create a filesystem, give the filesystem a name and click ```Format```, as shown below. Once you have clicked ```Format``` you will be returned to the main page for your ```Volume Group```. Note that we are choosing the default filesystem format for Red Hat Enterprise Linux 8, which is called XFS. The limits for XFS are a maximum filesystem size of 1 Petabyte and the maximum filesize of 8 Exabyte. A single filesystem scales fairly well. We will also tell the system where to mount this filesystem, set directly by inputting Mount Point like in picture below
 
@@ -106,7 +104,7 @@ Now we'll pretend that our newly created filesystem has become full, meaning we'
 
 We are now at the main page for our ```Volume Group```, overviewing all ```logical volumes``` and ```filesystems``` inside of it. As we have already consumed all available storage in this ```Volume Group```, we need to add an additional disk to it, so we can get more space. Had our filesystem existed directly on a disk, this would have not been possible, as a filesystem normally cannot span several disks.
 
-:boom: Let's add a new disk to our Volume Group. Click on the **+** located at ```Physical Volumes``` on the left side of the page, as shown below.
+:boom: Let's add a new disk to our Volume Group. Click on the **+** located at ```Physical Volumes``` on the left side of the page, as shown in the picture below.
 
 ![extending filesystems](images/extend_fs2.png)
 
