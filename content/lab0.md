@@ -91,8 +91,6 @@ You have to accept the fact that we are running self signed certificates. How yo
 
 After you you have connected to your server it is time to log into the web console application.
 
-:boom: Check the checkbox labeled ```Reuse my password for remote connections``` when you log in. If you do not do this, there are certain task you will not be able to do.
-
 :boom: Use the user **rhel** and password that your instructor provided to you and click **Log in** as displayed below.
 
 ![login page of cockpit](images/login.png)
