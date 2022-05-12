@@ -2,7 +2,7 @@
 
 An upcoming and more and more common workload on Red Hat Enterprise Linux is maybe a bit surprisingly Microsoft SQL server.
 
-Starting ```Microsoft SQL Server 2017```, Microsoft supports the use of Red Hat Enterprise Linux (7 and 8) as an operating system. Starting ```Microsoft SQL Server 2019```, you may even run it as a container on Red Hat's Kubernetes platform, ```OpenShift```.
+Starting with ```Microsoft SQL Server 2017```, Microsoft supports the use of Red Hat Enterprise Linux (7 and 8) as an operating system. With ```Microsoft SQL Server 2019```, you may even run it as a container on Red Hat's Kubernetes platform, ```OpenShift```.
 
 ![microsoft sql server](images/mssql.png)
 
@@ -63,6 +63,12 @@ You can now use the services part of the menu to your left to setup the service 
 And you will use the firewall part from the Networking menu on your left to open the port for MSSQL
 ```
 port=1433
+```
+
+When you are done with testing and such please disable the service to conserve resources.
+
+```
+sudo systemctl disable --now mssql-server.service
 ```
 
 Continue to [assignment 3](assign3.md)
