@@ -56,7 +56,7 @@ less /etc/ansible/hosts
 sudo cp /etc/ansible/hosts /etc/ansible/hosts.backup
 ```
 
-:boom: So now we have a backup file we can lookup if needed. Now it is time to fill the file with simple context. Type below commands to put your Red Hat Enterprise Linux server into the inventory file:
+:boom: So now we have a backup file we can lookup if needed. Now it is time to fill the file with simple context. Copy the text from below and change the ```ip.address.of.linuxserverX``` part to reflect your two internal ips:
 ```
 sudo su -
 echo "[linux]" > /etc/ansible/hosts
@@ -64,6 +64,8 @@ echo "ip.address.of.linuxserver1" >>/etc/ansible/hosts
 echo "ip.address.of.linuxserver2" >>/etc/ansible/hosts
 exit
 ```
+
+Then copy again and paste into the terminal to replace the hosts file with this new file.
 
 :exclamation: Please note the double ```>>``` on the two last lines.
 
