@@ -65,6 +65,8 @@ And you will use the firewall part from the Networking menu on your left to open
 port=1433
 ```
 
+## Disable and stop the service
+
 When you are done with testing and such please disable the service to conserve resources.
 
 ```
