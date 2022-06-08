@@ -266,15 +266,22 @@ Type=forking
 WantedBy=multi-user.target default.target
 ```
 
+You might need to create the folder first, use this command:
+```
+mkdir -p ~/.config/systemd/user
+```
+
 Copy and place here:
 ```
 ~/.config/systemd/user/myubi.service
 ```
 
-You might need to create the folder first, use this command:
+:boom: Use this command to create and put file in right place
+
 ```
-mkdir -p ~/.config/systemd/user
+podman generate systemd --name myubi > ~/.config/systemd/user/myubi.service
 ```
+
 
 Notify the daemon that there is a new service definition using this command:
 ```
@@ -326,7 +333,8 @@ kind: Pod
 ...
 ```
 
-Now in order to use this we need a kubernetes cluster and access.
+:boom: The command below is only provided as guidance. kubectl is not installed
+
 ```
 kubectl create -f nameof.yaml
 pod/movetok8s-libpod created

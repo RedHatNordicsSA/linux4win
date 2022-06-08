@@ -88,6 +88,8 @@ Also try to look at the Ansible roles themselves.
 ```bash
 head /usr/share/ansible/roles/rhel-system-roles.timesync/tasks/main.yml
 ```
+:boom: The output might differ from below
+
 
 ```yaml
 ---
