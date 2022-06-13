@@ -43,25 +43,16 @@
       force: yes
     register: aduserdata
 
-#  - name: Create empty file to store Cockpit public IPs
-#    file:
-#      path: "{{ mytempdir['path'] }}/cockpit_instances.out"
-#      state: touch
+  - name: create a new ec2 key pair, returns generated private key
+    amazon.aws.ec2_key:
+      name: "{{ ec2_key }}"
+      region: "{{ ec2_region }}"
+    register: mynewkey
 
-#  - name: Create empty file to store RHEL host public IPs
-#    file:
-#      path: "{{ mytempdir['path'] }}/rhelhost_instances.out"
-#      state: touch
-
-#  - name: Create empty file to store Windows host public IPs
-#    file:
-#      path: "{{ mytempdir['path'] }}/winhost_instances.out"
-#      state: touch
-
-#  - name: Create empty file to store Active Directory host public IPs
-#    file:
-#      path: "{{ mytempdir['path'] }}/ad_instances.out"
-#      state: touch
+  - name: Save the private key of account
+    copy:
+      dest: "{{ mytempdir['path'] }}/{{ ec2_key }}.pem"
+      content: "{{ mynewkey.key.private_key }}"
 
   - name: create the VPC for the linux4win
     amazon.aws.ec2_vpc_net:
