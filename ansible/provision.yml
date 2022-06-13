@@ -196,6 +196,10 @@
           to_port: 1433
           cidr_ip: 0.0.0.0/0
         - proto: tcp
+          from_port: 3000
+          to_port: 3000
+          cidr_ip: 0.0.0.0/0
+        - proto: tcp
           from_port: 1512
           to_port: 1512
           cidr_ip: "{{ ec2_vpc_cidr }}"

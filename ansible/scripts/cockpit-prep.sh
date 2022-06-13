@@ -14,6 +14,8 @@ usermod -aG wheel rhel
 echo "rhel ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/rhel
 chmod 0440 /etc/sudoers.d/rhel
 
+dnf update -y
+
 #install enable and open firewall for cockpit
 dnf install tcpdump traceroute mtr firewalld cockpit-composer cockpit cockpit-dashboard cockpit-pcp bash-completion -y
 
@@ -104,9 +106,11 @@ else
         rm -f /etc/yum.repos.d/*rhui*
 fi
 subscription-manager config --rhsm.manage_repos=1
+subscription-manager repos --enable ansible-2-for-rhel-8-x86_64-rpms
+dnf downgrade which -y
 ) >/tmp/user-data.log 2>&1
 
-subscription-manager repos --enable ansible-2-for-rhel-8-x86_64-rpms
+reboot
 
 # fix for corrupt rpm db
 #rpmdb --rebuilddb

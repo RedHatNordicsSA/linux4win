@@ -14,6 +14,8 @@ usermod -aG wheel rhel
 echo "rhel ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/rhel
 chmod 0440 /etc/sudoers.d/rhel
 
+dnf update -y
+
 #install enable and open firewall for cockpit
 dnf install firewalld cockpit-composer cockpit cockpit-pcp bash-completion -y
 systemctl enable --now firewalld
@@ -74,8 +76,10 @@ else
         rm -f /etc/yum.repos.d/*rhui*
 fi
 subscription-manager config --rhsm.manage_repos=1
+dnf downgrade which -y
 ) >/tmp/user-data.log 2>&1
 
+reboot
 
 # fix for corrupt rpmdb
 #rpmdb --rebuilddb
