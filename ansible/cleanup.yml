@@ -28,10 +28,7 @@
       state: absent
       filters:
         instance-state-name: running
-        "tag:Name": cockpit
-        "tag:Name": rhel
-        "tag:Name": winguest
-        "tag:Name": ad
+        "tag:workshop": linux4win
 
 
   - name: Remove the ec2 key pair
