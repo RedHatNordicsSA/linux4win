@@ -87,12 +87,12 @@ ansible all -m ping --ask-pass
 ansible all -m shell -a 'cat /etc/redhat-release' --ask-pass
 ```
 
-:boom: With this command we find out what release of Red Hat Enterprise Linux these servers are running. Imagine this being a loooooong list of servers. You now have some insights into you entire fleet just using one command that you can alter indefinite. So let's just update stuff.
+:boom: With this command we find out what release of Red Hat Enterprise Linux these servers are running. Imagine this being a loooooong list of servers. You now have some insights into you entire fleet just using one command that you can alter indefinite. So let's just check and see if they need to be updated.
 ```
 ansible all -m shell -a 'dnf check-update' --ask-pass --become
 ```
 
-:boom: This command list all available updates for any system. Now most likely you do not get any updates since we have already done the patching using the web-ui. But if there where any all you needed to do was run this command to install them all.
+:boom: This command list all available updates for any system. Now most likely you do not get any updates since we have already done the patching using the web-ui.
 ```
 ansible all -m shell -a 'dnf update -y' --ask-pass --become
 ```

@@ -5,7 +5,7 @@
     - vars/vars.yml
 
   tasks:
-  - name: Ansible delete file wildcard
+  - name: List any temp working dir
     find:
       paths: /tmp/
       patterns: "linux4win_*"
@@ -13,12 +13,11 @@
       file_type: directory
     register: wildcard_files_to_delete
 
-  - name: Ansible remove file wildcard
+  - name: Delete temp working dir
     file:
       path: "{{ item.path }}"
       state: absent
     with_items: "{{ wildcard_files_to_delete.files }}"
-
 
   - name: Terminate everything here
     amazon.aws.ec2_instance:
@@ -29,7 +28,6 @@
       filters:
         instance-state-name: running
         "tag:workshop": linux4win
-
 
   - name: Remove the ec2 key pair
     amazon.aws.ec2_key:
